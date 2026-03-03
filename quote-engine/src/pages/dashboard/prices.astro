@@ -1,0 +1,139 @@
+---
+import '../styles/global.css';
+
+const userId = '67fc9ba0000000000000001';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prices - Quote Engine</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
+    <!-- Sidebar -->
+    <aside class="fixed left-0 top-0 bottom-0 w-64 bg-slate-900/80 backdrop-blur border-r border-slate-800 p-6">
+      <a href="/" class="text-2xl font-bold text-cyan-400 mb-8 block">Quote Engine</a>
+      <nav class="space-y-2">
+        <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+          Dashboard
+        </a>
+        <a href="/dashboard/prices" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-cyan-500/10 text-cyan-400">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          Prices
+        </a>
+        <a href="/dashboard/quotes" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          Quotes
+        </a>
+        <a href="/dashboard/rules" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          Rules
+        </a>
+      </nav>
+    </aside>
+
+    <main class="ml-64 p-8">
+      <div class="max-w-6xl">
+        <h1 class="text-3xl font-bold mb-8">💰 Pricing Data</h1>
+        
+        <!-- Upload -->
+        <div class="p-6 rounded-2xl bg-slate-900/50 border border-slate-800 mb-8">
+          <h3 class="text-lg font-semibold mb-4">Upload New Pricing</h3>
+          <form id="upload-form" class="flex gap-4">
+            <input type="hidden" name="userId" value={userId} />
+            <input type="file" name="file" accept=".xlsx,.xls" required class="flex-1 p-3 rounded-xl bg-slate-800 border border-slate-700" />
+            <button type="submit" class="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 rounded-xl font-medium">Upload</button>
+          </form>
+          <div id="upload-result" class="mt-4 hidden p-4 rounded-lg"></div>
+        </div>
+
+        <!-- Prices Table -->
+        <div class="p-6 rounded-2xl bg-slate-900/50 border border-slate-800">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-semibold">All Price Items</h3>
+            <span id="price-count" class="text-slate-400">Loading...</span>
+          </div>
+          <div id="prices-table" class="overflow-x-auto">
+            <p class="text-slate-500 text-center py-8">No pricing data. Upload an Excel file above.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script define:vars={{ userId }}>
+      async function loadPrices() {
+        try {
+          const res = await fetch(`/api/prices?userId=${userId}`);
+          const data = await res.json();
+          
+          document.getElementById('price-count').textContent = `${data.count || 0} items`;
+          
+          if (data.items && data.items.length > 0) {
+            const table = document.getElementById('prices-table');
+            table.innerHTML = `
+              <table class="w-full">
+                <thead>
+                  <tr class="border-b border-slate-700">
+                    <th class="text-left py-3 px-4 text-slate-400">Category</th>
+                    <th class="text-left py-3 px-4 text-slate-400">Name</th>
+                    <th class="text-left py-3 px-4 text-slate-400">Unit</th>
+                    <th class="text-right py-3 px-4 text-slate-400">Base Price</th>
+                    <th class="text-right py-3 px-4 text-slate-400">Min Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${data.items.map(item => `
+                    <tr class="border-b border-slate-800 hover:bg-slate-800/50">
+                      <td class="py-3 px-4">${item.category}</td>
+                      <td class="py-3 px-4 font-medium">${item.name}</td>
+                      <td class="py-3 px-4 text-slate-400">${item.unit}</td>
+                      <td class="py-3 px-4 text-right text-cyan-400">€${item.basePrice.toFixed(2)}</td>
+                      <td class="py-3 px-4 text-right text-slate-400">€${item.minPrice.toFixed(2)}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            `;
+          }
+        } catch (e) {
+          console.error('Failed to load prices:', e);
+        }
+      }
+      
+      loadPrices();
+
+      document.getElementById('upload-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const result = document.getElementById('upload-result');
+        
+        result.classList.remove('hidden', 'bg-green-500/20', 'bg-red-500/20');
+        result.innerHTML = 'Uploading...';
+        
+        try {
+          const res = await fetch('/api/prices', { method: 'POST', body: formData });
+          const data = await res.json();
+          
+          if (data.success) {
+            result.classList.add('bg-green-500/20');
+            result.innerHTML = `✅ Success! ${data.itemsCount} items uploaded.`;
+            loadPrices();
+          } else {
+            result.classList.add('bg-red-500/20');
+            result.innerHTML = `❌ Error: ${data.error}`;
+          }
+        } catch (err) {
+          result.classList.add('bg-red-500/20');
+          result.innerHTML = `❌ Error: ${err}`;
+        }
+        
+        result.classList.remove('hidden');
+      });
+    </script>
+  </body>
+</html>

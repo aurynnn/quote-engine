@@ -1,0 +1,173 @@
+---
+import '../styles/global.css';
+
+const userId = '67fc9ba0000000000000001';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rules - Quote Engine</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
+    <aside class="fixed left-0 top-0 bottom-0 w-64 bg-slate-900/80 backdrop-blur border-r border-slate-800 p-6">
+      <a href="/" class="text-2xl font-bold text-cyan-400 mb-8 block">Quote Engine</a>
+      <nav class="space-y-2">
+        <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+          Dashboard
+        </a>
+        <a href="/dashboard/prices" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          Prices
+        </a>
+        <a href="/dashboard/quotes" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          Quotes
+        </a>
+        <a href="/dashboard/rules" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-cyan-500/10 text-cyan-400">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          Rules
+        </a>
+      </nav>
+    </aside>
+
+    <main class="ml-64 p-8">
+      <div class="max-w-6xl">
+        <div class="flex justify-between items-center mb-8">
+          <h1 class="text-3xl font-bold">⚙️ Pricing Rules</h1>
+          <button onclick="showAddModal()" class="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 rounded-xl font-medium">+ Add Rule</button>
+        </div>
+
+        <!-- Rules Grid -->
+        <div id="rules-grid" class="grid md:grid-cols-2 gap-6">
+          <p class="text-slate-500 text-center py-8 col-span-2">Loading rules...</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Add Rule Modal -->
+    <dialog id="add-rule-modal" class="p-8 rounded-2xl bg-slate-900 border border-slate-700 max-w-md w-full">
+      <h3 class="text-xl font-bold mb-4">Add Pricing Rule</h3>
+      <form id="rule-form" class="space-y-4">
+        <input type="hidden" name="userId" value={userId} />
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">Rule Name</label>
+          <input type="text" name="name" required class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl" />
+        </div>
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">Type</label>
+          <select name="type" required class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl">
+            <option value="minimum">Minimum</option>
+            <option value="buffer">Buffer (%)</option>
+            <option value="discount">Discount (%)</option>
+            <option value="tax">Tax (%)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">Value</label>
+          <input type="number" name="value" step="0.01" required class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl" />
+        </div>
+        <div class="flex gap-3">
+          <button type="button" onclick="document.getElementById('add-rule-modal').close()" class="flex-1 py-3 border border-slate-700 rounded-xl">Cancel</button>
+          <button type="submit" class="flex-1 py-3 bg-cyan-500 rounded-xl">Save</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script define:vars={{ userId }}>
+      async function loadRules() {
+        try {
+          const res = await fetch(`/api/rules?userId=${userId}`);
+          const data = await res.json();
+          
+          const container = document.getElementById('rules-grid');
+          
+          if (data.rules && data.rules.length > 0) {
+            container.innerHTML = data.rules.map(r => `
+              <div class="p-6 rounded-2xl bg-slate-900/50 border ${r.active ? 'border-cyan-500/30' : 'border-slate-800'}">
+                <div class="flex justify-between items-start mb-4">
+                  <div>
+                    <h3 class="font-semibold">${r.name}</h3>
+                    <span class="text-xs px-2 py-1 rounded-full ${r.active ? 'bg-green-500/20 text-green-400' : 'bg-slate-600 text-slate-400'}">${r.type}</span>
+                  </div>
+                  <div class="text-2xl font-bold text-cyan-400">${r.type === 'minimum' ? '€' : ''}${r.value}${r.type !== 'minimum' ? '%' : ''}</div>
+                </div>
+                <div class="flex gap-2">
+                  <button onclick="toggleRule('${r._id}', ${!r.active})" class="flex-1 py-2 text-sm rounded-lg ${r.active ? 'bg-red-500/20 text-red-400' : 'bg-green-500/20 text-green-400'}">
+                    ${r.active ? 'Disable' : 'Enable'}
+                  </button>
+                  <button onclick="deleteRule('${r._id}')" class="px-4 py-2 text-sm rounded-lg bg-slate-700 text-slate-400 hover:bg-red-500/20 hover:text-red-400">
+                    Delete
+                  </button>
+                </div>
+              </div>
+            `).join('');
+          } else {
+            container.innerHTML = '<p class="text-slate-500 text-center py-8 col-span-2">No rules yet. Add your first rule!</p>';
+          }
+        } catch (e) {
+          console.error('Failed to load rules:', e);
+        }
+      }
+      
+      loadRules();
+
+      function showAddModal() {
+        document.getElementById('add-rule-modal').showModal();
+      }
+
+      document.getElementById('rule-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        
+        const data = {
+          userId: formData.get('userId'),
+          name: formData.get('name'),
+          type: formData.get('type'),
+          value: parseFloat(formData.get('value'))
+        };
+        
+        try {
+          const res = await fetch('/api/rules', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          
+          if (res.ok) {
+            document.getElementById('add-rule-modal').close();
+            form.reset();
+            loadRules();
+          }
+        } catch (err) {
+          console.error('Failed to create rule:', err);
+        }
+      });
+
+      async function toggleRule(id, active) {
+        await fetch('/api/rules', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ruleId: id, userId, active })
+        });
+        loadRules();
+      }
+
+      async function deleteRule(id) {
+        if (confirm('Delete this rule?')) {
+          await fetch('/api/rules', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ruleId: id, userId })
+          });
+          loadRules();
+        }
+      }
+    </script>
+  </body>
+</html>

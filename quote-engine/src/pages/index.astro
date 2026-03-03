@@ -1,17 +1,149 @@
 ---
-
+// Welcome to Astro!
+import '../styles/global.css';
 ---
 
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote Engine - AI-Powered Quote Generation</title>
+    <meta name="description" content="Generate professional quotes in seconds with AI" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+        <a href="/" class="text-2xl font-bold text-cyan-400">Quote Engine</a>
+        <nav class="hidden md:flex items-center gap-8 text-sm">
+          <a href="#features" class="text-slate-400 hover:text-white transition-colors">Features</a>
+          <a href="#pricing" class="text-slate-400 hover:text-white transition-colors">Pricing</a>
+          <a href="/dashboard" class="text-slate-400 hover:text-white transition-colors">Dashboard</a>
+          <a href="/auth/signin" class="text-slate-400 hover:text-white transition-colors">Sign In</a>
+          <a href="/auth/signup" class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-colors">Get Started</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="pt-28">
+      <!-- Hero Section -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <div class="max-w-3xl mx-auto">
+          <p class="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1 text-sm text-cyan-400 mb-6">
+            ✨ AI-Powered Quote Generation
+          </p>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-cyan-100 to-slate-400 bg-clip-text text-transparent mb-6">
+            Generate Professional Quotes in Seconds
+          </h1>
+          <p class="text-slate-400 text-lg mb-8">
+            Upload your pricing data, set your business rules, and let AI create accurate, professional quotes instantly. No more manual calculations.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="/dashboard" class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white rounded-xl font-semibold transition-all hover:scale-105">
+              Start Now — It's Free
+            </a>
+            <a href="#how-it-works" class="px-8 py-3 border border-slate-700 text-slate-300 rounded-xl font-medium hover:border-slate-500 transition-colors">
+              See How It Works
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section id="features" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-4">Why Choose Quote Engine?</h2>
+            <p class="text-slate-400">Everything you need to generate professional quotes fast</p>
+          </div>
+          
+          <div class="grid md:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="group relative p-8 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-cyan-500/30 transition-all">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">Excel Import</h3>
+              <p class="text-slate-400">Simply upload your Excel pricing file and we parse it automatically.</p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="group relative p-8 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-cyan-500/30 transition-all">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">AI-Powered</h3>
+              <p class="text-slate-400">Smart quote generation using advanced AI to understand your requirements.</p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="group relative p-8 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-cyan-500/30 transition-all">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">Smart Rules</h3>
+              <p class="text-slate-400">Set minimums, buffers, and discounts. We apply them automatically.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works -->
+      <section id="how-it-works" class="py-20 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-4">How It Works</h2>
+            <p class="text-slate-400">Three simple steps to professional quotes</p>
+          </div>
+          
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="text-center">
+              <div class="w-16 h-16 rounded-full bg-cyan-500/20 text-cyan-400 text-2xl font-bold flex items-center justify-center mx-auto mb-4">1</div>
+              <h3 class="text-lg font-semibold mb-2">Upload Pricing</h3>
+              <p class="text-slate-400">Upload your Excel file with prices, categories, and units.</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 rounded-full bg-purple-500/20 text-purple-400 text-2xl font-bold flex items-center justify-center mx-auto mb-4">2</div>
+              <h3 class="text-lg font-semibold mb-2">Set Rules</h3>
+              <p class="text-slate-400">Configure minimums, buffers, and discounts.</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 rounded-full bg-pink-500/20 text-pink-400 text-2xl font-bold flex items-center justify-center mx-auto mb-4">3</div>
+              <h3 class="text-lg font-semibold mb-2">Generate Quotes</h3>
+              <p class="text-slate-400">Describe what you need and get a professional quote instantly.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 class="text-3xl sm:text-4xl font-bold mb-6">Ready to Get Started?</h2>
+          <p class="text-slate-400 mb-8">Join thousands of businesses generating quotes faster than ever.</p>
+          <a href="/dashboard" class="inline-block px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white rounded-xl font-semibold text-lg transition-all hover:scale-105">
+            Start Generating Quotes
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-slate-800 py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+        <span>© 2026 Quote Engine. All rights reserved.</span>
+        <div class="flex items-center gap-6">
+          <a href="#" class="hover:text-white transition-colors">Privacy</a>
+          <a href="#" class="hover:text-white transition-colors">Terms</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

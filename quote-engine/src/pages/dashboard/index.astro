@@ -1,0 +1,283 @@
+---
+import '../styles/global.css';
+
+// Demo user ID for testing
+const userId = '67fc9ba0000000000000001';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Quote Engine</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
+    <!-- Sidebar -->
+    <aside class="fixed left-0 top-0 bottom-0 w-64 bg-slate-900/80 backdrop-blur border-r border-slate-800 p-6">
+      <a href="/" class="text-2xl font-bold text-cyan-400 mb-8 block">Quote Engine</a>
+      
+      <nav class="space-y-2">
+        <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-cyan-500/10 text-cyan-400">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          Dashboard
+        </a>
+        <a href="/dashboard/prices" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Prices
+        </a>
+        <a href="/dashboard/quotes" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Quotes
+        </a>
+        <a href="/dashboard/rules" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          Rules
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="ml-64 p-8">
+      <div class="max-w-6xl">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <h1 class="text-3xl font-bold">Dashboard</h1>
+            <p class="text-slate-400">Manage your pricing and generate quotes</p>
+          </div>
+          <button onclick="document.getElementById('generate-modal').showModal()" class="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white rounded-xl font-semibold transition-all">
+            + New Quote
+          </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-6 mb-8">
+          <div class="p-6 rounded-2xl bg-slate-900/50 border border-slate-800">
+            <div class="text-3xl font-bold text-cyan-400" id="price-count">-</div>
+            <div class="text-slate-400">Price Items</div>
+          </div>
+          <div class="p-6 rounded-2xl bg-slate-900/50 border border-slate-800">
+            <div class="text-3xl font-bold text-purple-400" id="quote-count">-</div>
+            <div class="text-slate-400">Quotes Generated</div>
+          </div>
+          <div class="p-6 rounded-2xl bg-slate-900/50 border border-slate-800">
+            <div class="text-3xl font-bold text-green-400" id="rule-count">-</div>
+            <div class="text-slate-400">Active Rules</div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+          <!-- Upload Prices -->
+          <div class="p-6 rounded-2xl bg-slate-900/50 border border-slate-800">
+            <h3 class="text-lg font-semibold mb-4">📊 Upload Pricing Data</h3>
+            <form id="upload-form" class="space-y-4">
+              <input type="hidden" name="userId" value={userId} />
+              <input type="file" name="file" accept=".xlsx,.xls" required 
+                class="w-full p-4 rounded-xl bg-slate-800 border border-slate-700 text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-cyan-500 file:text-white file:cursor-pointer" />
+              <button type="submit" class="w-full py-3 bg-cyan-500 hover:bg-cyan-600 text-white rounded-xl font-medium transition-colors">
+                Upload & Process
+              </button>
+            </form>
+            <div id="upload-result" class="mt-4 hidden p-4 rounded-lg"></div>
+          </div>
+
+          <!-- Generate Quote -->
+          <div class="p-6 rounded-2xl bg-slate-900/50 border border-slate-800">
+            <h3 class="text-lg font-semibold mb-4">✨ Quick Quote</h3>
+            <form id="quote-form" class="space-y-4">
+              <input type="hidden" name="userId" value={userId} />
+              <input type="text" name="clientName" placeholder="Client Name" required
+                class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500" />
+              <textarea name="prompt" placeholder="Describe what you need..." rows="3" required
+                class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"></textarea>
+              <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white rounded-xl font-medium transition-colors">
+                Generate Quote
+              </button>
+            </form>
+            <div id="quote-result" class="mt-4 hidden p-4 rounded-lg bg-slate-800"></div>
+          </div>
+        </div>
+
+        <!-- Recent Quotes -->
+        <div class="p-6 rounded-2xl bg-slate-900/50 border border-slate-800">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold">Recent Quotes</h3>
+            <a href="/dashboard/quotes" class="text-cyan-400 hover:text-cyan-300 text-sm">View All →</a>
+          </div>
+          <div id="recent-quotes" class="space-y-3">
+            <p class="text-slate-500 text-center py-8">No quotes yet. Generate your first quote!</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Generate Modal -->
+    <dialog id="generate-modal" class="p-8 rounded-2xl bg-slate-900 border border-slate-700 backdrop:bg-black/50 max-w-lg w-full">
+      <h3 class="text-xl font-bold mb-4">Generate New Quote</h3>
+      <form id="modal-quote-form" class="space-y-4">
+        <input type="hidden" name="userId" value={userId} />
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">Client Name</label>
+          <input type="text" name="clientName" required
+            class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white" />
+        </div>
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">Client Email</label>
+          <input type="email" name="clientEmail"
+            class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white" />
+        </div>
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">What do you need?</label>
+          <textarea name="prompt" rows="4" required
+            class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white" placeholder="Describe your project or requirements..."></textarea>
+        </div>
+        <div class="flex gap-3">
+          <button type="button" onclick="document.getElementById('generate-modal').close()" class="flex-1 py-3 border border-slate-700 text-slate-300 rounded-xl">Cancel</button>
+          <button type="submit" class="flex-1 py-3 bg-cyan-500 text-white rounded-xl">Generate</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script define:vars={{ userId }}>
+      // Load stats on page load
+      async function loadStats() {
+        try {
+          // Load price count
+          const pricesRes = await fetch(`/api/prices?userId=${userId}`);
+          const prices = await pricesRes.json();
+          document.getElementById('price-count').textContent = prices.count || 0;
+          
+          // Load quote count
+          const quotesRes = await fetch(`/api/quotes?id&userId=${userId}`);
+          const quotes = await quotesRes.json();
+          document.getElementById('quote-count').textContent = quotes.count || 0;
+          
+          // Load rule count
+          const rulesRes = await fetch(`/api/rules?userId=${userId}`);
+          const rules = await rulesRes.json();
+          document.getElementById('rule-count').textContent = rules.count || 0;
+          
+          // Load recent quotes
+          if (quotes.quotes && quotes.quotes.length > 0) {
+            const recentContainer = document.getElementById('recent-quotes');
+            recentContainer.innerHTML = quotes.quotes.slice(0, 5).map(q => `
+              <div class="flex items-center justify-between p-4 rounded-xl bg-slate-800">
+                <div>
+                  <div class="font-medium">${q.clientName}</div>
+                  <div class="text-sm text-slate-500">${q.quoteNumber} • ${new Date(q.generatedAt).toLocaleDateString()}</div>
+                </div>
+                <div class="text-right">
+                  <div class="font-bold text-cyan-400">€${q.total.toFixed(2)}</div>
+                  <div class="text-xs text-slate-500 capitalize">${q.status}</div>
+                </div>
+              </div>
+            `).join('');
+          }
+        } catch (e) {
+          console.error('Failed to load stats:', e);
+        }
+      }
+      
+      loadStats();
+
+      // Upload form handler
+      document.getElementById('upload-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const result = document.getElementById('upload-result');
+        
+        result.classList.remove('hidden', 'bg-green-500/20', 'bg-red-500/20');
+        result.innerHTML = 'Uploading...';
+        
+        try {
+          const res = await fetch('/api/prices', {
+            method: 'POST',
+            body: formData
+          });
+          const data = await res.json();
+          
+          if (data.success) {
+            result.classList.add('bg-green-500/20');
+            result.innerHTML = `✅ Success! ${data.itemsCount} price items uploaded.`;
+            loadStats();
+          } else {
+            result.classList.add('bg-red-500/20');
+            result.innerHTML = `❌ Error: ${data.error}`;
+          }
+        } catch (err) {
+          result.classList.add('bg-red-500/20');
+          result.innerHTML = `❌ Error: ${err}`;
+        }
+        
+        result.classList.remove('hidden');
+      });
+
+      // Quote form handler
+      async function handleQuoteForm(form) {
+        const formData = new FormData(form);
+        const data = {
+          userId: formData.get('userId'),
+          clientName: formData.get('clientName'),
+          clientEmail: formData.get('clientEmail') || '',
+          prompt: formData.get('prompt')
+        };
+        
+        const result = form.closest('form').nextElementSibling;
+        
+        try {
+          const res = await fetch('/api/quote', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          const response = await res.json();
+          
+          if (response.success) {
+            result.classList.remove('hidden', 'bg-red-500/20');
+            result.classList.add('bg-green-500/20');
+            result.innerHTML = `
+              <div class="font-semibold text-green-400 mb-2">✅ Quote Generated!</div>
+              <div class="text-sm">
+                <div><strong>Quote #:</strong> ${response.quote.quoteNumber}</div>
+                <div><strong>Total:</strong> €${response.quote.total.toFixed(2)}</div>
+                <div class="mt-2 text-slate-400">Items: ${response.quote.items.length}</div>
+              </div>
+            `;
+            loadStats();
+          } else {
+            result.classList.remove('hidden', 'bg-green-500/20');
+            result.classList.add('bg-red-500/20');
+            result.innerHTML = `❌ Error: ${response.error}`;
+          }
+        } catch (err) {
+          result.classList.remove('hidden');
+          result.innerHTML = `❌ Error: ${err}`;
+        }
+      }
+
+      document.getElementById('quote-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        handleQuoteForm(e.target);
+      });
+
+      document.getElementById('modal-quote-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        handleQuoteForm(e.target);
+        document.getElementById('generate-modal').close();
+      });
+    </script>
+  </body>
+</html>
