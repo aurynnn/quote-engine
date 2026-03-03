@@ -245,6 +245,9 @@ Response:
 ### Authentication
 - `lucia` - Auth framework (or simple JWT)
 
+### Localization
+- `@inlang/paraglide-js` - i18n (English + Dutch)
+
 ---
 
 ## 7. 🚀 PHASED ROADMAP
@@ -259,6 +262,12 @@ Response:
 - [ ] User registration/login
 - [ ] JWT session management
 - [ ] Protected dashboard routes
+
+### Phase 1.6: Localization (Week 2)
+- [ ] Set up paraglide-js
+- [ ] Create English translations
+- [ ] Create Dutch translations
+- [ ] Add language switcher to UI
 
 ### Phase 2: Data Ingestion (Week 2)
 - [ ] Excel parser implementation
