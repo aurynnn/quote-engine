@@ -13,23 +13,23 @@ const userId = '67fc9ba0000000000000001'; // Demo user
     <title>Quote Details - Quote Engine</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
-  <body class="min-h-screen">
-    <aside class="sidebar fixed left-0 top-0 bottom-0 w-64 p-6">
+  <body class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+    <aside class="fixed left-0 top-0 bottom-0 w-64 bg-slate-900/80 backdrop-blur border-r border-white/5 p-6">
       <a href="/" class="text-2xl font-bold gradient-text mb-8 block">Quote Engine</a>
       <nav class="space-y-1">
-        <a href="/dashboard" class="sidebar-link">
+        <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/5 hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
           Dashboard
         </a>
-        <a href="/dashboard/prices" class="sidebar-link">
+        <a href="/dashboard/prices" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/5 hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
           Prices
         </a>
-        <a href="/dashboard/quotes" class="sidebar-link">
+        <a href="/dashboard/quotes" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/5 hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
           Quotes
         </a>
-        <a href="/dashboard/rules" class="sidebar-link">
+        <a href="/dashboard/rules" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/5 hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
           Rules
         </a>
@@ -46,17 +46,17 @@ const userId = '67fc9ba0000000000000001'; // Demo user
             <h1 class="text-3xl font-bold" id="quote-title">Quote Details</h1>
           </div>
           <div class="flex gap-3">
-            <button onclick="downloadPDF()" class="btn-secondary">
-              📄 Download PDF
+            <button onclick="downloadPDF()" class="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition flex items-center gap-2">
+              📄 Download
             </button>
-            <button onclick="sendQuote()" class="btn-primary">
+            <button onclick="sendQuote()" class="px-4 py-2 bg-red-500 hover:bg-red-600 rounded-xl transition flex items-center gap-2">
               ✉️ Send to Client
             </button>
           </div>
         </div>
 
         <!-- Quote Info -->
-        <div class="card p-6 mb-6">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 mb-6">
           <div class="grid grid-cols-2 gap-6">
             <div>
               <div class="text-sm text-zinc-500 mb-1">Client</div>
@@ -72,11 +72,11 @@ const userId = '67fc9ba0000000000000001'; // Demo user
         </div>
 
         <!-- Line Items -->
-        <div class="card p-6 mb-6">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 mb-6">
           <h2 class="text-lg font-semibold mb-4">Line Items</h2>
           <table class="w-full">
             <thead>
-              <tr class="border-b border-zinc-800">
+              <tr class="border-b border-white/10">
                 <th class="text-left py-3 text-zinc-400 font-medium">Item</th>
                 <th class="text-center py-3 text-zinc-400 font-medium">Qty</th>
                 <th class="text-right py-3 text-zinc-400 font-medium">Unit Price</th>
@@ -90,7 +90,7 @@ const userId = '67fc9ba0000000000000001'; // Demo user
         </div>
 
         <!-- Totals -->
-        <div class="card p-6">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
           <div class="flex justify-end">
             <div class="w-64 space-y-3">
               <div class="flex justify-between text-zinc-400">
@@ -105,9 +105,9 @@ const userId = '67fc9ba0000000000000001'; // Demo user
                 <span>Tax</span>
                 <span id="tax">€0.00</span>
               </div>
-              <div class="flex justify-between text-xl font-bold pt-3 border-t border-zinc-700">
+              <div class="flex justify-between text-xl font-bold pt-3 border-t border-white/10">
                 <span>Total</span>
-                <span class="gradient-text" id="total">€0.00</span>
+                <span class="text-red-400" id="total">€0.00</span>
               </div>
             </div>
           </div>
@@ -115,7 +115,18 @@ const userId = '67fc9ba0000000000000001'; // Demo user
       </div>
     </main>
 
+    <!-- Toast notification -->
+    <div id="toast" class="fixed bottom-4 right-4 px-6 py-3 rounded-xl hidden"></div>
+
     <script define:vars={{ slug, userId }}>
+      function showToast(message, success = true) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = `fixed bottom-4 right-4 px-6 py-3 rounded-xl ${success ? 'bg-green-500' : 'bg-red-500'} text-white`;
+        toast.classList.remove('hidden');
+        setTimeout(() => toast.classList.add('hidden'), 3000);
+      }
+
       async function loadQuote() {
         try {
           const res = await fetch(`/api/quotes/${slug}?userId=${userId}`);
@@ -136,7 +147,7 @@ const userId = '67fc9ba0000000000000001'; // Demo user
           // Items
           const tbody = document.getElementById('items-table');
           tbody.innerHTML = q.items.map(item => `
-            <tr class="border-b border-zinc-800/50">
+            <tr class="border-b border-white/5">
               <td class="py-3">
                 <div class="font-medium">${item.name}</div>
                 ${item.description ? `<div class="text-sm text-zinc-500">${item.description}</div>` : ''}
@@ -164,12 +175,36 @@ const userId = '67fc9ba0000000000000001'; // Demo user
       loadQuote();
 
       function downloadPDF() {
-        alert('PDF download coming soon!');
+        window.open(`/api/quotes/${slug}/pdf?id=${slug}&userId=${userId}&format=html`, '_blank');
       }
 
-      function sendQuote() {
-        alert('Email sending coming soon!');
+      async function sendQuote() {
+        try {
+          const res = await fetch('/api/quotes/send', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ quoteId: slug, userId })
+          });
+          
+          const data = await res.json();
+          
+          if (data.success) {
+            showToast('✅ Quote sent to client!', true);
+          } else {
+            showToast('❌ ' + data.error, false);
+          }
+        } catch (err) {
+          showToast('❌ Failed to send', false);
+        }
       }
     </script>
   </body>
 </html>
+
+<style>
+.gradient-text {
+  background: linear-gradient(135deg, #f97316, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+</style>
