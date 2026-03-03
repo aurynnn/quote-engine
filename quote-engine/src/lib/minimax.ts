@@ -45,7 +45,7 @@ async function callMiniMax(prompt: string, systemPrompt?: string): Promise<strin
     model: 'MiniMax-M2.5',
     messages,
     temperature: 0.7,
-    max_tokens: 4096
+    max_tokens: 8192
   };
   
   const response = await fetch(`${BASE_URL}/text/chatcompletion_v2`, {
