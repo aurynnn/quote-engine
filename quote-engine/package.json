@@ -13,6 +13,7 @@
     "@astrojs/svelte": "^7.2.5",
     "@inlang/paraglide-js": "^2.13.1",
     "@sveltejs/vite-plugin-svelte": "^6.2.4",
+    "@tailwindcss/postcss": "^4.2.1",
     "@tailwindcss/vite": "^4.2.1",
     "@types/jsonwebtoken": "^9.0.10",
     "astro": "^5.17.1",
