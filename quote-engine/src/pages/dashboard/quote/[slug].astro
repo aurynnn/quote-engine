@@ -1,0 +1,175 @@
+---
+import '../styles/global.css';
+
+const { slug } = Astro.params;
+const userId = '67fc9ba0000000000000001'; // Demo user
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote Details - Quote Engine</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen">
+    <aside class="sidebar fixed left-0 top-0 bottom-0 w-64 p-6">
+      <a href="/" class="text-2xl font-bold gradient-text mb-8 block">Quote Engine</a>
+      <nav class="space-y-1">
+        <a href="/dashboard" class="sidebar-link">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+          Dashboard
+        </a>
+        <a href="/dashboard/prices" class="sidebar-link">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          Prices
+        </a>
+        <a href="/dashboard/quotes" class="sidebar-link">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          Quotes
+        </a>
+        <a href="/dashboard/rules" class="sidebar-link">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          Rules
+        </a>
+      </nav>
+    </aside>
+
+    <main class="ml-64 p-8">
+      <div class="max-w-4xl">
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <a href="/dashboard/quotes" class="text-zinc-500 hover:text-white mb-2 inline-flex items-center gap-2">
+              ← Back to Quotes
+            </a>
+            <h1 class="text-3xl font-bold" id="quote-title">Quote Details</h1>
+          </div>
+          <div class="flex gap-3">
+            <button onclick="downloadPDF()" class="btn-secondary">
+              📄 Download PDF
+            </button>
+            <button onclick="sendQuote()" class="btn-primary">
+              ✉️ Send to Client
+            </button>
+          </div>
+        </div>
+
+        <!-- Quote Info -->
+        <div class="card p-6 mb-6">
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <div class="text-sm text-zinc-500 mb-1">Client</div>
+              <div class="text-xl font-semibold" id="client-name">Loading...</div>
+              <div class="text-zinc-400" id="client-email"></div>
+            </div>
+            <div class="text-right">
+              <div class="text-sm text-zinc-500 mb-1">Quote #</div>
+              <div class="text-xl font-mono" id="quote-number">-</div>
+              <div class="text-sm text-zinc-500" id="quote-date">-</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Line Items -->
+        <div class="card p-6 mb-6">
+          <h2 class="text-lg font-semibold mb-4">Line Items</h2>
+          <table class="w-full">
+            <thead>
+              <tr class="border-b border-zinc-800">
+                <th class="text-left py-3 text-zinc-400 font-medium">Item</th>
+                <th class="text-center py-3 text-zinc-400 font-medium">Qty</th>
+                <th class="text-right py-3 text-zinc-400 font-medium">Unit Price</th>
+                <th class="text-right py-3 text-zinc-400 font-medium">Total</th>
+              </tr>
+            </thead>
+            <tbody id="items-table">
+              <tr><td colspan="4" class="py-8 text-center text-zinc-500">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Totals -->
+        <div class="card p-6">
+          <div class="flex justify-end">
+            <div class="w-64 space-y-3">
+              <div class="flex justify-between text-zinc-400">
+                <span>Subtotal</span>
+                <span id="subtotal">€0.00</span>
+              </div>
+              <div class="flex justify-between text-zinc-400" id="buffer-row">
+                <span>Buffer</span>
+                <span id="buffer">€0.00</span>
+              </div>
+              <div class="flex justify-between text-zinc-400" id="tax-row">
+                <span>Tax</span>
+                <span id="tax">€0.00</span>
+              </div>
+              <div class="flex justify-between text-xl font-bold pt-3 border-t border-zinc-700">
+                <span>Total</span>
+                <span class="gradient-text" id="total">€0.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script define:vars={{ slug, userId }}>
+      async function loadQuote() {
+        try {
+          const res = await fetch(`/api/quotes/${slug}?userId=${userId}`);
+          const data = await res.json();
+          
+          if (!data.quote) {
+            document.getElementById('quote-title').textContent = 'Quote Not Found';
+            return;
+          }
+          
+          const q = data.quote;
+          
+          document.getElementById('client-name').textContent = q.clientName;
+          document.getElementById('client-email').textContent = q.clientEmail || '';
+          document.getElementById('quote-number').textContent = q.quoteNumber;
+          document.getElementById('quote-date').textContent = new Date(q.generatedAt).toLocaleDateString();
+          
+          // Items
+          const tbody = document.getElementById('items-table');
+          tbody.innerHTML = q.items.map(item => `
+            <tr class="border-b border-zinc-800/50">
+              <td class="py-3">
+                <div class="font-medium">${item.name}</div>
+                ${item.description ? `<div class="text-sm text-zinc-500">${item.description}</div>` : ''}
+              </td>
+              <td class="py-3 text-center">${item.quantity}</td>
+              <td class="py-3 text-right">€${item.unitPrice.toFixed(2)}</td>
+              <td class="py-3 text-right font-medium">€${item.total.toFixed(2)}</td>
+            </tr>
+          `).join('');
+          
+          // Totals
+          document.getElementById('subtotal').textContent = `€${q.subtotal.toFixed(2)}`;
+          document.getElementById('buffer').textContent = `€${q.buffer.toFixed(2)}`;
+          document.getElementById('tax').textContent = `€${q.tax.toFixed(2)}`;
+          document.getElementById('total').textContent = `€${q.total.toFixed(2)}`;
+          
+          if (q.buffer === 0) document.getElementById('buffer-row').style.display = 'none';
+          if (q.tax === 0) document.getElementById('tax-row').style.display = 'none';
+          
+        } catch (e) {
+          console.error('Failed to load quote:', e);
+        }
+      }
+      
+      loadQuote();
+
+      function downloadPDF() {
+        alert('PDF download coming soon!');
+      }
+
+      function sendQuote() {
+        alert('Email sending coming soon!');
+      }
+    </script>
+  </body>
+</html>

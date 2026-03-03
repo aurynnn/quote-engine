@@ -1,0 +1,108 @@
+---
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - Quote Engine</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen">
+    <div class="min-h-screen flex items-center justify-center p-6">
+      <div class="w-full max-w-md">
+        <!-- Logo -->
+        <div class="text-center mb-8">
+          <a href="/" class="text-3xl font-bold gradient-text">Quote Engine</a>
+        </div>
+        
+        <!-- Form Card -->
+        <div class="card p-8">
+          <h1 class="text-2xl font-bold mb-6 text-center">Create Account</h1>
+          
+          <form id="register-form" class="space-y-4">
+            <div>
+              <label class="block text-sm text-zinc-400 mb-2">Full Name</label>
+              <input type="text" name="name" required class="input" placeholder="John Doe" />
+            </div>
+            
+            <div>
+              <label class="block text-sm text-zinc-400 mb-2">Company (optional)</label>
+              <input type="text" name="company" class="input" placeholder="Acme Inc." />
+            </div>
+            
+            <div>
+              <label class="block text-sm text-zinc-400 mb-2">Email</label>
+              <input type="email" name="email" required class="input" placeholder="you@example.com" />
+            </div>
+            
+            <div>
+              <label class="block text-sm text-zinc-400 mb-2">Password</label>
+              <input type="password" name="password" required class="input" placeholder="••••••••" minlength="6" />
+            </div>
+            
+            <button type="submit" class="btn-primary w-full">
+              Create Account
+            </button>
+          </form>
+          
+          <div id="error" class="mt-4 p-4 rounded-lg bg-red-500/20 text-red-400 hidden"></div>
+          
+          <div class="mt-6 text-center text-zinc-500">
+            Already have an account? 
+            <a href="/auth/signin" class="text-emerald-400 hover:text-emerald-300">Sign in</a>
+          </div>
+        </div>
+        
+        <div class="text-center mt-6">
+          <a href="/" class="text-zinc-500 hover:text-white">← Back to home</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('register-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const form = e.target;
+        const formData = new FormData(form);
+        
+        const data = {
+          action: 'register',
+          name: formData.get('name'),
+          company: formData.get('company'),
+          email: formData.get('email'),
+          password: formData.get('password')
+        };
+        
+        const errorDiv = document.getElementById('error');
+        errorDiv.classList.add('hidden');
+        
+        try {
+          const res = await fetch('/api/auth', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          
+          const result = await res.json();
+          
+          if (result.success) {
+            // Store token and redirect
+            localStorage.setItem('token', result.token);
+            localStorage.setItem('user', JSON.stringify(result.user));
+            window.location.href = '/dashboard';
+          } else {
+            errorDiv.textContent = result.error;
+            errorDiv.classList.remove('hidden');
+          }
+        } catch (err) {
+          errorDiv.textContent = 'An error occurred. Please try again.';
+          errorDiv.classList.remove('hidden');
+        }
+      });
+    </script>
+  </body>
+</html>
