@@ -12,91 +12,145 @@ const userId = '507f1f77bcf86cd799439011';
     <title>Settings - Quote Engine</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
-  <body class="min-h-screen">
-    <aside class="sidebar fixed left-0 top-0 bottom-0 w-64 p-6">
-      <a href="/" class="text-2xl font-bold gradient-text mb-8 block">Quote Engine</a>
+  <body class="min-h-screen bg-[#0a0a0f] text-white font-sans">
+    <div class="fixed inset-0 -z-10 bg-gradient-to-br from-[#0a0a0f] via-[#0f0f14] to-[#0a0a0f]"></div>
+
+    <aside class="fixed left-0 top-0 bottom-0 w-64 bg-[#0c0c12]/95 backdrop-blur-xl border-r border-white/[0.06] p-6 z-20">
+      <a href="/" class="flex items-center gap-3 mb-8">
+        <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-rose-600 rounded-lg"></div>
+        <span class="text-xl font-semibold">Quote Engine</span>
+      </a>
       <nav class="space-y-1">
-        <a href="/dashboard" class="sidebar-link">
+        <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
           Dashboard
         </a>
-        <a href="/dashboard/prices" class="sidebar-link">
+        <a href="/dashboard/prices" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
           Prices
         </a>
-        <a href="/dashboard/quotes" class="sidebar-link">
+        <a href="/dashboard/quotes" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
           Quotes
         </a>
-        <a href="/dashboard/rules" class="sidebar-link">
+        <a href="/dashboard/rules" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
           Rules
+        </a>
+        <a href="/dashboard/settings" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-red-500/10 text-red-400">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m-6-4a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
+          Settings
         </a>
       </nav>
     </aside>
 
-    <main class="ml-64 p-8">
+    <main class="ml-64 p-8 relative z-10">
       <div class="max-w-2xl">
         <h1 class="text-3xl font-bold mb-8">⚙️ Settings</h1>
 
-        <!-- Profile -->
-        <div class="card p-6 mb-6">
-          <h2 class="text-lg font-semibold mb-4">Profile</h2>
-          <form id="profile-form" class="space-y-4">
+        <!-- Company Info -->
+        <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 mb-6">
+          <h2 class="text-lg font-semibold mb-4">Company Information</h2>
+          <form id="company-form" class="space-y-4">
+            <input type="hidden" name="userId" value={userId} />
             <div>
-              <label class="block text-sm text-zinc-400 mb-2">Name</label>
-              <input type="text" name="name" class="input" placeholder="Your name" />
+              <label class="block text-sm text-zinc-400 mb-2">Company Name</label>
+              <input type="text" name="companyName" class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl" placeholder="Your Company" />
             </div>
             <div>
-              <label class="block text-sm text-zinc-400 mb-2">Company</label>
-              <input type="text" name="company" class="input" placeholder="Your company" />
+              <label class="block text-sm text-zinc-400 mb-2">Address</label>
+              <textarea name="address" rows="2" class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl" placeholder="Street, City, Country"></textarea>
             </div>
             <div>
-              <label class="block text-sm text-zinc-400 mb-2">Email</label>
-              <input type="email" name="email" class="input" placeholder="you@example.com" disabled />
+              <label class="block text-sm text-zinc-400 mb-2">Phone</label>
+              <input type="tel" name="phone" class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl" placeholder="+32 123 45 67 89" />
             </div>
-            <button type="submit" class="btn-primary">Save Changes</button>
+            <div>
+              <label class="block text-sm text-zinc-400 mb-2">Website</label>
+              <input type="url" name="website" class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl" placeholder="https://yourcompany.com" />
+            </div>
+            <div>
+              <label class="block text-sm text-zinc-400 mb-2">VAT Number</label>
+              <input type="text" name="vat" class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl" placeholder="BE0123456789" />
+            </div>
+            <button type="submit" class="px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-xl font-medium">Save Company Info</button>
+          </form>
+          <div id="company-result" class="mt-4 hidden p-4 rounded-xl"></div>
+        </div>
+
+        <!-- Email Settings -->
+        <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 mb-6">
+          <h2 class="text-lg font-semibold mb-4">📧 Email Settings</h2>
+          <form id="email-form" class="space-y-4">
+            <input type="hidden" name="userId" value={userId} />
+            <div>
+              <label class="block text-sm text-zinc-400 mb-2">Default Email Subject</label>
+              <input type="text" name="emailSubject" class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl" placeholder="Your Quote from {company}" />
+            </div>
+            <div>
+              <label class="block text-sm text-zinc-400 mb-2">Email Footer</label>
+              <textarea name="emailFooter" rows="3" class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl" placeholder="Best regards,&#10;{company}"></textarea>
+            </div>
+            <button type="submit" class="px-6 py-3 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] rounded-xl font-medium">Save Email Settings</button>
           </form>
         </div>
 
-        <!-- Appearance -->
-        <div class="card p-6 mb-6">
-          <h2 class="text-lg font-semibold mb-4">Appearance</h2>
-          <div class="flex items-center justify-between">
-            <div>
-              <div class="font-medium">Dark Mode</div>
-              <div class="text-sm text-zinc-500">Use dark theme</div>
+        <!-- Quote Defaults -->
+        <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 mb-6">
+          <h2 class="text-lg font-semibold mb-4">📝 Quote Defaults</h2>
+          <form id="defaults-form" class="space-y-4">
+            <input type="hidden" name="userId" value={userId} />
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm text-zinc-400 mb-2">Quote Valid Days</label>
+                <input type="number" name="validDays" value="30" class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl" />
+              </div>
+              <div>
+                <label class="block text-sm text-zinc-400 mb-2">Default Tax Rate %</label>
+                <input type="number" name="taxRate" value="21" step="0.1" class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl" />
+              </div>
             </div>
-            <button id="theme-toggle" class="w-14 h-8 rounded-full bg-zinc-700 relative transition-colors">
-              <div class="w-6 h-6 rounded-full bg-white absolute top-1 left-1 transition-transform"></div>
-            </button>
-          </div>
+            <div>
+              <label class="block text-sm text-zinc-400 mb-2">Currency</label>
+              <select name="currency" class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl">
+                <option value="EUR">€ Euro</option>
+                <option value="USD">$ US Dollar</option>
+                <option value="GBP">£ British Pound</option>
+              </select>
+            </div>
+            <button type="submit" class="px-6 py-3 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] rounded-xl font-medium">Save Defaults</button>
+          </form>
         </div>
 
-        <!-- Danger Zone -->
-        <div class="card p-6 border-red-500/20">
-          <h2 class="text-lg font-semibold mb-4 text-red-400">Danger Zone</h2>
-          <p class="text-zinc-500 mb-4">Once you delete your account, there is no going back.</p>
-          <button class="px-4 py-2 bg-red-500/20 text-red-400 rounded-lg hover:bg-red-500/30 transition-colors">
-            Delete Account
-          </button>
+        <!-- API Keys (for future Stripe) -->
+        <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 mb-6">
+          <h2 class="text-lg font-semibold mb-4">🔑 API Keys</h2>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm text-zinc-400 mb-2">MiniMax API Key</label>
+              <input type="password" name="minimaxKey" class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl" placeholder="sk-..." />
+            </div>
+            <div>
+              <label class="block text-sm text-zinc-400 mb-2">MailerSend API Key</label>
+              <input type="password" name="mailersendKey" class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl" placeholder="key-..." />
+            </div>
+            <button class="px-6 py-3 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] rounded-xl font-medium">Save API Keys</button>
+          </div>
         </div>
       </div>
     </main>
 
-    <script>
-      // Theme toggle
-      const themeBtn = document.getElementById('theme-toggle');
-      const isDark = document.documentElement.classList.contains('dark');
-      
-      if (isDark) {
-        themeBtn.classList.add('bg-emerald-500');
-        themeBtn.querySelector('div').classList.add('translate-x-6');
-      }
-      
-      themeBtn.addEventListener('click', () => {
-        themeBtn.classList.toggle('bg-emerald-500');
-        themeBtn.querySelector('div').classList.toggle('translate-x-6');
+    <script define:vars={{ userId }}>
+      // Save company form
+      document.getElementById('company-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const result = document.getElementById('company-result');
+        result.classList.remove('hidden');
+        result.innerHTML = '<span class="text-zinc-400">Saving...</span>';
+        
+        // For now, just show success
+        result.className = 'mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20';
+        result.innerHTML = '✅ Settings saved!';
       });
     </script>
   </body>

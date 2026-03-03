@@ -1,7 +1,7 @@
 ---
 import '../../styles/global.css';
 
-const userId = '67fc9ba0000000000000000001';
+const userId = '507f1f77bcf86cd799439011';
 ---
 
 <!DOCTYPE html>
@@ -13,25 +13,23 @@ const userId = '67fc9ba0000000000000000001';
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body class="min-h-screen bg-[#0a0a0f] text-white font-sans">
-    <div class="fixed inset-0 -z-10 overflow-hidden">
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-red-500/10 rounded-full blur-[100px]"></div>
-    </div>
+    <div class="fixed inset-0 -z-10 bg-gradient-to-br from-[#0a0a0f] via-[#0f0f14] to-[#0a0a0f]"></div>
 
-    <aside class="fixed left-0 top-0 bottom-0 w-64 bg-[#0a0a0f]/80 backdrop-blur-xl border-r border-white/5 p-6 z-20">
+    <aside class="fixed left-0 top-0 bottom-0 w-64 bg-[#0c0c12]/95 backdrop-blur-xl border-r border-white/[0.06] p-6 z-20">
       <a href="/" class="flex items-center gap-3 mb-8">
-        <div class="w-8 h-8 bg-gradient-to-br from-red-400 to-rose-500 rounded-lg"></div>
+        <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-rose-600 rounded-lg"></div>
         <span class="text-xl font-semibold">Quote Engine</span>
       </a>
       <nav class="space-y-1">
-        <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/5 hover:text-white transition">
+        <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
           Dashboard
         </a>
-        <a href="/dashboard/prices" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/5 hover:text-white transition">
+        <a href="/dashboard/prices" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
           Prices
         </a>
-        <a href="/dashboard/quotes" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/5 hover:text-white transition">
+        <a href="/dashboard/quotes" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
           Quotes
         </a>
@@ -39,14 +37,43 @@ const userId = '67fc9ba0000000000000000001';
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
           Rules
         </a>
+        <a href="/dashboard/settings" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m-6-4a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
+          Settings
+        </a>
       </nav>
     </aside>
 
     <main class="ml-64 p-8 relative z-10">
       <div class="max-w-4xl">
         <div class="flex justify-between items-center mb-8">
-          <h1 class="text-3xl font-bold">⚙️ Pricing Rules</h1>
-          <button onclick="document.getElementById('add-rule-modal').showModal()" class="px-6 py-3 bg-red-500 hover:bg-red-600 rounded-xl font-medium">+ Add Rule</button>
+          <div>
+            <h1 class="text-3xl font-bold">⚙️ Pricing Rules</h1>
+            <p class="text-zinc-500">Configure how quotes are calculated</p>
+          </div>
+          <button onclick="document.getElementById('add-rule-modal').showModal()" class="px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-xl font-medium text-sm">
+            + Add Rule
+          </button>
+        </div>
+
+        <!-- Rule Types Info -->
+        <div class="grid md:grid-cols-4 gap-4 mb-8">
+          <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4">
+            <div class="text-lg font-semibold text-red-400">€ Minimum</div>
+            <div class="text-sm text-zinc-500">Minimum price per item</div>
+          </div>
+          <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4">
+            <div class="text-lg font-semibold text-blue-400">% Buffer</div>
+            <div class="text-sm text-zinc-500">Add safety margin</div>
+          </div>
+          <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4">
+            <div class="text-lg font-semibold text-emerald-400">% Discount</div>
+            <div class="text-sm text-zinc-500">Volume or client discount</div>
+          </div>
+          <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4">
+            <div class="text-lg font-semibold text-purple-400">% Tax</div>
+            <div class="text-sm text-zinc-500">VAT or sales tax</div>
+          </div>
         </div>
 
         <!-- Rules Grid -->
@@ -57,18 +84,18 @@ const userId = '67fc9ba0000000000000000001';
     </main>
 
     <!-- Add Rule Modal -->
-    <dialog id="add-rule-modal" class="p-8 rounded-2xl bg-[#0a0a0f] border border-white/10">
+    <dialog id="add-rule-modal" class="p-8 rounded-2xl bg-[#0c0c12] border border-white/[0.1]">
       <h3 class="text-xl font-bold mb-4">Add Pricing Rule</h3>
       <form id="rule-form" class="space-y-4">
         <input type="hidden" name="userId" value={userId} />
         <div>
           <label class="block text-sm text-zinc-400 mb-2">Rule Name</label>
-          <input type="text" name="name" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl" />
+          <input type="text" name="name" required class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl" placeholder="e.g., Holiday Discount" />
         </div>
         <div>
           <label class="block text-sm text-zinc-400 mb-2">Type</label>
-          <select name="type" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl">
-            <option value="minimum">Minimum</option>
+          <select name="type" required class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl">
+            <option value="minimum">Minimum Price (€)</option>
             <option value="buffer">Buffer (%)</option>
             <option value="discount">Discount (%)</option>
             <option value="tax">Tax (%)</option>
@@ -76,16 +103,27 @@ const userId = '67fc9ba0000000000000000001';
         </div>
         <div>
           <label class="block text-sm text-zinc-400 mb-2">Value</label>
-          <input type="number" name="value" step="0.01" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl" />
+          <input type="number" name="value" step="0.01" required class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl" placeholder="e.g., 10 for 10%" />
         </div>
         <div class="flex gap-3">
-          <button type="button" onclick="document.getElementById('add-rule-modal').close()" class="flex-1 py-3 border border-white/10 rounded-xl text-zinc-400">Cancel</button>
-          <button type="submit" class="flex-1 py-3 bg-red-500 rounded-xl">Save</button>
+          <button type="button" onclick="document.getElementById('add-rule-modal').close()" class="flex-1 py-3 border border-white/[0.1] rounded-xl text-zinc-400 hover:bg-white/[0.05]">Cancel</button>
+          <button type="submit" class="flex-1 py-3 bg-red-600 rounded-xl font-medium">Save Rule</button>
         </div>
       </form>
     </dialog>
 
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-4 right-4 px-6 py-3 rounded-xl hidden"></div>
+
     <script define:vars={{ userId }}>
+      function showToast(message, success = true) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = `fixed bottom-4 right-4 px-6 py-3 rounded-xl ${success ? 'bg-emerald-600' : 'bg-red-600'} text-white`;
+        toast.classList.remove('hidden');
+        setTimeout(() => toast.classList.add('hidden'), 3000);
+      }
+
       async function loadRules() {
         try {
           const res = await fetch(`/api/rules?userId=${userId}`);
@@ -95,26 +133,37 @@ const userId = '67fc9ba0000000000000000001';
           
           if (data.rules && data.rules.length > 0) {
             container.innerHTML = data.rules.map(r => `
-              <div class="p-6 bg-white/5 border ${r.active ? 'border-red-500/30' : 'border-white/10'} rounded-2xl">
+              <div class="p-6 bg-white/[0.03] border ${r.active ? 'border-red-500/30' : 'border-white/[0.06]'} rounded-2xl">
                 <div class="flex justify-between items-start mb-4">
                   <div>
-                    <h3 class="font-semibold">${r.name}</h3>
-                    <span class="text-xs px-2 py-1 rounded-full ${r.active ? 'bg-green-500/20 text-green-400' : 'bg-zinc-700 text-zinc-400'}">${r.type}</span>
+                    <h3 class="font-semibold text-lg">${r.name}</h3>
+                    <span class="text-xs px-2 py-1 rounded-full ${
+                      r.type === 'minimum' ? 'bg-red-500/20 text-red-400' :
+                      r.type === 'buffer' ? 'bg-blue-500/20 text-blue-400' :
+                      r.type === 'discount' ? 'bg-emerald-500/20 text-emerald-400' :
+                      'bg-purple-500/20 text-purple-400'
+                    }">${r.type}</span>
                   </div>
-                  <div class="text-2xl font-bold text-red-400">${r.type === 'minimum' ? '€' : ''}${r.value}${r.type !== 'minimum' ? '%' : ''}</div>
+                  <div class="text-3xl font-bold ${r.active ? 'text-red-400' : 'text-zinc-500'}">${r.type === 'minimum' ? '€' : ''}${r.value}${r.type !== 'minimum' ? '%' : ''}</div>
                 </div>
                 <div class="flex gap-2">
-                  <button onclick="toggleRule('${r._id}', ${!r.active})" class="flex-1 py-2 text-sm rounded-lg ${r.active ? 'bg-red-500/20 text-red-400' : 'bg-green-500/20 text-green-400'}">
-                    ${r.active ? 'Disable' : 'Enable'}
+                  <button onclick="toggleRule('${r._id}', ${!r.active})" class="flex-1 py-2.5 text-sm rounded-lg ${r.active ? 'bg-red-500/20 text-red-400' : 'bg-emerald-500/20 text-emerald-400'} font-medium">
+                    ${r.active ? '✓ Active' : '○ Enable'}
                   </button>
-                  <button onclick="deleteRule('${r._id}')" class="px-4 py-2 text-sm rounded-lg bg-zinc-700 text-zinc-400 hover:bg-red-500/20 hover:text-red-400">
-                    Delete
+                  <button onclick="deleteRule('${r._id}')" class="px-4 py-2.5 text-sm rounded-lg bg-white/[0.05] text-zinc-400 hover:bg-red-500/20 hover:text-red-400">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                   </button>
                 </div>
               </div>
             `).join('');
           } else {
-            container.innerHTML = '<p class="text-zinc-500 text-center py-8 col-span-2">No rules yet. Add your first rule!</p>';
+            container.innerHTML = `
+              <div class="col-span-2 text-center py-12">
+                <div class="text-5xl mb-4">⚙️</div>
+                <p class="text-zinc-500 mb-4">No rules yet. Add your first rule!</p>
+                <button onclick="document.getElementById('add-rule-modal').showModal()" class="px-6 py-3 bg-red-600 rounded-xl font-medium">+ Add Rule</button>
+              </div>
+            `;
           }
         } catch (e) {
           console.error('Failed to load rules:', e);
@@ -146,29 +195,42 @@ const userId = '67fc9ba0000000000000000001';
             document.getElementById('add-rule-modal').close();
             form.reset();
             loadRules();
+            showToast('✅ Rule added!');
+          } else {
+            showToast('❌ Failed to add rule', false);
           }
         } catch (err) {
-          console.error('Failed to create rule:', err);
+          showToast('❌ Error: ' + err, false);
         }
       });
 
       async function toggleRule(id, active) {
-        await fetch('/api/rules', {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ruleId: id, userId, active })
-        });
-        loadRules();
+        try {
+          await fetch('/api/rules', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ruleId: id, userId, active })
+          });
+          loadRules();
+          showToast(active ? '✅ Rule enabled' : 'Rule disabled');
+        } catch (err) {
+          showToast('❌ Failed to update', false);
+        }
       }
 
       async function deleteRule(id) {
         if (confirm('Delete this rule?')) {
-          await fetch('/api/rules', {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ ruleId: id, userId })
-          });
-          loadRules();
+          try {
+            await fetch('/api/rules', {
+              method: 'DELETE',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ ruleId: id, userId })
+            });
+            loadRules();
+            showToast('Rule deleted');
+          } catch (err) {
+            showToast('❌ Failed to delete', false);
+          }
         }
       }
     </script>

@@ -13,18 +13,15 @@ const userId = '507f1f77bcf86cd799439011';
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body class="min-h-screen bg-[#0a0a0f] text-white font-sans">
-    <div class="fixed inset-0 -z-10 overflow-hidden">
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-red-500/10 rounded-full blur-[100px]"></div>
-    </div>
+    <div class="fixed inset-0 -z-10 bg-gradient-to-br from-[#0a0a0f] via-[#0f0f14] to-[#0a0a0f]"></div>
 
-    <!-- Sidebar -->
-    <aside class="fixed left-0 top-0 bottom-0 w-64 bg-[#0a0a0f]/80 backdrop-blur-xl border-r border-white/5 p-6 z-20">
+    <aside class="fixed left-0 top-0 bottom-0 w-64 bg-[#0c0c12]/95 backdrop-blur-xl border-r border-white/[0.06] p-6 z-20">
       <a href="/" class="flex items-center gap-3 mb-8">
-        <div class="w-8 h-8 bg-gradient-to-br from-red-400 to-rose-500 rounded-lg"></div>
+        <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-rose-600 rounded-lg"></div>
         <span class="text-xl font-semibold">Quote Engine</span>
       </a>
       <nav class="space-y-1">
-        <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/5 hover:text-white transition">
+        <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
           Dashboard
         </a>
@@ -32,35 +29,47 @@ const userId = '507f1f77bcf86cd799439011';
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
           Prices
         </a>
-        <a href="/dashboard/quotes" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/5 hover:text-white transition">
+        <a href="/dashboard/quotes" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
           Quotes
         </a>
-        <a href="/dashboard/rules" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/5 hover:text-white transition">
+        <a href="/dashboard/rules" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
           Rules
+        </a>
+        <a href="/dashboard/settings" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m-6-4a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
+          Settings
         </a>
       </nav>
     </aside>
 
     <main class="ml-64 p-8 relative z-10">
       <div class="max-w-6xl">
-        <h1 class="text-3xl font-bold mb-8">💰 Pricing Data</h1>
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <h1 class="text-3xl font-bold">💰 Pricing Data</h1>
+            <p class="text-zinc-500">Manage your pricing items</p>
+          </div>
+          <button onclick="document.getElementById('add-modal').showModal()" class="px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-xl font-medium text-sm">
+            + Add Manually
+          </button>
+        </div>
         
         <!-- Upload -->
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8">
-          <h3 class="text-lg font-semibold mb-4">Upload New Pricing</h3>
+        <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 mb-8">
+          <h3 class="text-lg font-semibold mb-4">Upload from Excel</h3>
           <form id="upload-form" class="flex gap-4">
             <input type="hidden" name="userId" value={userId} />
             <input type="file" name="file" accept=".xlsx,.xls" required 
-              class="flex-1 p-3 rounded-xl bg-white/5 border border-white/10 text-white" />
-            <button type="submit" class="px-6 py-3 bg-red-500 hover:bg-red-600 rounded-xl font-medium">Upload</button>
+              class="flex-1 px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-red-500 file:text-white file:cursor-pointer" />
+            <button type="submit" class="px-6 py-3 bg-red-600 hover:bg-red-500 rounded-xl font-medium">Upload</button>
           </form>
-          <div id="upload-result" class="mt-4 hidden p-4 rounded-lg"></div>
+          <div id="upload-result" class="mt-4 hidden p-4 rounded-xl"></div>
         </div>
 
         <!-- Table -->
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6">
           <div class="flex justify-between items-center mb-4">
             <h3 class="text-lg font-semibold">All Price Items</h3>
             <span id="price-count" class="text-zinc-500">Loading...</span>
@@ -71,6 +80,42 @@ const userId = '507f1f77bcf86cd799439011';
         </div>
       </div>
     </main>
+
+    <!-- Add Manual Modal -->
+    <dialog id="add-modal" class="p-8 rounded-2xl bg-[#0c0c12] border border-white/[0.1]">
+      <h3 class="text-xl font-bold mb-4">Add Price Item</h3>
+      <form id="add-form" class="space-y-4">
+        <input type="hidden" name="userId" value={userId} />
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm text-zinc-400 mb-2">Category</label>
+            <input type="text" name="category" required class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl" placeholder="Development" />
+          </div>
+          <div>
+            <label class="block text-sm text-zinc-400 mb-2">Name</label>
+            <input type="text" name="name" required class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl" placeholder="Website" />
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-4">
+          <div>
+            <label class="block text-sm text-zinc-400 mb-2">Unit</label>
+            <input type="text" name="unit" value="hour" class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl" />
+          </div>
+          <div>
+            <label class="block text-sm text-zinc-400 mb-2">Base Price (€)</label>
+            <input type="number" name="basePrice" step="0.01" required class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl" />
+          </div>
+          <div>
+            <label class="block text-sm text-zinc-400 mb-2">Min Price (€)</label>
+            <input type="number" name="minPrice" step="0.01" required class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl" />
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <button type="button" onclick="document.getElementById('add-modal').close()" class="flex-1 py-3 border border-white/[0.1] rounded-xl text-zinc-400">Cancel</button>
+          <button type="submit" class="flex-1 py-3 bg-red-600 rounded-xl">Add Item</button>
+        </div>
+      </form>
+    </dialog>
 
     <script define:vars={{ userId }}>
       async function loadPrices() {
@@ -85,22 +130,26 @@ const userId = '507f1f77bcf86cd799439011';
             table.innerHTML = `
               <table class="w-full">
                 <thead>
-                  <tr class="border-b border-white/10">
-                    <th class="text-left py-3 px-4 text-zinc-400">Category</th>
-                    <th class="text-left py-3 px-4 text-zinc-400">Name</th>
-                    <th class="text-left py-3 px-4 text-zinc-400">Unit</th>
-                    <th class="text-right py-3 px-4 text-zinc-400">Base Price</th>
-                    <th class="text-right py-3 px-4 text-zinc-400">Min Price</th>
+                  <tr class="border-b border-white/[0.06]">
+                    <th class="text-left py-3 px-4 text-zinc-400 font-medium text-sm">Category</th>
+                    <th class="text-left py-3 px-4 text-zinc-400 font-medium text-sm">Name</th>
+                    <th class="text-left py-3 px-4 text-zinc-400 font-medium text-sm">Unit</th>
+                    <th class="text-right py-3 px-4 text-zinc-400 font-medium text-sm">Base Price</th>
+                    <th class="text-right py-3 px-4 text-zinc-400 font-medium text-sm">Min Price</th>
+                    <th class="text-right py-3 px-4 text-zinc-400 font-medium text-sm">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  ${data.items.map(item => `
-                    <tr class="border-b border-white/5 hover:bg-white/5">
-                      <td class="py-3 px-4">${item.category}</td>
+                  ${data.items.map((item, i) => `
+                    <tr class="border-b border-white/[0.04] hover:bg-white/[0.02]">
+                      <td class="py-3 px-4"><span class="px-2 py-1 rounded-lg bg-red-500/10 text-red-400 text-xs">${item.category}</span></td>
                       <td class="py-3 px-4 font-medium">${item.name}</td>
                       <td class="py-3 px-4 text-zinc-500">${item.unit}</td>
                       <td class="py-3 px-4 text-right text-red-400">€${item.basePrice.toFixed(2)}</td>
                       <td class="py-3 px-4 text-right text-zinc-500">€${item.minPrice.toFixed(2)}</td>
+                      <td class="py-3 px-4 text-right">
+                        <button onclick="deletePrice('${item._id}')" class="text-zinc-500 hover:text-red-400 text-sm">Delete</button>
+                      </td>
                     </tr>
                   `).join('')}
                 </tbody>
@@ -121,22 +170,63 @@ const userId = '507f1f77bcf86cd799439011';
         const result = document.getElementById('upload-result');
         
         result.classList.remove('hidden');
-        result.innerHTML = 'Uploading...';
+        result.innerHTML = '<span class="text-zinc-400">Uploading...</span>';
         
         try {
           const res = await fetch('/api/prices', { method: 'POST', body: formData });
           const data = await res.json();
           
           if (data.success) {
+            result.className = 'mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20';
             result.innerHTML = `✅ Success! ${data.itemsCount} items uploaded.`;
             loadPrices();
           } else {
-            result.innerHTML = `❌ Error: ${data.error}`;
+            result.className = 'mt-4 p-4 rounded-xl bg-red-500/10 border border-red-500/20';
+            result.innerHTML = `❌ ${data.error}`;
           }
         } catch (err) {
           result.innerHTML = `❌ Error: ${err}`;
         }
       });
+
+      document.getElementById('add-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        
+        const data = {
+          userId: formData.get('userId'),
+          items: [{
+            category: formData.get('category'),
+            name: formData.get('name'),
+            unit: formData.get('unit'),
+            basePrice: parseFloat(formData.get('basePrice')),
+            minPrice: parseFloat(formData.get('minPrice'))
+          }]
+        };
+        
+        try {
+          const res = await fetch('/api/prices', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          
+          if (res.ok) {
+            document.getElementById('add-modal').close();
+            e.target.reset();
+            loadPrices();
+          }
+        } catch (err) {
+          console.error('Failed to add price:', err);
+        }
+      });
+
+      async function deletePrice(id) {
+        if (confirm('Delete this price item?')) {
+          await fetch(`/api/prices?id=${id}&userId=${userId}`, { method: 'DELETE' });
+          loadPrices();
+        }
+      }
     </script>
   </body>
 </html>
