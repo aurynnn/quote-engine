@@ -50,6 +50,18 @@ quote-engine/
 ### 2.2 Data Models (MongoDB)
 
 ```typescript
+// User - Authentication
+{
+  _id: ObjectId,
+  email: string,
+  passwordHash: string,
+  name: string,
+  company: string,
+  plan: "free" | "starter" | "pro" | "enterprise",
+  createdAt: Date,
+  updatedAt: Date
+}
+
 // PriceItem - Individual pricing elements
 {
   _id: ObjectId,
@@ -227,6 +239,11 @@ Response:
 
 ### Utilities
 - `zod` - Validation
+- `nodemailer` - Email notifications
+- `pdfkit` - PDF generation
+
+### Authentication
+- `lucia` - Auth framework (or simple JWT)
 
 ---
 
@@ -235,8 +252,13 @@ Response:
 ### Phase 1: Foundation (Week 1)
 - [x] Set up Astro + Svelte project
 - [x] Configure MongoDB connection
-- [ ] Create data models
-- [ ] Build folder structure
+- [x] Create data models
+- [x] Build folder structure
+
+### Phase 1.5: Authentication (Week 1-2)
+- [ ] User registration/login
+- [ ] JWT session management
+- [ ] Protected dashboard routes
 
 ### Phase 2: Data Ingestion (Week 2)
 - [ ] Excel parser implementation
