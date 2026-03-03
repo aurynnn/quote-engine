@@ -17,9 +17,13 @@
     "astro": "^5.17.1",
     "mongodb": "^7.1.0",
     "svelte": "^5.53.7",
-    "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3",
     "xlsx": "^0.18.5",
     "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.1"
   }
 }
