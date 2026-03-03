@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote Engine - Style 2</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen bg-zinc-950 text-white">
+    <!-- Grid pattern -->
+    <div class="fixed inset-0 -z-10 opacity-20">
+      <div class="absolute inset-0" style="background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 50px 50px;"></div>
+    </div>
+
+    <header class="fixed top-0 left-0 right-0 z-50">
+      <div class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+        <span class="text-2xl font-bold tracking-tight">Quote Engine</span>
+        <nav class="flex items-center gap-8 text-sm">
+          <a href="#features" class="text-zinc-400 hover:text-white transition">Features</a>
+          <a href="#pricing" class="text-zinc-400 hover:text-white transition">Pricing</a>
+          <a href="/dashboard" class="text-white hover:text-white transition">Dashboard</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="pt-40">
+      <section class="max-w-3xl mx-auto px-6 text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm mb-8">
+          ✨ AI-Powered
+        </div>
+        <h1 class="text-5xl font-bold mb-8 leading-tight">
+          Smart Quotes for<br />
+          <span class="text-emerald-400">Smart Business</span>
+        </h1>
+        <p class="text-lg text-zinc-400 mb-10">
+          Stop calculating manually. Let our AI handle your quotes while you focus on closing deals.
+        </p>
+        <div class="flex justify-center gap-4">
+          <a href="/dashboard" class="bg-emerald-500 text-black px-6 py-3 rounded-lg font-semibold hover:bg-emerald-400 transition">Get Started</a>
+          <a href="/auth/signin" class="text-zinc-400 px-6 py-3 hover:text-white transition">Sign In</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

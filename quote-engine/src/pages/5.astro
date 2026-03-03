@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote Engine - Style 5</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen bg-[#050507] text-white font-sans">
+    <!-- Geometric pattern -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+      <div class="absolute top-0 right-0 w-1/2 h-full opacity-30">
+        <div class="w-full h-full bg-gradient-to-bl from-violet-600/20 to-transparent"></div>
+      </div>
+    </div>
+
+    <header class="fixed top-0 left-0 right-0 z-50">
+      <div class="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 bg-violet-500 rounded-md"></div>
+          <span class="text-xl font-semibold">Quote Engine</span>
+        </div>
+        <a href="/dashboard" class="bg-violet-500 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-violet-400 transition">Launch App</a>
+      </div>
+    </header>
+
+    <main class="pt-40">
+      <section class="max-w-3xl mx-auto px-8">
+        <div class="mb-12">
+          <span class="text-violet-400 text-sm font-medium tracking-wider uppercase">Introducing</span>
+        </div>
+        
+        <h1 class="text-6xl font-bold mb-8 leading-[1.1]">
+          The future of<br />
+          <span class="text-violet-400">quoting</span> is here
+        </h1>
+        
+        <p class="text-xl text-zinc-400 mb-12 max-w-lg">
+          Create accurate, professional quotes in seconds. Powered by AI, refined by your pricing data.
+        </p>
+        
+        <div class="flex flex-wrap gap-4">
+          <a href="/dashboard" class="bg-violet-500 text-white px-8 py-4 rounded-xl font-semibold hover:bg-violet-400 transition shadow-lg shadow-violet-500/25">
+            Get Started Free
+          </a>
+          <a href="#demo" class="px-8 py-4 rounded-xl font-medium border border-zinc-700 hover:border-zinc-500 transition">
+            See Demo
+          </a>
+        </div>
+        
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-8 mt-20 pt-12 border-t border-zinc-800">
+          <div>
+            <div class="text-3xl font-bold text-white">10s</div>
+            <div class="text-zinc-500 text-sm mt-1">Generate time</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-white">99%</div>
+            <div class="text-zinc-500 text-sm mt-1">Accuracy</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-white">Free</div>
+            <div class="text-zinc-500 text-sm mt-1">To start</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

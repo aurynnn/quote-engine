@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote Engine - Style 1</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen bg-black text-white">
+    <!-- Ambient glow -->
+    <div class="fixed inset-0 -z-10">
+      <div class="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-blue-500/20 rounded-full blur-[120px]"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-purple-500/20 rounded-full blur-[120px]"></div>
+    </div>
+
+    <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-white/5">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <span class="text-2xl font-bold">Quote Engine</span>
+        <nav class="flex items-center gap-6">
+          <a href="/dashboard" class="text-white/70 hover:text-white">Dashboard</a>
+          <a href="/auth/signup" class="bg-white text-black px-4 py-2 rounded-lg font-medium">Get Started</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="pt-32 pb-20">
+      <section class="max-w-4xl mx-auto px-6 text-center">
+        <h1 class="text-6xl font-bold mb-6 leading-tight">
+          Generate Quotes<br />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">in Seconds</span>
+        </h1>
+        <p class="text-xl text-white/60 mb-10 max-w-2xl mx-auto">
+          Upload your pricing, set your rules, and let AI create accurate quotes instantly.
+        </p>
+        <div class="flex justify-center gap-4">
+          <a href="/dashboard" class="bg-white text-black px-8 py-4 rounded-xl font-semibold text-lg">Start Free</a>
+          <a href="#how" class="border border-white/20 px-8 py-4 rounded-xl font-medium">Learn More</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
