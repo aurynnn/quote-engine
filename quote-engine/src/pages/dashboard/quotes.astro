@@ -12,39 +12,46 @@ const userId = '67fc9ba0000000000000001';
     <title>Quotes - Quote Engine</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
-  <body class="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
-    <aside class="fixed left-0 top-0 bottom-0 w-64 bg-slate-900/80 backdrop-blur border-r border-slate-800 p-6">
-      <a href="/" class="text-2xl font-bold text-cyan-400 mb-8 block">Quote Engine</a>
-      <nav class="space-y-2">
-        <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white">
+  <body class="min-h-screen bg-[#0a0a0f] text-white font-sans">
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-red-500/10 rounded-full blur-[100px]"></div>
+    </div>
+
+    <aside class="fixed left-0 top-0 bottom-0 w-64 bg-[#0a0a0f]/80 backdrop-blur-xl border-r border-white/5 p-6 z-20">
+      <a href="/" class="flex items-center gap-3 mb-8">
+        <div class="w-8 h-8 bg-gradient-to-br from-red-400 to-rose-500 rounded-lg"></div>
+        <span class="text-xl font-semibold">Quote Engine</span>
+      </a>
+      <nav class="space-y-1">
+        <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/5 hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
           Dashboard
         </a>
-        <a href="/dashboard/prices" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white">
+        <a href="/dashboard/prices" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/5 hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
           Prices
         </a>
-        <a href="/dashboard/quotes" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-cyan-500/10 text-cyan-400">
+        <a href="/dashboard/quotes" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-red-500/10 text-red-400">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
           Quotes
         </a>
-        <a href="/dashboard/rules" class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white">
+        <a href="/dashboard/rules" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/5 hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
           Rules
         </a>
       </nav>
     </aside>
 
-    <main class="ml-64 p-8">
+    <main class="ml-64 p-8 relative z-10">
       <div class="max-w-6xl">
         <div class="flex justify-between items-center mb-8">
           <h1 class="text-3xl font-bold">📄 Quotes</h1>
-          <a href="/dashboard" class="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 rounded-xl font-medium">+ New Quote</a>
+          <a href="/dashboard" class="px-6 py-3 bg-red-500 hover:bg-red-600 rounded-xl font-medium">+ New Quote</a>
         </div>
 
-        <div class="p-6 rounded-2xl bg-slate-900/50 border border-slate-800">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
           <div id="quotes-list" class="space-y-4">
-            <p class="text-slate-500 text-center py-8">Loading quotes...</p>
+            <p class="text-zinc-500 text-center py-8">Loading quotes...</p>
           </div>
         </div>
       </div>
@@ -60,30 +67,27 @@ const userId = '67fc9ba0000000000000001';
           
           if (data.quotes && data.quotes.length > 0) {
             container.innerHTML = data.quotes.map(q => `
-              <div class="flex items-center justify-between p-4 rounded-xl bg-slate-800 hover:bg-slate-700/50 transition-colors">
+              <div class="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition cursor-pointer" onclick="window.location.href='/dashboard/quote/${q._id}'">
                 <div class="flex-1">
                   <div class="font-semibold">${q.clientName}</div>
-                  <div class="text-sm text-slate-500">${q.quoteNumber} • ${new Date(q.generatedAt).toLocaleDateString()}</div>
+                  <div class="text-sm text-zinc-500">${q.quoteNumber} • ${new Date(q.generatedAt).toLocaleDateString()}</div>
                 </div>
                 <div class="flex items-center gap-4">
                   <span class="px-3 py-1 rounded-full text-xs font-medium ${
-                    q.status === 'draft' ? 'bg-slate-600 text-slate-300' :
+                    q.status === 'draft' ? 'bg-zinc-700 text-zinc-300' :
                     q.status === 'sent' ? 'bg-blue-500/20 text-blue-400' :
                     q.status === 'accepted' ? 'bg-green-500/20 text-green-400' :
                     'bg-red-500/20 text-red-400'
                   }">${q.status}</span>
                   <div class="text-right">
-                    <div class="font-bold text-cyan-400">€${q.total.toFixed(2)}</div>
-                    <div class="text-xs text-slate-500">${q.items.length} items</div>
+                    <div class="font-bold text-red-400">€${q.total.toFixed(2)}</div>
+                    <div class="text-xs text-zinc-500">${q.items.length} items</div>
                   </div>
-                  <button onclick="viewQuote('${q._id}')" class="p-2 hover:bg-slate-600 rounded-lg">
-                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                  </button>
                 </div>
               </div>
             `).join('');
           } else {
-            container.innerHTML = '<p class="text-slate-500 text-center py-8">No quotes yet. Generate your first quote!</p>';
+            container.innerHTML = '<p class="text-zinc-500 text-center py-8">No quotes yet. Generate your first quote!</p>';
           }
         } catch (e) {
           console.error('Failed to load quotes:', e);
@@ -91,10 +95,6 @@ const userId = '67fc9ba0000000000000001';
       }
       
       loadQuotes();
-
-      function viewQuote(id) {
-        window.location.href = `/dashboard/quote/${id}`;
-      }
     </script>
   </body>
 </html>
