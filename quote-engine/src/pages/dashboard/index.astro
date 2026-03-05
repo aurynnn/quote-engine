@@ -81,7 +81,7 @@ const userId = '507f1f77bcf86cd799439011';
             <div class="text-5xl mb-3">🚀</div>
             <h2 class="text-2xl font-bold text-white mb-2">Let's get you set up!</h2>
             <p class="text-zinc-400 mb-4">Complete these steps to start creating quotes</p>
-            <button onclick="scrollToStep1()" class="px-10 py-4 bg-red-600 hover:bg-red-500 text-white rounded-xl font-semibold text-lg shadow-lg shadow-red-600/30 hover:scale-105 transition flex items-center gap-2 mx-auto">
+            <button onclick="goToStep('prices')" class="px-10 py-4 bg-red-600 hover:bg-red-500 text-white rounded-xl font-semibold text-lg shadow-lg shadow-red-600/30 hover:scale-105 transition flex items-center gap-2 mx-auto">
               <span class="text-2xl">⚡</span>
               Start Now
             </button>
@@ -409,7 +409,7 @@ const userId = '507f1f77bcf86cd799439011';
       function finishQuickFlow() {
         document.getElementById('quickflow-modal').close();
         localStorage.setItem('quickFlowDone', 'true');
-        document.getElementById('quick-start-banner').classList.add('hidden');
+        document.getElementById('setup-banner').classList.add('hidden');
         loadStats();
       }
 
@@ -542,9 +542,11 @@ const userId = '507f1f77bcf86cd799439011';
         // After prices: can see stats and prices page
         // After template: can create quotes
         const dashboardContent = document.getElementById('dashboard-content');
+        const fullDashboard = document.getElementById('full-dashboard');
         if (dashboardContent) {
           if (setupState.prices && setupState.template) {
-            // Full access
+            // Full access - show both parent and content
+            if (fullDashboard) fullDashboard.classList.remove('hidden');
             dashboardContent.style.display = 'block';
           } else {
             dashboardContent.style.display = 'none';
@@ -559,6 +561,13 @@ const userId = '507f1f77bcf86cd799439011';
 
       function unlockDashboard() {
         const banner = document.getElementById('setup-banner');
+        const fullDashboard = document.getElementById('full-dashboard');
+        
+        // Show the full dashboard content
+        if (fullDashboard) {
+          fullDashboard.classList.remove('hidden');
+        }
+        
         if (banner) {
           banner.innerHTML = `
             <div class="p-6 rounded-2xl bg-gradient-to-br from-emerald-900/40 to-emerald-800/20 border border-emerald-500/20 text-center">
@@ -614,7 +623,8 @@ const userId = '507f1f77bcf86cd799439011';
 
       // Hide quick start if done
       if (localStorage.getItem('quickFlowDone')) {
-        document.getElementById('quick-start-banner').classList.add('hidden');
+        const banner = document.getElementById('setup-banner');
+        if (banner) banner.classList.add('hidden');
       }
 
       // Forms

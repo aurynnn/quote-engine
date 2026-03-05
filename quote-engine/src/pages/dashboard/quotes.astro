@@ -46,15 +46,14 @@ const userId = '507f1f77bcf86cd799439011';
           Settings
         </a>
       </nav>
-            <a href="/dashboard/subscription" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
-          Subscription
-        </a>
-      </nav>
+      <a href="/dashboard/subscription" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+        Subscription
+      </a>
     </aside>
 
     <main class="ml-64 p-8 relative z-10">
-      <div class="max-w-6xl">
+      <div class="max-w-7xl">
         <div class="flex justify-between items-center mb-8">
           <div>
             <h1 class="text-3xl font-bold">
@@ -73,22 +72,73 @@ const userId = '507f1f77bcf86cd799439011';
           </div>
         </div>
 
-        <!-- Filters -->
-        <div class="flex gap-3 mb-6">
-          <button onclick="filterQuotes('all')" class="filter-btn active px-4 py-2 rounded-lg bg-gradient-to-r from-white/10 to-white/05 text-white text-sm border border-white/10" data-filter="all">All</button>
-          <button onclick="filterQuotes('draft')" class="filter-btn px-4 py-2 rounded-lg bg-white/[0.03] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white transition-all" data-filter="draft">Draft</button>
-          <button onclick="filterQuotes('sent')" class="filter-btn px-4 py-2 rounded-lg bg-white/[0.03] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white transition-all" data-filter="sent">Sent</button>
-          <button onclick="filterQuotes('accepted')" class="filter-btn px-4 py-2 rounded-lg bg-white/[0.03] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white transition-all" data-filter="accepted">Accepted</button>
-          <button onclick="filterQuotes('rejected')" class="filter-btn px-4 py-2 rounded-lg bg-white/[0.03] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white transition-all" data-filter="rejected">Rejected</button>
-        </div>
+        <!-- Search and Filter Bar -->
+        <div class="bg-[#12121a]/80 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 mb-6">
+          <div class="flex flex-wrap items-center gap-4">
+            <div class="flex-1 min-w-[280px]">
+              <div class="relative">
+                <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input 
+                  type="text" 
+                  id="search-input"
+                  oninput="handleSearch(this.value)"
+                  placeholder="Search quotes by client, number..." 
+                  class="w-full pl-12 pr-4 py-3 bg-white/[0.04] border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50 focus:ring-2 focus:ring-red-500/20 transition-all"
+                />
+              </div>
+            </div>
 
-        <div class="group relative bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6 overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-br from-purple-500/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <div class="relative">
-            <div id="quotes-list" class="space-y-3">
-              <p class="text-zinc-500 text-center py-8">Loading quotes...</p>
+            <div class="flex gap-2">
+              <button onclick="filterQuotes('all')" class="filter-btn active px-4 py-2 rounded-lg bg-gradient-to-r from-white/10 to-white/05 text-white text-sm border border-white/10" data-filter="all">All</button>
+              <button onclick="filterQuotes('draft')" class="filter-btn px-4 py-2 rounded-lg bg-white/[0.03] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white transition-all" data-filter="draft">Draft</button>
+              <button onclick="filterQuotes('sent')" class="filter-btn px-4 py-2 rounded-lg bg-white/[0.03] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white transition-all" data-filter="sent">Sent</button>
+              <button onclick="filterQuotes('accepted')" class="filter-btn px-4 py-2 rounded-lg bg-white/[0.03] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white transition-all" data-filter="accepted">Accepted</button>
+              <button onclick="filterQuotes('rejected')" class="filter-btn px-4 py-2 rounded-lg bg-white/[0.03] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white transition-all" data-filter="rejected">Rejected</button>
             </div>
           </div>
+
+          <!-- Bulk Actions Bar -->
+          <div id="bulk-actions-bar" class="hidden mt-4 pt-4 border-t border-white/[0.08]">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-4">
+                <span class="text-sm text-zinc-400">
+                  <span id="selected-count">0</span> selected
+                </span>
+                <button onclick="clearSelection()" class="text-sm text-zinc-500 hover:text-white transition">Clear</button>
+              </div>
+              <div class="flex gap-2">
+                <button onclick="bulkDuplicate()" class="px-3 py-1.5 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] rounded-lg text-sm flex items-center gap-2 transition-all">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                  Duplicate
+                </button>
+                <button onclick="bulkDelete()" class="px-3 py-1.5 bg-red-500/20 hover:bg-red-500/30 border border-red-500/30 rounded-lg text-sm flex items-center gap-2 text-red-400 transition-all">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quotes Grid -->
+        <div id="quotes-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <p class="text-zinc-500 text-center py-12 col-span-full">Loading quotes...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden text-center py-16">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-white/[0.04] flex items-center justify-center">
+            <svg class="w-10 h-10 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">No quotes found</h3>
+          <p class="text-zinc-500 mb-6">Try adjusting your search or filters</p>
+          <button onclick="clearFilters()" class="px-4 py-2 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] rounded-xl text-white text-sm transition-all">
+            Clear filters
+          </button>
         </div>
       </div>
     </main>
@@ -166,69 +216,345 @@ const userId = '507f1f77bcf86cd799439011';
       </div>
     </div>
 
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="fixed inset-0 z-50 hidden">
+      <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeDeleteModal()"></div>
+      <div class="absolute inset-0 flex items-center justify-center p-4">
+        <div class="relative bg-[#12121a] border border-white/[0.1] rounded-2xl p-6 max-w-md w-full">
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-500/20 flex items-center justify-center">
+              <svg class="w-8 h-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Delete Quote<span id="delete-count-suffix"></span>?</h3>
+            <p class="text-zinc-400 mb-6">This action cannot be undone.</p>
+            <div class="flex gap-3 justify-center">
+              <button onclick="closeDeleteModal()" class="px-4 py-2 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] rounded-xl text-white text-sm transition-all">
+                Cancel
+              </button>
+              <button onclick="confirmDelete()" class="px-4 py-2 bg-red-500 hover:bg-red-600 rounded-xl text-white text-sm transition-all">
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300">
+      <div class="px-4 py-3 bg-[#12121a] border border-white/[0.1] rounded-xl shadow-xl flex items-center gap-3">
+        <svg id="toast-icon" class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        <span id="toast-message" class="text-white text-sm"></span>
+      </div>
+    </div>
+
     <script define:vars={{ userId }}>
       let allQuotes = [];
+      let selectedQuotes = new Set();
+      let currentFilter = 'all';
+      let searchQuery = '';
+      let pendingDeleteIds = [];
+
+      const statusColors = {
+        draft: { bg: 'bg-zinc-700/40', text: 'text-zinc-300', border: 'border-zinc-600/30', label: 'Draft' },
+        sent: { bg: 'bg-blue-500/20', text: 'text-blue-400', border: 'border-blue-500/30', label: 'Sent' },
+        accepted: { bg: 'bg-emerald-500/20', text: 'text-emerald-400', border: 'border-emerald-500/30', label: 'Accepted' },
+        rejected: { bg: 'bg-red-500/20', text: 'text-red-400', border: 'border-red-500/30', label: 'Rejected' }
+      };
 
       async function loadQuotes() {
         try {
           const res = await fetch(`/api/quotes?id&userId=${userId}`);
           const data = await res.json();
-          
           allQuotes = data.quotes || [];
-          renderQuotes(allQuotes);
+          renderQuotes();
         } catch (e) {
           console.error('Failed to load quotes:', e);
-        }
-      }
-      
-      function renderQuotes(quotes) {
-        const container = document.getElementById('quotes-list');
-        
-        if (quotes && quotes.length > 0) {
-          container.innerHTML = quotes.map(q => `
-            <div class="flex items-center justify-between p-5 rounded-xl bg-white/[0.02] hover:bg-white/[0.04] transition cursor-pointer border border-transparent hover:border-white/[0.06]" onclick="window.location.href='/dashboard/quote/${q._id}'">
-              <div class="flex-1">
-                <div class="font-semibold text-lg">${q.clientName}</div>
-                <div class="text-sm text-zinc-500 mt-1">
-                  <span class="font-mono">${q.quoteNumber}</span> • ${new Date(q.generatedAt).toLocaleDateString()} • ${q.items.length} items
-                </div>
-              </div>
-              <div class="flex items-center gap-6">
-                <span class="px-3 py-1.5 rounded-full text-xs font-medium ${
-                  q.status === 'draft' ? 'bg-zinc-700/50 text-zinc-300' :
-                  q.status === 'sent' ? 'bg-blue-500/20 text-blue-400' :
-                  q.status === 'accepted' ? 'bg-emerald-500/20 text-emerald-400' :
-                  'bg-red-500/20 text-red-400'
-                }">${q.status}</span>
-                <div class="text-right min-w-[100px]">
-                  <div class="font-bold text-xl text-red-400">€${q.total.toFixed(2)}</div>
-                </div>
-              </div>
-            </div>
-          `).join('');
-        } else {
-          container.innerHTML = '<p class="text-zinc-500 text-center py-8">No quotes yet. Generate your first quote!</p>';
+          showToast('Failed to load quotes', 'error');
         }
       }
 
+      function getFilteredQuotes() {
+        let filtered = [...allQuotes];
+        if (currentFilter !== 'all') {
+          filtered = filtered.filter(q => q.status === currentFilter);
+        }
+        if (searchQuery) {
+          const query = searchQuery.toLowerCase();
+          filtered = filtered.filter(q => 
+            q.clientName.toLowerCase().includes(query) ||
+            q.quoteNumber.toLowerCase().includes(query) ||
+            (q.clientEmail && q.clientEmail.toLowerCase().includes(query))
+          );
+        }
+        return filtered;
+      }
+
+      function renderQuotes() {
+        const container = document.getElementById('quotes-container');
+        const emptyState = document.getElementById('empty-state');
+        const filtered = getFilteredQuotes();
+
+        if (filtered.length === 0) {
+          container.classList.add('hidden');
+          emptyState.classList.remove('hidden');
+          return;
+        }
+
+        container.classList.remove('hidden');
+        emptyState.classList.add('hidden');
+
+        container.innerHTML = filtered.map(q => {
+          const colors = statusColors[q.status] || statusColors.draft;
+          const isSelected = selectedQuotes.has(q._id);
+          const previewItems = q.items.slice(0, 2);
+          const moreItems = q.items.length - 2;
+
+          return `
+            <div class="quote-card group relative bg-[#12121a] border ${isSelected ? 'border-red-500/50' : 'border-white/[0.08]'} rounded-2xl overflow-hidden hover:border-white/[0.15] transition-all duration-200 hover:shadow-xl hover:shadow-black/20" onclick="window.location.href='/dashboard/quote/${q._id}'">
+              <div class="absolute top-4 left-4 z-10">
+                <input 
+                  type="checkbox" 
+                  ${isSelected ? 'checked' : ''}
+                  onclick="event.stopPropagation(); toggleSelect('${q._id}')"
+                  class="w-5 h-5 rounded border-2 border-white/30 bg-white/5 checked:bg-red-500 checked:border-red-500 cursor-pointer appearance-none transition-all"
+                />
+              </div>
+
+              <div class="absolute top-4 right-4 z-10">
+                <span class="px-2.5 py-1 rounded-full text-xs font-medium ${colors.bg} ${colors.text} border ${colors.border}">
+                  ${colors.label}
+                </span>
+              </div>
+
+              <div class="p-5 pt-14">
+                <div class="mb-1 text-xs text-zinc-500 font-mono">${q.quoteNumber}</div>
+                <h3 class="text-lg font-semibold text-white truncate pr-20">${q.clientName}</h3>
+                <div class="text-sm text-zinc-500 mt-1">${q.items.length} item${q.items.length !== 1 ? 's' : ''}</div>
+              </div>
+
+              <div class="px-5 pb-3">
+                <div class="bg-white/[0.03] rounded-xl p-3 space-y-2">
+                  ${previewItems.map(item => `
+                    <div class="flex justify-between text-sm">
+                      <span class="text-zinc-400 truncate flex-1">${item.name}</span>
+                      <span class="text-white ml-2">€${item.price.toFixed(2)}</span>
+                    </div>
+                  `).join('')}
+                  ${moreItems > 0 ? `
+                    <div class="text-xs text-zinc-500 text-center pt-1">
+                      +${moreItems} more item${moreItems !== 1 ? 's' : ''}
+                    </div>
+                  ` : ''}
+                </div>
+              </div>
+
+              <div class="px-5 py-4 bg-white/[0.02] border-t border-white/[0.05] flex items-center justify-between">
+                <div>
+                  <div class="text-xs text-zinc-500">Total</div>
+                  <div class="text-xl font-bold text-red-400">€${q.total.toFixed(2)}</div>
+                </div>
+                <div class="text-xs text-zinc-500">
+                  ${new Date(q.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                </div>
+              </div>
+
+              <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-[#12121a] via-[#12121a]/95 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-200">
+                <div class="flex gap-2">
+                  <button onclick="event.stopPropagation(); editQuote('${q._id}')" class="flex-1 px-3 py-2 bg-white/[0.08] hover:bg-white/[0.15] border border-white/[0.08] rounded-lg text-sm text-white flex items-center justify-center gap-2 transition-all" title="Edit">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                    Edit
+                  </button>
+                  <button onclick="event.stopPropagation(); duplicateQuote('${q._id}')" class="flex-1 px-3 py-2 bg-white/[0.08] hover:bg-white/[0.15] border border-white/[0.08] rounded-lg text-sm text-white flex items-center justify-center gap-2 transition-all" title="Duplicate">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                    Copy
+                  </button>
+                  <button onclick="event.stopPropagation(); sendQuote('${q._id}')" class="flex-1 px-3 py-2 ${q.status === 'sent' ? 'bg-blue-500/20 text-blue-400' : 'bg-white/[0.08] hover:bg-white/[0.15] text-white'} border border-white/[0.08] rounded-lg text-sm flex items-center justify-center gap-2 transition-all" title="Send">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                    ${q.status === 'sent' ? 'Sent' : 'Send'}
+                  </button>
+                  <button onclick="event.stopPropagation(); downloadPDF('${q._id}')" class="flex-1 px-3 py-2 bg-white/[0.08] hover:bg-white/[0.15] border border-white/[0.08] rounded-lg text-sm text-white flex items-center justify-center gap-2 transition-all" title="Download PDF">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.5864a1.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                    PDF
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function toggleSelect(id) {
+        if (selectedQuotes.has(id)) {
+          selectedQuotes.delete(id);
+        } else {
+          selectedQuotes.add(id);
+        }
+        updateBulkActionsBar();
+        renderQuotes();
+      }
+
+      function updateBulkActionsBar() {
+        const bar = document.getElementById('bulk-actions-bar');
+        const count = document.getElementById('selected-count');
+        count.textContent = selectedQuotes.size;
+        
+        if (selectedQuotes.size > 0) {
+          bar.classList.remove('hidden');
+        } else {
+          bar.classList.add('hidden');
+        }
+      }
+
+      function clearSelection() {
+        selectedQuotes.clear();
+        updateBulkActionsBar();
+        renderQuotes();
+      }
+
+      function handleSearch(value) {
+        searchQuery = value;
+        renderQuotes();
+      }
+
       function filterQuotes(status) {
-        // Update buttons
+        currentFilter = status;
+        
         document.querySelectorAll('.filter-btn').forEach(btn => {
           if (btn.dataset.filter === status) {
-            btn.className = 'filter-btn active px-4 py-2 rounded-lg bg-white/[0.08] text-sm';
+            btn.className = 'filter-btn active px-4 py-2 rounded-lg bg-white/[0.08] text-white text-sm border border-white/10';
           } else {
             btn.className = 'filter-btn px-4 py-2 rounded-lg bg-white/[0.03] text-zinc-400 text-sm hover:bg-white/[0.08]';
           }
         });
 
-        if (status === 'all') {
-          renderQuotes(allQuotes);
-        } else {
-          renderQuotes(allQuotes.filter(q => q.status === status));
+        renderQuotes();
+      }
+
+      function clearFilters() {
+        currentFilter = 'all';
+        searchQuery = '';
+        document.getElementById('search-input').value = '';
+        
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+          if (btn.dataset.filter === 'all') {
+            btn.className = 'filter-btn active px-4 py-2 rounded-lg bg-white/[0.08] text-white text-sm border border-white/10';
+          } else {
+            btn.className = 'filter-btn px-4 py-2 rounded-lg bg-white/[0.03] text-zinc-400 text-sm hover:bg-white/[0.08]';
+          }
+        });
+        
+        renderQuotes();
+      }
+
+      // Quick Actions
+      function editQuote(id) {
+        window.location.href = `/dashboard/quote/${id}`;
+      }
+
+      function duplicateQuote(id) {
+        const quote = allQuotes.find(q => q._id === id);
+        if (quote) {
+          const newQuote = {
+            ...quote,
+            _id: undefined,
+            quoteNumber: 'QT-' + Date.now(),
+            status: 'draft',
+            generatedAt: new Date().toISOString()
+          };
+          
+          fetch('/api/quotes', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newQuote)
+          })
+          .then(res => res.json())
+          .then(data => {
+            showToast('Quote duplicated successfully');
+            loadQuotes();
+          })
+          .catch(() => showToast('Failed to duplicate quote', 'error'));
         }
       }
 
-      // Template Modal Functions
+      function sendQuote(id) {
+        fetch(`/api/quotes/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'sent' })
+        })
+        .then(res => res.json())
+        .then(data => {
+          showToast('Quote sent successfully');
+          loadQuotes();
+        })
+        .catch(() => showToast('Failed to send quote', 'error'));
+      }
+
+      function downloadPDF(id) {
+        window.location.href = `/api/quotes/${id}/pdf`;
+      }
+
+      // Bulk Actions
+      function bulkDuplicate() {
+        selectedQuotes.forEach(id => {
+          const quote = allQuotes.find(q => q._id === id);
+          if (quote) {
+            const newQuote = {
+              ...quote,
+              _id: undefined,
+              quoteNumber: 'QT-' + Date.now(),
+              status: 'draft',
+              generatedAt: new Date().toISOString()
+            };
+            
+            fetch('/api/quotes', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(newQuote)
+            });
+          }
+        });
+        
+        setTimeout(() => {
+          showToast(`${selectedQuotes.size} quotes duplicated`);
+          clearSelection();
+          loadQuotes();
+        }, 500);
+      }
+
+      function bulkDelete() {
+        pendingDeleteIds = [...selectedQuotes];
+        const count = pendingDeleteIds.length;
+        
+        document.getElementById('delete-count-suffix').textContent = count > 1 ? 's' : '';
+        document.getElementById('delete-modal').classList.remove('hidden');
+      }
+
+      function closeDeleteModal() {
+        document.getElementById('delete-modal').classList.add('hidden');
+        pendingDeleteIds = [];
+      }
+
+      function confirmDelete() {
+        pendingDeleteIds.forEach(id => {
+          fetch(`/api/quotes/${id}`, { method: 'DELETE' });
+        });
+        
+        setTimeout(() => {
+          const count = pendingDeleteIds.length;
+          showToast(`${count} quote${count > 1 ? 's' : ''} deleted`);
+          closeDeleteModal();
+          clearSelection();
+          loadQuotes();
+        }, 300);
+      }
+
+      // Template Modal
       function openTemplateModal() {
         const modal = document.getElementById('template-modal');
         modal.classList.remove('hidden');
@@ -258,7 +584,32 @@ const userId = '507f1f77bcf86cd799439011';
           }
         });
       }
-      
+
+      // Toast
+      function showToast(message, type = 'success') {
+        const toast = document.getElementById('toast');
+        const icon = document.getElementById('toast-icon');
+        const msg = document.getElementById('toast-message');
+        
+        msg.textContent = message;
+        
+        if (type === 'error') {
+          icon.classList.remove('text-emerald-400');
+          icon.classList.add('text-red-400');
+          icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+        } else {
+          icon.classList.remove('text-red-400');
+          icon.classList.add('text-emerald-400');
+          icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />';
+        }
+        
+        toast.classList.remove('translate-y-20', 'opacity-0');
+        
+        setTimeout(() => {
+          toast.classList.add('translate-y-20', 'opacity-0');
+        }, 3000);
+      }
+
       loadQuotes();
     </script>
   </body>

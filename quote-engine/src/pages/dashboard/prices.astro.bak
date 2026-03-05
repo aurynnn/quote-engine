@@ -205,44 +205,48 @@ const userId = '507f1f77bcf86cd799439011';
       let previewData = [];
       let prices = [];
 
-      document.addEventListener('DOMContentLoaded', function() {
+      // Initialize
+      document.addEventListener('DOMContentLoaded', () => {
         loadPrices();
         setupDropZone();
       });
 
+      // Drop Zone Setup
       function setupDropZone() {
         const dropZone = document.getElementById('drop-zone');
         const fileInput = document.getElementById('file-input');
 
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(function(eventName) {
-          dropZone.addEventListener(eventName, function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-          });
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+          dropZone.addEventListener(eventName, preventDefaults);
         });
 
-        ['dragenter', 'dragover'].forEach(function(eventName) {
-          dropZone.addEventListener(eventName, function() {
+        function preventDefaults(e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+          dropZone.addEventListener(eventName, () => {
             dropZone.classList.add('border-emerald-500/40', 'bg-emerald-500/5');
           });
         });
 
-        ['dragleave', 'drop'].forEach(function(eventName) {
-          dropZone.addEventListener(eventName, function() {
+        ['dragleave', 'drop'].forEach(eventName => {
+          dropZone.addEventListener(eventName, () => {
             dropZone.classList.remove('border-emerald-500/40', 'bg-emerald-500/5');
           });
         });
 
-        dropZone.addEventListener('drop', function(e) {
+        dropZone.addEventListener('drop', (e) => {
           const files = e.dataTransfer.files;
           if (files.length) handleFile(files[0]);
         });
 
-        fileInput.addEventListener('change', function(e) {
+        fileInput.addEventListener('change', (e) => {
           if (e.target.files.length) handleFile(e.target.files[0]);
         });
 
-        document.getElementById('cancel-import').addEventListener('click', function() {
+        document.getElementById('cancel-import').addEventListener('click', () => {
           document.getElementById('preview-section').classList.add('hidden');
           previewData = [];
           fileInput.value = '';
@@ -253,55 +257,54 @@ const userId = '507f1f77bcf86cd799439011';
         document.getElementById('sample-data-btn').addEventListener('click', loadSampleData);
       }
 
+      // Handle file selection
       async function handleFile(file) {
         if (!file.name.match(/\.(xlsx|xls)$/i)) {
-          showStatus('Please select an Excel file (.xlsx or .xls)', 'error');
+          showStatus('❌ Please select an Excel file (.xlsx or .xls)', 'error');
           return;
         }
 
-        showStatus('Parsing file...', 'loading');
+        showStatus('⏳ Parsing file...', 'loading');
 
         const formData = new FormData();
         formData.append('file', file);
         formData.append('userId', userId);
 
         try {
-          // Upload and parse in one step, then get items for preview
-          const formData = new FormData();
-          formData.append('file', file);
-          formData.append('userId', userId);
-
-          const res = await fetch('/api/prices', { method: 'POST', body: formData });
+          const res = await fetch('/api/prices/parse', { method: 'POST', body: formData });
           const data = await res.json();
 
-          if (data.success && data.items && data.items.length > 0) {
+          if (data.success && data.items?.length > 0) {
             previewData = data.items;
             showPreview(data.items);
-            showStatus('Found ' + data.items.length + ' items ready to import', 'success');
+            showStatus(`✅ Found ${data.items.length} items ready to import`, 'success');
           } else {
-            showStatus('No valid pricing data found in file', 'error');
+            showStatus('❌ No valid pricing data found in file', 'error');
           }
         } catch (err) {
-          showStatus('Error parsing file: ' + err.message, 'error');
+          showStatus('❌ Error parsing file: ' + err.message, 'error');
         }
       }
 
+      // Show preview table
       function showPreview(items) {
         const tbody = document.getElementById('preview-table-body');
-        document.getElementById('preview-count').textContent = '(' + items.length + ' items)';
+        document.getElementById('preview-count').textContent = `(${items.length} items)`;
         
-        tbody.innerHTML = items.map(function(item) {
-          return '<tr class="border-b border-white/[0.04] hover:bg-white/[0.02]">' +
-            '<td class="py-2 px-4"><span class="px-2 py-0.5 rounded-md bg-red-500/10 text-red-400 text-xs">' + (item.category || '-') + '</span></td>' +
-            '<td class="py-2 px-4 font-medium">' + (item.name || '-') + '</td>' +
-            '<td class="py-2 px-4 text-zinc-500">' + (item.unit || 'hour') + '</td>' +
-            '<td class="py-2 px-4 text-right text-emerald-400">€' + parseFloat(item.basePrice || 0).toFixed(2) + '</td>' +
-            '<td class="py-2 px-4 text-right text-zinc-500">€' + parseFloat(item.minPrice || 0).toFixed(2) + '</td></tr>';
-        }).join('');
+        tbody.innerHTML = items.map((item, i) => `
+          <tr class="border-b border-white/[0.04] hover:bg-white/[0.02]">
+            <td class="py-2 px-4"><span class="px-2 py-0.5 rounded-md bg-red-500/10 text-red-400 text-xs">${item.category || '-'}</span></td>
+            <td class="py-2 px-4 font-medium">${item.name || '-'}</td>
+            <td class="py-2 px-4 text-zinc-500">${item.unit || 'hour'}</td>
+            <td class="py-2 px-4 text-right text-emerald-400">€${parseFloat(item.basePrice || 0).toFixed(2)}</td>
+            <td class="py-2 px-4 text-right text-zinc-500">€${parseFloat(item.minPrice || 0).toFixed(2)}</td>
+          </tr>
+        `).join('');
 
         document.getElementById('preview-section').classList.remove('hidden');
       }
 
+      // Import preview data
       async function importPreviewData() {
         const btn = document.getElementById('confirm-import');
         btn.disabled = true;
@@ -311,30 +314,29 @@ const userId = '507f1f77bcf86cd799439011';
           const res = await fetch('/api/prices', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId: userId, items: previewData })
+            body: JSON.stringify({ userId, items: previewData })
           });
 
           const data = await res.json();
           
           if (data.success) {
-            showStatus('Successfully imported ' + previewData.length + ' items!', 'success');
+            showStatus(`✅ Successfully imported ${previewData.length} items!`, 'success');
             document.getElementById('preview-section').classList.add('hidden');
             previewData = [];
             document.getElementById('file-input').value = '';
             loadPrices();
-            // Mark step as complete
-            if (window.markStepDone) window.markStepDone('prices');
           } else {
-            showStatus(data.error || 'Import failed', 'error');
+            showStatus('❌ ' + (data.error || 'Import failed'), 'error');
           }
         } catch (err) {
-          showStatus('Error: ' + err.message, 'error');
+          showStatus('❌ Error: ' + err.message, 'error');
         }
 
         btn.disabled = false;
         btn.textContent = 'Import All';
       }
 
+      // Show status message
       function showStatus(message, type) {
         const status = document.getElementById('upload-status');
         status.classList.remove('hidden');
@@ -349,6 +351,7 @@ const userId = '507f1f77bcf86cd799439011';
         status.textContent = message;
       }
 
+      // Load prices from API
       async function loadPrices() {
         const table = document.getElementById('prices-table');
         
@@ -370,16 +373,16 @@ const userId = '507f1f77bcf86cd799439011';
         }
       }
 
+      // Render prices table
       function renderPricesTable(items) {
         const table = document.getElementById('prices-table');
         
         table.innerHTML = '<table class="w-full"><thead><tr class="border-b border-white/[0.06]"><th class="text-left py-3 px-4 text-zinc-400 font-medium text-sm">Category</th><th class="text-left py-3 px-4 text-zinc-400 font-medium text-sm">Name</th><th class="text-left py-3 px-4 text-zinc-400 font-medium text-sm">Unit</th><th class="text-right py-3 px-4 text-zinc-400 font-medium text-sm">Base Price</th><th class="text-right py-3 px-4 text-zinc-400 font-medium text-sm">Min Price</th><th class="text-right py-3 px-4 text-zinc-400 font-medium text-sm">Actions</th></tr></thead><tbody>' +
-          items.map(function(item) {
-            return '<tr class="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors"><td class="py-3 px-4"><span class="px-2 py-1 rounded-lg bg-red-500/10 text-red-400 text-xs">' + item.category + '</span></td><td class="py-3 px-4 font-medium">' + item.name + '</td><td class="py-3 px-4 text-zinc-500">' + item.unit + '</td><td class="py-3 px-4 text-right text-emerald-400 font-medium">€' + item.basePrice.toFixed(2) + '</td><td class="py-3 px-4 text-right text-zinc-500">€' + item.minPrice.toFixed(2) + '</td><td class="py-3 px-4 text-right"><div class="flex items-center justify-end gap-2"><button onclick="editPrice(\'' + item._id + '\')" class="p-2 text-zinc-500 hover:text-cyan-400 transition" title="Edit"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg></button><button onclick="deletePrice(\'' + item._id + '\')" class="p-2 text-zinc-500 hover:text-red-400 transition" title="Delete"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button></div></td></tr>';
-          }).join('') +
+          items.map((item, i) => '<tr class="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors"><td class="py-3 px-4"><span class="px-2 py-1 rounded-lg bg-red-500/10 text-red-400 text-xs">' + item.category + '</span></td><td class="py-3 px-4 font-medium">' + item.name + '</td><td class="py-3 px-4 text-zinc-500">' + item.unit + '</td><td class="py-3 px-4 text-right text-emerald-400 font-medium">€' + item.basePrice.toFixed(2) + '</td><td class="py-3 px-4 text-right text-zinc-500">€' + item.minPrice.toFixed(2) + '</td><td class="py-3 px-4 text-right"><div class="flex items-center justify-end gap-2"><button onclick="editPrice(\'' + item._id + '\')" class="p-2 text-zinc-500 hover:text-cyan-400 transition" title="Edit"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg></button><button onclick="deletePrice(\'' + item._id + '\')" class="p-2 text-zinc-500 hover:text-red-400 transition" title="Delete"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button></div></td></tr>').join('') +
           '</tbody></table>';
       }
 
+      // Load sample data
       async function loadSampleData() {
         const btn = document.getElementById('sample-data-btn');
         btn.disabled = true;
@@ -402,135 +405,4 @@ const userId = '507f1f77bcf86cd799439011';
           const res = await fetch('/api/prices', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId: userId, items: sampleItems })
-          });
-
-          const data = await res.json();
-          
-          if (data.success) {
-            showStatus('Successfully loaded ' + sampleItems.length + ' sample items!', 'success');
-            loadPrices();
-            // Mark step as complete
-            if (window.markStepDone) window.markStepDone('prices');
-          } else {
-            showStatus(data.error || 'Failed to load sample data', 'error');
-          }
-        } catch (err) {
-          showStatus('Error: ' + err.message, 'error');
-        }
-
-        btn.disabled = false;
-        btn.innerHTML = '<span class="flex items-center gap-2"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>Sample Data</span>';
-      }
-
-      function openAddModal(item) {
-        const modal = document.getElementById('add-modal');
-        const title = document.getElementById('modal-title');
-        const submit = document.getElementById('modal-submit');
-        const itemId = document.getElementById('item-id');
-        
-        if (item) {
-          // Edit mode
-          title.textContent = 'Edit Price Item';
-          submit.textContent = 'Save Changes';
-          itemId.value = item._id;
-          document.getElementById('category').value = item.category;
-          document.getElementById('name').value = item.name;
-          document.getElementById('unit').value = item.unit;
-          document.getElementById('basePrice').value = item.basePrice;
-          document.getElementById('minPrice').value = item.minPrice;
-        } else {
-          // Add mode
-          title.textContent = 'Add Price Item';
-          submit.textContent = 'Add Item';
-          itemId.value = '';
-          document.getElementById('price-form').reset();
-          document.getElementById('unit').value = 'hour';
-        }
-        
-        modal.showModal();
-      }
-
-      function closeModal() {
-        document.getElementById('add-modal').close();
-      }
-
-      window.openAddModal = openAddModal;
-      window.closeModal = closeModal;
-
-      function editPrice(id) {
-        const item = prices.find(function(p) { return p._id === id; });
-        if (item) {
-          openAddModal(item);
-        }
-      }
-
-      window.editPrice = editPrice;
-
-      async function deletePrice(id) {
-        if (confirm('Delete this price item?')) {
-          try {
-            await fetch('/api/prices?id=' + id + '&userId=' + userId, { method: 'DELETE' });
-            loadPrices();
-          } catch (err) {
-            console.error('Failed to delete price:', err);
-          }
-        }
-      }
-
-      window.deletePrice = deletePrice;
-
-      document.getElementById('price-form').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(e.target);
-        const itemId = formData.get('itemId');
-        
-        const data = {
-          userId: userId,
-          items: [{
-            category: formData.get('category'),
-            name: formData.get('name'),
-            unit: formData.get('unit'),
-            basePrice: parseFloat(formData.get('basePrice')),
-            minPrice: parseFloat(formData.get('minPrice'))
-          }]
-        };
-
-        if (itemId) {
-          // Update existing
-          try {
-            const res = await fetch('/api/prices?id=' + itemId, {
-              method: 'PUT',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(data.items[0])
-            });
-            
-            if (res.ok) {
-              closeModal();
-              loadPrices();
-            }
-          } catch (err) {
-            console.error('Failed to update price:', err);
-          }
-        } else {
-          // Add new
-          try {
-            const res = await fetch('/api/prices', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(data)
-            });
-            
-            if (res.ok) {
-              closeModal();
-              loadPrices();
-            }
-          } catch (err) {
-            console.error('Failed to add price:', err);
-          }
-        }
-      });
-    </script>
-  </body>
-</html>
+            body: JSON.stringify

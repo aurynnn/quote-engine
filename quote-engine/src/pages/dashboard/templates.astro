@@ -350,6 +350,10 @@ const userId = '507f1f77bcf86cd799439011';
           state.template = true;
           localStorage.setItem('setupState', JSON.stringify(state));
         }
+        // Mark the setup step as done
+        if (typeof markStepDone === 'function') {
+          markStepDone('template');
+        }
         // Show success
         alert('Template selected! You can now create quotes with this template.');
       }
