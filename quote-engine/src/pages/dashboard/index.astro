@@ -13,199 +13,596 @@ const userId = '507f1f77bcf86cd799439011';
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body class="min-h-screen bg-[#0a0a0f] text-white font-sans">
-    <!-- Clean background without stars -->
-    <div class="fixed inset-0 -z-10 bg-gradient-to-br from-[#0a0a0f] via-[#0f0f14] to-[#0a0a0f]"></div>
+    <div class="fixed inset-0 -z-10 bg-[#0a0a0f]"></div>
 
     <!-- Sidebar -->
-    <aside class="fixed left-0 top-0 bottom-0 w-64 bg-[#0c0c12]/95 backdrop-blur-xl border-r border-white/[0.06] p-6 z-20">
-      <a href="/" class="flex items-center gap-3 mb-8">
-        <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-rose-600 rounded-lg"></div>
-        <span class="text-xl font-semibold">Quote Engine</span>
+    <aside class="fixed left-0 top-0 bottom-0 w-56 bg-[#0c0c12] border-r border-white/[0.06] p-4 z-20">
+      <a href="/" class="flex items-center gap-3 mb-6 px-2">
+        <div class="w-7 h-7 bg-red-600 rounded-lg"></div>
+        <span class="text-lg font-semibold">Quote Engine</span>
       </a>
       
       <nav class="space-y-1">
-        <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-red-500/10 text-red-400 font-medium">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+        <a href="/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/[0.06] text-white font-medium text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
           Dashboard
         </a>
-        <a href="/dashboard/prices" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-          Prices
-        </a>
-        <a href="/dashboard/quotes" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+        <a href="/dashboard/quotes" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm" data-requires="template:true">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
           Quotes
         </a>
-        <a href="/dashboard/rules" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+        <a href="/dashboard/templates" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm" data-requires="prices:true">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" /></svg>
+          Templates
+        </a>
+        <a href="/dashboard/prices" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm" data-requires="prices:true">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          Prices
+        </a>
+        <a href="/dashboard/rules" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm" data-requires="rules:true">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
           Rules
         </a>
-        <a href="/dashboard/settings" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m-6-4a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
+        <a href="/dashboard/settings" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m-6-4a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
           Settings
+        </a>
+        <a href="/dashboard/subscription" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+          Subscription
         </a>
       </nav>
     </aside>
 
     <!-- Main Content -->
-    <main class="ml-64 p-8 relative z-10">
-      <div class="max-w-6xl">
+    <main class="ml-56 p-6">
+      <div class="max-w-5xl">
         <!-- Header -->
-        <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center justify-between mb-6">
           <div>
-            <h1 class="text-3xl font-bold mb-1">Dashboard</h1>
-            <p class="text-zinc-500">Manage your pricing and generate quotes</p>
+            <h1 class="text-2xl font-bold text-white">Dashboard</h1>
+            <p class="text-sm text-zinc-500">Create quotes and manage your pricing</p>
           </div>
-          <button onclick="document.getElementById('generate-modal').showModal()" class="group relative px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-xl font-semibold transition-all shadow-lg shadow-red-600/20 hover:shadow-red-600/30">
-            <span class="flex items-center gap-2">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+          <div class="flex items-center gap-3">
+            <button id="theme-toggle" class="p-2 rounded-lg bg-white/[0.06] hover:bg-white/[0.1] transition" title="Toggle theme">
+              <svg class="w-4 h-4 moon-icon text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+              <svg class="w-4 h-4 sun-icon text-zinc-400 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+            </button>
+            <button onclick="document.getElementById('generate-modal').showModal()" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium text-sm transition flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
               New Quote
-            </span>
-          </button>
-        </div>
-
-        <!-- Stats -->
-        <div class="grid grid-cols-3 gap-6 mb-8">
-          <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6">
-            <div class="flex items-center gap-3 mb-2">
-              <div class="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center">
-                <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              </div>
-              <span class="text-zinc-400 text-sm">Total Value</span>
-            </div>
-            <div class="text-3xl font-bold" id="total-value">€0</div>
-          </div>
-          <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6">
-            <div class="flex items-center gap-3 mb-2">
-              <div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center">
-                <svg class="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-              </div>
-              <span class="text-zinc-400 text-sm">Quotes</span>
-            </div>
-            <div class="text-3xl font-bold" id="quote-count">0</div>
-          </div>
-          <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6">
-            <div class="flex items-center gap-3 mb-2">
-              <div class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center">
-                <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              </div>
-              <span class="text-zinc-400 text-sm">Accepted</span>
-            </div>
-            <div class="text-3xl font-bold" id="accepted-count">0</div>
+            </button>
           </div>
         </div>
 
-        <!-- Quick Actions -->
-        <div class="grid md:grid-cols-2 gap-6 mb-8">
-          <!-- Generate Quote -->
-          <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6">
-            <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-              <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-              Quick Quote
-            </h3>
-            <form id="quick-quote-form" class="space-y-4">
+        <!-- Setup Banner (always visible until complete) -->
+        <div id="setup-banner" class="mb-6 p-6 rounded-2xl bg-gradient-to-br from-red-900/30 to-red-800/15 border border-red-500/20">
+          <div class="text-center mb-6">
+            <div class="text-5xl mb-3">🚀</div>
+            <h2 class="text-2xl font-bold text-white mb-2">Let's get you set up!</h2>
+            <p class="text-zinc-400 mb-4">Complete these steps to start creating quotes</p>
+            <button onclick="scrollToStep1()" class="px-10 py-4 bg-red-600 hover:bg-red-500 text-white rounded-xl font-semibold text-lg shadow-lg shadow-red-600/30 hover:scale-105 transition flex items-center gap-2 mx-auto">
+              <span class="text-2xl">⚡</span>
+              Start Now
+            </button>
+          </div>
+          
+          <!-- Step Cards -->
+          <div id="step1-section" class="grid md:grid-cols-5 gap-4">
+            <!-- Step 1: Prices -->
+            <div id="step-prices" onclick="goToStep('prices')" class="step-card cursor-pointer p-4 rounded-xl bg-[#0c0c12] border-2 border-white/[0.08] hover:border-red-500/50 hover:bg-red-500/5 transition group">
+              <div class="flex items-start justify-between mb-2">
+                <div id="step-prices-icon" class="w-10 h-10 rounded-lg bg-red-600 flex items-center justify-center text-xl">📊</div>
+                <span id="step-prices-badge" class="text-xs px-2 py-0.5 rounded bg-red-500/20 text-red-400">Step 1</span>
+              </div>
+              <h3 class="font-semibold text-white mb-1">Upload Prices</h3>
+              <p class="text-xs text-zinc-500">Add your pricing</p>
+            </div>
+            
+            <!-- Step 2: Template -->
+            <div id="step-template" onclick="goToStep('template')" class="step-card cursor-pointer p-4 rounded-xl bg-[#0c0c12] border-2 border-white/[0.08] hover:border-purple-500/50 hover:bg-purple-500/5 transition group">
+              <div class="flex items-start justify-between mb-2">
+                <div id="step-template-icon" class="w-10 h-10 rounded-lg bg-purple-600 flex items-center justify-center text-xl">🎨</div>
+                <span id="step-template-badge" class="text-xs px-2 py-0.5 rounded bg-purple-500/20 text-purple-400">Step 2</span>
+              </div>
+              <h3 class="font-semibold text-white mb-1">Choose Template</h3>
+              <p class="text-xs text-zinc-500">Pick a style</p>
+            </div>
+            
+            <!-- Step 3: Rules -->
+            <div onclick="goToStep('rules')" class="step-card cursor-pointer p-4 rounded-xl bg-[#0c0c12] border-2 border-white/[0.08] hover:border-amber-500/50 hover:bg-amber-500/5 transition group">
+              <div class="flex items-start justify-between mb-2">
+                <div id="step-rules-icon" class="w-10 h-10 rounded-lg bg-amber-600 flex items-center justify-center text-xl">⚙️</div>
+                <span id="step-rules-badge" class="text-xs px-2 py-0.5 rounded bg-amber-500/20 text-amber-400">Step 3</span>
+              </div>
+              <h3 class="font-semibold text-white mb-1">Set Rules</h3>
+              <p class="text-xs text-zinc-500">Discounts & tax</p>
+            </div>
+            
+            <!-- Step 4: Quote -->
+            <div onclick="startQuickFlow()" class="step-card cursor-pointer p-4 rounded-xl bg-[#0c0c12] border-2 border-white/[0.08] hover:border-blue-500/50 hover:bg-blue-500/5 transition group">
+              <div class="flex items-start justify-between mb-2">
+                <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center text-xl">✏️</div>
+                <span class="text-xs px-2 py-0.5 rounded bg-blue-500/20 text-blue-400">Step 4</span>
+              </div>
+              <h3 class="font-semibold text-white mb-1">Create Quote</h3>
+              <p class="text-xs text-zinc-500">Generate quote</p>
+            </div>
+            
+            <!-- Step 5: Preview -->
+            <div onclick="window.location.href='/dashboard/quotes'" class="step-card cursor-pointer p-4 rounded-xl bg-[#0c0c12] border-2 border-white/[0.08] hover:border-emerald-500/50 hover:bg-emerald-500/5 transition group">
+              <div class="flex items-start justify-between mb-2">
+                <div class="w-10 h-10 rounded-lg bg-emerald-600 flex items-center justify-center text-xl">👁️</div>
+                <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Step 5</span>
+              </div>
+              <h3 class="font-semibold text-white mb-1">Preview & Send</h3>
+              <p class="text-xs text-zinc-500">View & export</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full Dashboard (hidden until unlocked) -->
+        <div id="full-dashboard" class="hidden">
+
+        <!-- Main Dashboard Content (locked until setup complete) -->
+        <div id="dashboard-content">
+          <!-- Stats Row -->
+          <div class="grid grid-cols-4 gap-4 mb-6">
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl p-4">
+            <div class="text-xs text-zinc-500 mb-1">Total Value</div>
+            <div class="text-xl font-bold text-white" id="total-value">€0</div>
+          </div>
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl p-4">
+            <div class="text-xs text-zinc-500 mb-1">Quotes</div>
+            <div class="text-xl font-bold text-white" id="quote-count">0</div>
+          </div>
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl p-4">
+            <div class="text-xs text-zinc-500 mb-1">Accepted</div>
+            <div class="text-xl font-bold text-emerald-400" id="accepted-count">0</div>
+          </div>
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl p-4">
+            <div class="text-xs text-zinc-500 mb-1">Draft</div>
+            <div class="text-xl font-bold text-zinc-400" id="draft-count">0</div>
+          </div>
+        </div>
+
+        <!-- Two Column -->
+        <div class="grid lg:grid-cols-2 gap-6 mb-6">
+          <!-- Create Quote -->
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl p-5">
+            <h2 class="text-base font-semibold text-white mb-4">Create Quote</h2>
+            <form id="quick-quote-form" class="space-y-3">
               <input type="hidden" name="userId" value={userId} />
               <input type="text" name="clientName" placeholder="Client name" required 
-                class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50" />
+                class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.08] rounded-lg text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-500" />
               <textarea name="prompt" placeholder="Describe what you need..." rows="3" required 
-                class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50"></textarea>
-              <button type="submit" class="w-full py-3 bg-red-600 hover:bg-red-500 text-white rounded-xl font-medium transition-all shadow-lg shadow-red-600/20">
+                class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.08] rounded-lg text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-500 resize-none"></textarea>
+              <button type="submit" class="w-full py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium text-sm transition">
                 Generate Quote
               </button>
             </form>
-            <div id="quick-result" class="mt-4 hidden p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20"></div>
+            <div id="quick-result" class="mt-3 hidden p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-sm"></div>
           </div>
 
-          <!-- Upload Prices -->
-          <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6">
-            <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
-              <svg class="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-              Upload Pricing
-            </h3>
-            <form id="upload-form" class="space-y-4">
-              <input type="hidden" name="userId" value={userId} />
-              <div class="border-2 border-dashed border-white/[0.1] rounded-xl p-8 text-center hover:border-red-500/30 transition-colors">
-                <input type="file" name="file" accept=".xlsx,.xls" required 
-                  class="hidden" id="file-input" />
-                <label for="file-input" class="cursor-pointer">
-                  <svg class="w-10 h-10 mx-auto mb-3 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
-                  <p class="text-zinc-400">Drop Excel file or click to upload</p>
-                </label>
+          <!-- Recent Quotes -->
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl p-5">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-base font-semibold text-white">Recent Quotes</h2>
+              <a href="/dashboard/quotes" class="text-xs text-zinc-500 hover:text-white">View all</a>
+            </div>
+            <div id="recent-quotes" class="space-y-2">
+              <p class="text-sm text-zinc-500 py-4 text-center">No quotes yet</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="mb-6">
+          <h2 class="text-base font-semibold text-white mb-4">Quick Access</h2>
+          <div class="grid grid-cols-5 gap-3">
+            <a href="/dashboard/templates" class="bg-[#0c0c12] border border-white/[0.06] rounded-lg p-3 hover:border-white/[0.12] transition text-center">
+              <div class="text-xl mb-1">📋</div>
+              <div class="text-xs font-medium text-white">Templates</div>
+            </a>
+            <a href="/dashboard/prices" class="bg-[#0c0c12] border border-white/[0.06] rounded-lg p-3 hover:border-white/[0.12] transition text-center">
+              <div class="text-xl mb-1">📊</div>
+              <div class="text-xs font-medium text-white">Prices</div>
+            </a>
+            <a href="/dashboard/rules" class="bg-[#0c0c12] border border-white/[0.06] rounded-lg p-3 hover:border-white/[0.12] transition text-center">
+              <div class="text-xl mb-1">⚙️</div>
+              <div class="text-xs font-medium text-white">Rules</div>
+            </a>
+            <a href="/dashboard/settings" class="bg-[#0c0c12] border border-white/[0.06] rounded-lg p-3 hover:border-white/[0.12] transition text-center">
+              <div class="text-xl mb-1">⚡</div>
+              <div class="text-xs font-medium text-white">Settings</div>
+            </a>
+            <a href="/dashboard/subscription" class="bg-[#0c0c12] border border-white/[0.06] rounded-lg p-3 hover:border-white/[0.12] transition text-center">
+              <div class="text-xl mb-1">💳</div>
+              <div class="text-xs font-medium text-white">Plan</div>
+            </a>
+          </div>
+        </div>
+
+        <!-- How it Works -->
+        <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl p-5">
+          <h2 class="text-base font-semibold text-white mb-3">How it works</h2>
+          <div class="grid md:grid-cols-3 gap-4 text-sm">
+            <div class="flex gap-3">
+              <div class="w-6 h-6 rounded bg-red-600 flex items-center justify-center text-xs font-bold">1</div>
+              <div>
+                <div class="font-medium text-white">Upload Prices</div>
+                <div class="text-zinc-500">Add your pricing from Excel</div>
               </div>
-              <button type="submit" class="w-full py-3 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] rounded-xl font-medium transition-all">
-                Upload Prices
-              </button>
-            </form>
-            <div id="upload-result" class="mt-4 hidden p-4 rounded-xl"></div>
+            </div>
+            <div class="flex gap-3">
+              <div class="w-6 h-6 rounded bg-red-600 flex items-center justify-center text-xs font-bold">2</div>
+              <div>
+                <div class="font-medium text-white">Set Rules</div>
+                <div class="text-zinc-500">Configure discounts & tax</div>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="w-6 h-6 rounded bg-red-600 flex items-center justify-center text-xs font-bold">3</div>
+              <div>
+                <div class="font-medium text-white">Create Quotes</div>
+                <div class="text-zinc-500">Generate in seconds</div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <!-- Recent Quotes -->
-        <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-semibold">Recent Quotes</h3>
-            <a href="/dashboard/quotes" class="text-red-400 hover:text-red-300 text-sm">View All →</a>
-          </div>
-          <div id="recent-quotes" class="space-y-3">
-            <p class="text-zinc-500 text-center py-8">No quotes yet. Generate your first quote!</p>
-          </div>
-        </div>
+        </div><!-- End locked dashboard content -->
       </div>
     </main>
 
-    <!-- Modal -->
-    <dialog id="generate-modal" class="p-8 rounded-2xl bg-[#0c0c12] border border-white/[0.1] shadow-2xl">
-      <h3 class="text-xl font-bold mb-4">Generate New Quote</h3>
-      <form id="modal-quote-form" class="space-y-4">
+    <!-- Generate Quote Modal -->
+    <dialog id="generate-modal" class="p-6 rounded-2xl bg-[#0c0c12] border border-white/[0.1] shadow-2xl max-w-lg w-full backdrop:bg-black/60">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold">New Quote</h3>
+        <button onclick="document.getElementById('generate-modal').close()" class="text-zinc-400 hover:text-white">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+      <form id="modal-quote-form" class="space-y-3">
         <input type="hidden" name="userId" value={userId} />
         <div>
-          <label class="block text-sm text-zinc-400 mb-2">Client Name</label>
-          <input type="text" name="clientName" required class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl" />
+          <label class="text-sm text-zinc-400 block mb-1">Client Name</label>
+          <input type="text" name="clientName" required class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white" />
         </div>
         <div>
-          <label class="block text-sm text-zinc-400 mb-2">Client Email</label>
-          <input type="email" name="clientEmail" class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl" />
+          <label class="text-sm text-zinc-400 block mb-1">Client Email</label>
+          <input type="email" name="clientEmail" class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white" />
         </div>
         <div>
-          <label class="block text-sm text-zinc-400 mb-2">What do you need?</label>
-          <textarea name="prompt" rows="4" required class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl"></textarea>
+          <label class="text-sm text-zinc-400 block mb-1">What do you need?</label>
+          <textarea name="prompt" rows="4" required class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white resize-none"></textarea>
         </div>
-        <div class="flex gap-3">
-          <button type="button" onclick="document.getElementById('generate-modal').close()" class="flex-1 py-3 border border-white/[0.1] rounded-xl text-zinc-400 hover:bg-white/[0.05]">Cancel</button>
-          <button type="submit" class="flex-1 py-3 bg-red-600 rounded-xl font-medium">Generate</button>
-        </div>
+        <button type="submit" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium">Generate Quote</button>
       </form>
+      <div class="mt-3 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 hidden"></div>
+    </dialog>
+
+    <!-- Quick Flow Modal -->
+    <dialog id="quickflow-modal" class="p-6 rounded-2xl bg-[#0c0c12] border border-white/[0.1] shadow-2xl max-w-md w-full backdrop:bg-black/60">
+      <div id="quickflow-content"></div>
     </dialog>
 
     <script define:vars={{ userId }}>
+      // Theme
+      function initTheme() {
+        const saved = localStorage.getItem('theme') || 'dark';
+        if (saved === 'light') {
+          document.documentElement.classList.add('light');
+          document.querySelector('.sun-icon')?.classList.remove('hidden');
+          document.querySelector('.moon-icon')?.classList.add('hidden');
+        }
+      }
+      
+      function toggleTheme() {
+        const isLight = document.documentElement.classList.toggle('light');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      }
+      
+      document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+      initTheme();
+
+      // Quick Flow
+      let quickFlowStep = 1;
+
+      function startQuickFlow() {
+        quickFlowStep = 1;
+        renderQuickFlow();
+        document.getElementById('quickflow-modal').showModal();
+      }
+
+      function renderQuickFlow() {
+        const content = document.getElementById('quickflow-content');
+        
+        if (quickFlowStep === 1) {
+          content.innerHTML = `
+            <div class="text-center mb-4">
+              <div class="text-4xl mb-2">🚀</div>
+              <h3 class="text-lg font-semibold">Let's Create Your First Quote!</h3>
+              <p class="text-sm text-zinc-400 mt-1">3 simple steps to get started</p>
+            </div>
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center gap-3 p-3 rounded-lg bg-white/[0.03]">
+                <span class="w-6 h-6 rounded bg-red-600 text-xs font-bold">1</span>
+                <span class="text-sm">Upload pricing</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 rounded-lg bg-white/[0.03]">
+                <span class="w-6 h-6 rounded bg-zinc-600 text-xs font-bold">2</span>
+                <span class="text-sm">Create quote</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 rounded-lg bg-white/[0.03]">
+                <span class="w-6 h-6 rounded bg-zinc-600 text-xs font-bold">3</span>
+                <span class="text-sm">Done! 🎉</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="document.getElementById('quickflow-modal').close()" class="flex-1 py-2 border border-white/[0.1] rounded-lg text-sm text-zinc-400">Skip</button>
+              <button onclick="nextQuickFlowStep()" class="flex-1 py-2 bg-red-600 hover:bg-red-500 rounded-lg text-sm font-medium">Get Started</button>
+            </div>
+          `;
+        } else if (quickFlowStep === 2) {
+          content.innerHTML = `
+            <div class="text-center mb-4">
+              <div class="text-4xl mb-2">📊</div>
+              <h3 class="text-lg font-semibold">Step 1: Add Pricing</h3>
+              <p class="text-sm text-zinc-400 mt-1">Use sample data or upload your own</p>
+            </div>
+            <div class="space-y-3 mb-4">
+              <button onclick="useSamplePricing()" class="w-full p-4 rounded-lg border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-left transition">
+                <div class="font-medium">Use Sample Data</div>
+                <div class="text-xs text-zinc-500">Try with pre-loaded pricing</div>
+              </button>
+              <a href="/dashboard/prices" onclick="document.getElementById('quickflow-modal').close()" class="block w-full p-4 rounded-lg border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-center transition">
+                <div class="font-medium">Upload Excel File</div>
+                <div class="text-xs text-zinc-500">Import your own pricing</div>
+              </a>
+            </div>
+            <button onclick="nextQuickFlowStep()" class="w-full py-2 text-sm text-zinc-500">Skip this step</button>
+          `;
+        } else if (quickFlowStep === 3) {
+          content.innerHTML = `
+            <div class="text-center mb-4">
+              <div class="text-4xl mb-2">✏️</div>
+              <h3 class="text-lg font-semibold">Step 2: Create a Quote</h3>
+            </div>
+            <form id="quickflow-quote-form" class="space-y-3 mb-4">
+              <input type="text" id="qf-client" placeholder="Client name" required class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white" />
+              <textarea id="qf-prompt" placeholder="What do they need?" rows="3" required class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white resize-none"></textarea>
+              <button type="submit" class="w-full py-2.5 bg-red-600 hover:bg-red-500 rounded-lg font-medium">Generate Quote</button>
+            </form>
+            <button onclick="finishQuickFlow()" class="w-full py-2 text-sm text-zinc-500">Maybe later</button>
+          `;
+          
+          document.getElementById('quickflow-quote-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const clientName = document.getElementById('qf-client').value;
+            const prompt = document.getElementById('qf-prompt').value;
+            
+            try {
+              const res = await fetch('/api/quote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId, clientName, prompt })
+              });
+              const data = await res.json();
+              
+              if (data.success) {
+                showQuickFlowSuccess(data.quote);
+              } else {
+                alert(data.error || 'Failed to create quote');
+              }
+            } catch (err) {
+              alert('Error creating quote');
+            }
+          });
+        }
+      }
+
+      function nextQuickFlowStep() {
+        quickFlowStep++;
+        renderQuickFlow();
+      }
+
+      function finishQuickFlow() {
+        document.getElementById('quickflow-modal').close();
+        localStorage.setItem('quickFlowDone', 'true');
+        document.getElementById('quick-start-banner').classList.add('hidden');
+        loadStats();
+      }
+
+      function showQuickFlowSuccess(quote) {
+        const content = document.getElementById('quickflow-content');
+        content.innerHTML = `
+          <div class="text-center mb-4">
+            <div class="text-4xl mb-2">🎉</div>
+            <h3 class="text-lg font-semibold">Quote Created!</h3>
+            <p class="text-sm text-zinc-400">Quote #${quote.quoteNumber}</p>
+          </div>
+          <div class="mb-4 p-3 rounded-lg bg-white/[0.03]">
+            <div class="text-2xl font-bold text-white">€${quote.total.toFixed(2)}</div>
+            <div class="text-xs text-zinc-500">${quote.items?.length || 0} items</div>
+          </div>
+          <div class="flex gap-2">
+            <a href="/dashboard/quotes" class="flex-1 py-2 bg-red-600 hover:bg-red-500 rounded-lg text-sm font-medium text-center">View Quotes</a>
+            <button onclick="finishQuickFlow()" class="flex-1 py-2 border border-white/[0.1] rounded-lg text-sm">Done</button>
+          </div>
+        `;
+      }
+
+      function useSamplePricing() {
+        localStorage.setItem('samplePricingLoaded', 'true');
+        nextQuickFlowStep();
+      }
+
+      window.startQuickFlow = startQuickFlow;
+
+      // ===== SETUP STATE MANAGEMENT =====
+      let setupState = {
+        prices: false,
+        template: false,
+        rules: false
+      };
+
+      function loadSetupState() {
+        const saved = localStorage.getItem('setupState');
+        if (saved) {
+          setupState = JSON.parse(saved);
+        }
+        updateSetupUI();
+      }
+
+      function saveSetupState() {
+        localStorage.setItem('setupState', JSON.stringify(setupState));
+      }
+
+      window.goToStep = function(step) {
+        if (step === 'prices') {
+          window.location.href = '/dashboard/prices';
+        } else if (step === 'template') {
+          window.location.href = '/dashboard/templates';
+        } else if (step === 'rules') {
+          window.location.href = '/dashboard/rules';
+        }
+      };
+
+      window.showSetupFlow = function() {
+        document.getElementById('setup-banner')?.scrollIntoView({ behavior: 'smooth' });
+      };
+
+      window.scrollToStep1 = function() {
+        const step1 = document.getElementById('step-prices');
+        if (step1) {
+          step1.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      };
+
+      window.markStepDone = function(step) {
+        if (step === 'prices') {
+          setupState.prices = true;
+        } else if (step === 'template') {
+          setupState.template = true;
+        } else if (step === 'rules') {
+          setupState.rules = true;
+        }
+        saveSetupState();
+        updateSetupUI();
+      };
+
+      function updateSetupUI() {
+        // Update step cards - show completion state
+        const stepConfig = {
+          prices: { icon: 'step-prices-icon', badge: 'step-prices-badge', bgClass: 'bg-red-600', badgeClass: 'bg-red-500/20 text-red-400' },
+          template: { icon: 'step-template-icon', badge: 'step-template-badge', bgClass: 'bg-purple-600', badgeClass: 'bg-purple-500/20 text-purple-400' },
+          rules: { icon: 'step-rules-icon', badge: 'step-rules-badge', bgClass: 'bg-amber-600', badgeClass: 'bg-amber-500/20 text-amber-400' }
+        };
+        
+        Object.keys(stepConfig).forEach(step => {
+          const el = document.getElementById('step-' + step);
+          if (el && setupState[step]) {
+            // Mark as done with green styling
+            el.classList.remove('border-white/[0.08]');
+            el.classList.add('border-emerald-500/50', 'bg-emerald-500/10');
+            
+            // Update icon to checkmark
+            const icon = document.getElementById(stepConfig[step].icon);
+            if (icon) {
+              icon.className = 'w-10 h-10 rounded-lg bg-emerald-600 flex items-center justify-center text-xl';
+              icon.textContent = '✅';
+            }
+            
+            // Update badge to "Done"
+            const badge = document.getElementById(stepConfig[step].badge);
+            if (badge) {
+              badge.className = 'text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400';
+              badge.textContent = '✓ Done';
+            }
+          }
+        });
+        
+        // Update sidebar - lock/unlock items
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        sidebarItems.forEach(item => {
+          const required = item.dataset.requires;
+          if (required) {
+            const [step, value] = required.split(':');
+            if (setupState[step]) {
+              item.classList.remove('opacity-40', 'pointer-events-none');
+              item.classList.add('opacity-100');
+            } else {
+              item.classList.add('opacity-40', 'pointer-events-none');
+              item.classList.remove('opacity-100');
+            }
+          }
+        });
+        
+        // Update dashboard content visibility
+        // After prices: can see stats and prices page
+        // After template: can create quotes
+        const dashboardContent = document.getElementById('dashboard-content');
+        if (dashboardContent) {
+          if (setupState.prices && setupState.template) {
+            // Full access
+            dashboardContent.style.display = 'block';
+          } else {
+            dashboardContent.style.display = 'none';
+          }
+        }
+        
+        // Unlock dashboard if both required steps done
+        if (setupState.prices && setupState.template) {
+          unlockDashboard();
+        }
+      }
+
+      function unlockDashboard() {
+        const banner = document.getElementById('setup-banner');
+        if (banner) {
+          banner.innerHTML = `
+            <div class="p-6 rounded-2xl bg-gradient-to-br from-emerald-900/40 to-emerald-800/20 border border-emerald-500/20 text-center">
+              <div class="text-4xl mb-3">🎉</div>
+              <h2 class="text-xl font-bold text-white mb-2">All Set!</h2>
+              <p class="text-zinc-400 mb-4">You're ready to create quotes</p>
+              <a href="/dashboard" class="inline-block px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-medium">Go to Dashboard →</a>
+            </div>
+          `;
+        }
+      }
+
+      // Check setup state on load
+      loadSetupState();
+
+      // Load Stats
       async function loadStats() {
         try {
-          const quotesRes = await fetch(`/api/quotes?id&userId=${userId}`);
+          const quotesRes = await fetch(`/api/quotes?userId=${userId}`);
           const quotes = await quotesRes.json();
           
           document.getElementById('quote-count').textContent = quotes.count || 0;
           
-          // Calculate total value
           const accepted = quotes.quotes?.filter(q => q.status === 'accepted') || [];
+          const draft = quotes.quotes?.filter(q => q.status === 'draft') || [];
           document.getElementById('accepted-count').textContent = accepted.length;
+          document.getElementById('draft-count').textContent = draft.length;
           
           const total = quotes.quotes?.reduce((sum, q) => sum + q.total, 0) || 0;
           document.getElementById('total-value').textContent = '€' + total.toFixed(0);
           
-          // Recent quotes
           if (quotes.quotes && quotes.quotes.length > 0) {
             const container = document.getElementById('recent-quotes');
             container.innerHTML = quotes.quotes.slice(0, 5).map(q => `
-              <div class="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] hover:bg-white/[0.04] transition cursor-pointer" onclick="window.location.href='/dashboard/quote/${q._id}'">
+              <a href="/dashboard/quote/${q._id}" class="flex items-center justify-between p-2 rounded-lg hover:bg-white/[0.03] transition">
                 <div>
-                  <div class="font-medium">${q.clientName}</div>
-                  <div class="text-sm text-zinc-500">${q.quoteNumber} • ${new Date(q.generatedAt).toLocaleDateString()}</div>
+                  <div class="text-sm font-medium text-white">${q.clientName}</div>
+                  <div class="text-xs text-zinc-500">${q.quoteNumber}</div>
                 </div>
                 <div class="text-right">
-                  <div class="font-bold text-red-400">€${q.total.toFixed(2)}</div>
-                  <div class="text-xs px-2 py-0.5 rounded-full inline-block ${q.status === 'accepted' ? 'bg-emerald-500/20 text-emerald-400' : q.status === 'sent' ? 'bg-blue-500/20 text-blue-400' : 'bg-zinc-700 text-zinc-400'}">${q.status}</div>
+                  <div class="text-sm font-medium text-white">€${q.total.toFixed(2)}</div>
+                  <div class="text-xs px-1.5 py-0.5 rounded ${q.status === 'accepted' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-zinc-700 text-zinc-400'}">${q.status}</div>
                 </div>
-              </div>
+              </a>
             `).join('');
           }
         } catch (e) {
@@ -215,13 +612,17 @@ const userId = '507f1f77bcf86cd799439011';
       
       loadStats();
 
-      // Quick quote form
+      // Hide quick start if done
+      if (localStorage.getItem('quickFlowDone')) {
+        document.getElementById('quick-start-banner').classList.add('hidden');
+      }
+
+      // Forms
       document.getElementById('quick-quote-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         await handleQuoteSubmit(e.target);
       });
 
-      // Modal quote form
       document.getElementById('modal-quote-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         await handleQuoteSubmit(e.target);
@@ -248,47 +649,21 @@ const userId = '507f1f77bcf86cd799439011';
           const response = await res.json();
           
           if (response.success) {
-            result.classList.remove('hidden', 'bg-red-500/20');
+            result.classList.remove('hidden');
+            result.classList.remove('bg-red-500/20');
             result.classList.add('bg-emerald-500/10', 'border-emerald-500/20');
-            result.innerHTML = `<div class="font-medium text-emerald-400">✅ Quote ${response.quote.quoteNumber} - €${response.quote.total.toFixed(2)}</div><div class="text-sm text-zinc-400 mt-1">${response.quote.items.length} items generated</div>`;
+            result.innerHTML = `<span class="text-emerald-400">✓ Quote ${response.quote.quoteNumber} - €${response.quote.total.toFixed(2)}</span>`;
             loadStats();
-            form.reset();
           } else {
-            result.classList.remove('hidden', 'bg-emerald-500/10');
-            result.classList.add('bg-red-500/20');
-            result.innerHTML = `<div class="text-red-400">${response.error}</div>`;
+            result.classList.remove('hidden');
+            result.classList.add('bg-red-500/10', 'border-red-500/20');
+            result.innerHTML = `<span class="text-red-400">${response.error}</span>`;
           }
         } catch (err) {
           result.classList.remove('hidden');
-          result.innerHTML = `<div class="text-red-400">Error: ${err}</div>`;
+          result.innerHTML = `<span class="text-red-400">Error generating quote</span>`;
         }
       }
-
-      // Upload form
-      document.getElementById('upload-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const formData = new FormData(form);
-        const result = document.getElementById('upload-result');
-        
-        result.classList.remove('hidden');
-        result.innerHTML = '<span class="text-zinc-400">Uploading...</span>';
-        
-        try {
-          const res = await fetch('/api/prices', { method: 'POST', body: formData });
-          const data = await res.json();
-          
-          if (data.success) {
-            result.className = 'mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20';
-            result.innerHTML = `✅ ${data.itemsCount} price items uploaded`;
-          } else {
-            result.className = 'mt-4 p-4 rounded-xl bg-red-500/10 border border-red-500/20';
-            result.innerHTML = `❌ ${data.error}`;
-          }
-        } catch (err) {
-          result.innerHTML = `❌ Error: ${err}`;
-        }
-      });
     </script>
   </body>
 </html>

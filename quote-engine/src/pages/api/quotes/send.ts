@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
-import { collections, ObjectId } from '../../lib/mongodb';
-import { sendQuoteToClient } from '../../lib/email';
+import { collections, ObjectId } from '../../../lib/mongodb';
+import { sendQuoteToClient } from '../../../lib/email';
 
 export const POST: APIRoute = async ({ request }) => {
   try {

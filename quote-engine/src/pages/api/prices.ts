@@ -21,8 +21,8 @@ export const POST: APIRoute = async ({ request }) => {
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
     
-    // Parse Excel
-    const parseResult = parseExcelFile(buffer);
+    // Parse Excel (lazy-loads xlsx)
+    const parseResult = await parseExcelFile(buffer);
     
     if (!parseResult.success) {
       return new Response(JSON.stringify({
@@ -89,7 +89,13 @@ export const GET: APIRoute = async ({ url }) => {
       items,
       grouped,
       count: items.length
-    }), { status: 200 });
+    }), { 
+      status: 200,
+      headers: {
+        'Cache-Control': 'public, max-age=30, s-maxage=60', // Cache for 30s browser, 60s CDN
+        'Vary': 'Authorization'
+      }
+    });
     
   } catch (error) {
     console.error('Get prices error:', error);

@@ -1,5 +1,5 @@
 ---
-import '../../styles/global.css';
+import '../../../styles/global.css';
 
 const userId = '507f1f77bcf86cd799439011';
 const { slug } = Astro.params;
@@ -192,7 +192,8 @@ const { slug } = Astro.params;
       loadQuote();
 
       function downloadPDF() {
-        window.open(`/api/quotes/${slug}/pdf?id=${slug}&userId=${userId}&format=html`, '_blank');
+        const template = localStorage.getItem('quoteTemplate') || 'modern';
+        window.location.href = `/api/quotes/${slug}/pdf?template=${template}`;
       }
 
       async function sendQuote() {

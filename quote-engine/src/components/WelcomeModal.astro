@@ -1,0 +1,102 @@
+---
+// Welcome/Onboarding Modal Component
+// Usage: Include in any page to show onboarding
+
+interface Props {
+  userName?: string;
+}
+
+const { userName = 'User' } = Astro.props;
+---
+
+<dialog id="welcome-modal" class="bg-transparent backdrop:bg-black/70 p-0">
+  <div class="bg-[#0c0c12] border border-white/[0.1] rounded-2xl p-8 max-w-lg w-full shadow-2xl shadow-red-500/10">
+    <!-- Close button -->
+    <button onclick="document.getElementById('welcome-modal').close()" class="absolute top-4 right-4 text-zinc-500 hover:text-white">
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Header -->
+    <div class="text-center mb-6">
+      <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-rose-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold">Welcome to Quote Engine! 🚀</h2>
+      <p class="text-zinc-400 mt-2">Let's get you set up in under 2 minutes</p>
+    </div>
+
+    <!-- Steps -->
+    <div class="space-y-4">
+      <div class="flex gap-4 p-4 bg-white/[0.03] rounded-xl">
+        <div class="w-8 h-8 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center font-bold text-sm">1</div>
+        <div>
+          <h3 class="font-semibold">Upload Your Pricing</h3>
+          <p class="text-sm text-zinc-400">Import an Excel file with your prices, or add them manually</p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 p-4 bg-white/[0.03] rounded-xl">
+        <div class="w-8 h-8 bg-purple-500/20 text-purple-400 rounded-full flex items-center justify-center font-bold text-sm">2</div>
+        <div>
+          <h3 class="font-semibold">Set Your Rules</h3>
+          <p class="text-sm text-zinc-400">Configure minimums, buffers, taxes, and discounts</p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 p-4 bg-white/[0.03] rounded-xl">
+        <div class="w-8 h-8 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center font-bold text-sm">3</div>
+        <div>
+          <h3 class="font-semibold">Generate Quotes</h3>
+          <p class="text-sm text-zinc-400">Describe what your client needs and get an instant quote</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="mt-6 flex gap-3">
+      <button onclick="document.getElementById('welcome-modal').close()" class="flex-1 px-4 py-3 bg-white/[0.08] hover:bg-white/[0.12] rounded-xl font-medium">
+        Skip
+      </button>
+      <a href="/dashboard/prices" class="flex-1 px-4 py-3 bg-red-600 hover:bg-red-500 text-white rounded-xl font-medium text-center">
+        Get Started
+      </a>
+    </div>
+
+    <!-- Dismiss forever option -->
+    <p class="text-center text-xs text-zinc-500 mt-4">
+      <button onclick="localStorage.setItem('hideWelcome', 'true'); document.getElementById('welcome-modal').close()" class="underline hover:text-zinc-400">
+        Don't show this again
+      </button>
+    </p>
+  </div>
+</dialog>
+
+<script>
+  // Show modal if not dismissed
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!localStorage.getItem('hideWelcome')) {
+      const modal = document.getElementById('welcome-modal') as HTMLDialogElement;
+      if (modal) {
+        setTimeout(() => modal.showModal(), 1000);
+      }
+    }
+  });
+</script>
+
+<style>
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+  }
+  dialog[open] {
+    animation: fadeIn 0.3s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+</style>

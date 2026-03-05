@@ -1,0 +1,482 @@
+---
+import '../../styles/global.css';
+
+const userId = '507f1f77bcf86cd799439011';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Templates - Quote Engine</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen bg-[#0a0a0f] text-white font-sans">
+    <div class="fixed inset-0 -z-10 bg-[#0a0a0f]"></div>
+
+    <!-- Sidebar -->
+    <aside class="fixed left-0 top-0 bottom-0 w-56 bg-[#0c0c12] border-r border-white/[0.06] p-4 z-20">
+      <a href="/" class="flex items-center gap-3 mb-6 px-2">
+        <div class="w-7 h-7 bg-red-600 rounded-lg"></div>
+        <span class="text-lg font-semibold">Quote Engine</span>
+      </a>
+      
+      <nav class="space-y-1">
+        <a href="/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+          Dashboard
+        </a>
+        <a href="/dashboard/quotes" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          Quotes
+        </a>
+        <a href="/dashboard/templates" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/[0.06] text-white font-medium text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" /></svg>
+          Templates
+        </a>
+        <a href="/dashboard/prices" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          Prices
+        </a>
+        <a href="/dashboard/rules" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          Rules
+        </a>
+        <a href="/dashboard/settings" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m-6-4a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
+          Settings
+        </a>
+        <a href="/dashboard/subscription" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+          Subscription
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="ml-56 p-6">
+      <div class="max-w-5xl">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h1 class="text-2xl font-bold text-white">Templates</h1>
+            <p class="text-sm text-zinc-500">Create and manage your quote templates</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button id="theme-toggle" class="p-2 rounded-lg bg-white/[0.06] hover:bg-white/[0.1] transition" title="Toggle theme">
+              <svg class="w-4 h-4 moon-icon text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+              <svg class="w-4 h-4 sun-icon text-zinc-400 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+            </button>
+            <button onclick="document.getElementById('create-modal').showModal()" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium text-sm transition flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+              Create Template
+            </button>
+          </div>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="flex gap-2 mb-6">
+          <button onclick="filterCategory('all')" class="cat-btn active px-4 py-2 rounded-lg bg-white/[0.08] text-white text-sm" data-cat="all">All</button>
+          <button onclick="filterCategory('business')" class="cat-btn px-3 py-1.5 rounded-lg bg-white/[0.04] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white" data-cat="business">💼 Business</button>
+          <button onclick="filterCategory('creative')" class="cat-btn px-3 py-1.5 rounded-lg bg-white/[0.04] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white" data-cat="creative">🎨 Creative</button>
+          <button onclick="filterCategory('technical')" class="cat-btn px-3 py-1.5 rounded-lg bg-white/[0.04] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white" data-cat="technical">⚙️ Technical</button>
+        </div>
+
+        <!-- Templates Grid -->
+        <div id="templates-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Templates loaded via JS -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Template Preview Modal -->
+    <dialog id="preview-modal" class="p-0 rounded-2xl bg-[#0c0c12] border border-white/[0.1] shadow-2xl max-w-3xl w-full backdrop:bg-black/60">
+      <div id="preview-content"></div>
+    </dialog>
+
+    <!-- Create Template Modal -->
+    <dialog id="create-modal" class="p-6 rounded-2xl bg-[#0c0c12] border border-white/[0.1] shadow-2xl max-w-2xl w-full backdrop:bg-black/60">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold">Create New Template</h3>
+        <button onclick="document.getElementById('create-modal').close()" class="text-zinc-400 hover:text-white">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+
+      <!-- Creation Options -->
+      <div class="grid grid-cols-3 gap-3 mb-6">
+        <button onclick="showCreateOption('blank')" class="option-btn p-4 rounded-xl border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-center transition" data-option="blank">
+          <div class="text-2xl mb-2">📄</div>
+          <div class="text-sm font-medium">Start Fresh</div>
+          <div class="text-xs text-zinc-500">Create from scratch</div>
+        </button>
+        <button onclick="showCreateOption('ai')" class="option-btn p-4 rounded-xl border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-center transition" data-option="ai">
+          <div class="text-2xl mb-2">🤖</div>
+          <div class="text-sm font-medium">Generate with AI</div>
+          <div class="text-xs text-zinc-500">Describe your template</div>
+        </button>
+        <button onclick="showCreateOption('example')" class="option-btn p-4 rounded-xl border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-center transition" data-option="example">
+          <div class="text-2xl mb-2">📋</div>
+          <div class="text-sm font-medium">Use Example</div>
+          <div class="text-xs text-zinc-500">Based on templates</div>
+        </button>
+      </div>
+
+      <!-- Blank Form -->
+      <div id="blank-form" class="space-y-4 hidden">
+        <div>
+          <label class="text-sm text-zinc-400 block mb-1">Template Name</label>
+          <input type="text" id="template-name" placeholder="My Template" class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white" />
+        </div>
+        <div>
+          <label class="text-sm text-zinc-400 block mb-1">Category</label>
+          <select id="template-category" class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white">
+            <option value="business">💼 Business</option>
+            <option value="creative">🎨 Creative</option>
+            <option value="technical">⚙️ Technical</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-sm text-zinc-400 block mb-1">Accent Color</label>
+          <div class="flex gap-2">
+            <button type="button" onclick="selectColor('#dc2626')" class="color-btn w-8 h-8 rounded-lg bg-red-600 border-2 border-transparent" data-color="#dc2626"></button>
+            <button type="button" onclick="selectColor('#6b7280')" class="color-btn w-8 h-8 rounded-lg bg-gray-500 border-2 border-transparent" data-color="#6b7280"></button>
+            <button type="button" onclick="selectColor('#1e40af')" class="color-btn w-8 h-8 rounded-lg bg-blue-700 border-2 border-transparent" data-color="#1e40af"></button>
+            <button type="button" onclick="selectColor('#8b5cf6')" class="color-btn w-8 h-8 rounded-lg bg-purple-600 border-2 border-transparent" data-color="#8b5cf6"></button>
+            <button type="button" onclick="selectColor('#059669')" class="color-btn w-8 h-8 rounded-lg bg-emerald-600 border-2 border-transparent" data-color="#059669"></button>
+            <button type="button" onclick="selectColor('#d97706')" class="color-btn w-8 h-8 rounded-lg bg-amber-600 border-2 border-transparent" data-color="#d97706"></button>
+          </div>
+        </div>
+        <button onclick="saveTemplate()" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium">Save Template</button>
+      </div>
+
+      <!-- AI Form -->
+      <div id="ai-form" class="space-y-4 hidden">
+        <div>
+          <label class="text-sm text-zinc-400 block mb-1">Describe your template</label>
+          <textarea id="ai-prompt" rows="4" placeholder="Create a modern, clean template for consulting proposals with a blue accent color..." class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white resize-none"></textarea>
+        </div>
+        <button onclick="generateWithAI()" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+          Generate Template
+        </button>
+      </div>
+
+      <!-- Example Templates -->
+      <div id="example-form" class="hidden">
+        <p class="text-sm text-zinc-400 mb-3">Choose an example to start with:</p>
+        <div class="grid grid-cols-2 gap-3">
+          <button onclick="useExample('modern-business')" class="p-3 rounded-lg border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-left transition">
+            <div class="font-medium text-sm">✨ Modern Business</div>
+            <div class="text-xs text-zinc-500">Clean, professional for consulting</div>
+          </button>
+          <button onclick="useExample('minimal')" class="p-3 rounded-lg border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-left transition">
+            <div class="font-medium text-sm">📄 Minimal</div>
+            <div class="text-xs text-zinc-500">Ultra-clean, content-focused</div>
+          </button>
+          <button onclick="useExample('corporate')" class="p-3 rounded-lg border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-left transition">
+            <div class="font-medium text-sm">🏢 Corporate</div>
+            <div class="text-xs text-zinc-500">Formal, enterprise design</div>
+          </button>
+          <button onclick="useExample('creative')" class="p-3 rounded-lg border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-left transition">
+            <div class="font-medium text-sm">🎨 Creative</div>
+            <div class="text-xs text-zinc-500">Bold, colorful for agencies</div>
+          </button>
+          <button onclick="useExample('technical')" class="p-3 rounded-lg border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-left transition">
+            <div class="font-medium text-sm">⚙️ Technical</div>
+            <div class="text-xs text-zinc-500">Detailed specs & timelines</div>
+          </button>
+          <button onclick="useExample('proposal')" class="p-3 rounded-lg border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-left transition">
+            <div class="font-medium text-sm">📝 Proposal</div>
+            <div class="text-xs text-zinc-500">Standard proposal layout</div>
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <script define:vars={{ userId }}>
+      // Default templates
+      const defaultTemplates = [
+        { id: 'modern-business', name: 'Modern Business', category: 'business', accentColor: '#dc2626', description: 'Clean, professional design perfect for consulting and services', icon: '💼' },
+        { id: 'minimal', name: 'Minimal', category: 'business', accentColor: '#6b7280', description: 'Ultra-clean, minimal design focusing on content and clarity', icon: '📄' },
+        { id: 'corporate', name: 'Corporate', category: 'business', accentColor: '#1e40af', description: 'Traditional corporate design for enterprise and legal services', icon: '🏢' },
+        { id: 'creative', name: 'Creative Agency', category: 'creative', accentColor: '#8b5cf6', description: 'Bold, colorful design for creative professionals and agencies', icon: '🎨' },
+        { id: 'technical', name: 'Technical', category: 'technical', accentColor: '#059669', description: 'Detailed technical proposal with specifications and timelines', icon: '⚙️' },
+        { id: 'proposal', name: 'Standard Proposal', category: 'business', accentColor: '#d97706', description: 'Standard proposal layout for any business', icon: '📝' }
+      ];
+
+      let templates = [];
+      let selectedColor = '#dc2626';
+      let currentFilter = 'all';
+
+      // Load templates
+      function loadTemplates() {
+        const saved = localStorage.getItem('quoteTemplates');
+        const userTemplates = saved ? JSON.parse(saved) : [];
+        templates = [...defaultTemplates, ...userTemplates];
+        renderTemplates();
+      }
+
+      function renderTemplates() {
+        const grid = document.getElementById('templates-grid');
+        const filtered = currentFilter === 'all' 
+          ? templates 
+          : templates.filter(t => t.category === currentFilter);
+        
+        grid.innerHTML = filtered.map(t => `
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl p-4 hover:border-white/[0.12] transition group">
+            <div class="flex items-start justify-between mb-3">
+              <div class="text-2xl">${t.icon || '📄'}</div>
+              <button onclick="deleteTemplate('${t.id}')" class="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-white/[0.1] transition">
+                <svg class="w-4 h-4 text-zinc-500 hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+              </button>
+            </div>
+            <h3 class="font-semibold text-white mb-1">${t.name}</h3>
+            <p class="text-xs text-zinc-500 mb-3">${t.description}</p>
+            <div class="flex items-center justify-between">
+              <span class="text-xs px-2 py-1 rounded bg-white/[0.05] text-zinc-400">${t.category}</span>
+              <div class="flex items-center gap-2">
+                <button onclick="previewTemplate('${t.id}')" class="text-xs text-red-400 hover:text-red-300">Preview →</button>
+                <div class="w-4 h-4 rounded" style="background-color: ${t.accentColor}"></div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function previewTemplate(id) {
+        const template = templates.find(t => t.id === id);
+        if (!template) return;
+        
+        const modal = document.getElementById('preview-modal');
+        const content = document.getElementById('preview-content');
+        const accent = template.accentColor || '#dc2626';
+        
+        content.innerHTML = `
+          <div class="p-4 border-b border-white/[0.1] flex items-center justify-between">
+            <div>
+              <h3 class="font-semibold text-white">${template.name}</h3>
+              <p class="text-sm text-zinc-500">${template.description}</p>
+            </div>
+            <button onclick="document.getElementById('preview-modal').close()" class="text-zinc-400 hover:text-white">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+          </div>
+          
+          <!-- Preview Container - Shows what the quote would look like -->
+          <div class="p-6 bg-white">
+            <div style="border: 2px solid ${accent}; border-radius: 8px; padding: 24px; background: #fff; max-width: 500px; margin: 0 auto;">
+              <!-- Header -->
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #e5e7eb;">
+                <div>
+                  <h1 style="font-size: 24px; font-weight: bold; color: ${accent}; margin: 0;">QUOTE</h1>
+                  <p style="color: #6b7280; font-size: 14px; margin: 4px 0 0;">#QT-001234</p>
+                </div>
+                <div style="text-align: right; font-size: 12px; color: #6b7280;">
+                  <p>Date: ${new Date().toLocaleDateString()}</p>
+                  <p>Valid for 30 days</p>
+                </div>
+              </div>
+              
+              <!-- Client Info -->
+              <div style="margin-bottom: 20px;">
+                <p style="font-size: 12px; color: #9ca3af; margin: 0 0 4px;">Prepared for:</p>
+                <p style="font-weight: 600; color: #111; margin: 0;">Acme Corporation</p>
+                <p style="font-size: 14px; color: #6b7280; margin: 4px 0 0;">john@acme.com</p>
+              </div>
+              
+              <!-- Items Table -->
+              <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                <thead>
+                  <tr style="background: ${accent};">
+                    <th style="padding: 10px; text-align: left; color: white; font-size: 12px;">Description</th>
+                    <th style="padding: 10px; text-align: center; color: white; font-size: 12px;">Qty</th>
+                    <th style="padding: 10px; text-align: right; color: white; font-size: 12px;">Price</th>
+                    <th style="padding: 10px; text-align: right; color: white; font-size: 12px;">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid #e5e7eb;">
+                    <td style="padding: 10px; font-size: 14px; color: #111;">Web Development</td>
+                    <td style="padding: 10px; text-align: center; font-size: 14px; color: #111;">10</td>
+                    <td style="padding: 10px; text-align: right; font-size: 14px; color: #111;">€100</td>
+                    <td style="padding: 10px; text-align: right; font-size: 14px; color: #111;">€1,000</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #e5e7eb;">
+                    <td style="padding: 10px; font-size: 14px; color: #111;">UI/UX Design</td>
+                    <td style="padding: 10px; text-align: center; font-size: 14px; color: #111;">5</td>
+                    <td style="padding: 10px; text-align: right; font-size: 14px; color: #111;">€85</td>
+                    <td style="padding: 10px; text-align: right; font-size: 14px; color: #111;">€425</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <!-- Totals -->
+              <div style="text-align: right; margin-bottom: 20px;">
+                <p style="margin: 4px 0; color: #6b7280; font-size: 14px;">Subtotal: <span style="color: #111;">€1,425</span></p>
+                <p style="margin: 4px 0; color: #6b7280; font-size: 14px;">Tax (21%): <span style="color: #111;">€299.25</span></p>
+                <p style="margin: 8px 0 0; font-size: 18px; font-weight: bold; color: ${accent};">Total: €1,724.25</p>
+              </div>
+              
+              <!-- Footer -->
+              <div style="padding-top: 16px; border-top: 1px solid #e5e7eb; font-size: 12px; color: #9ca3af;">
+                <p style="margin: 0;">Payment terms: Net 30 days</p>
+                <p style="margin: 4px 0 0;">Thank you for your business!</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Actions -->
+          <div class="p-4 border-t border-white/[0.1] flex gap-3">
+            <button onclick="selectTemplate('${template.id}'); document.getElementById('preview-modal').close()" class="flex-1 py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium">
+              Use This Template
+            </button>
+            <button onclick="document.getElementById('preview-modal').close()" class="px-4 py-2.5 border border-white/[0.1] rounded-lg text-zinc-400 hover:text-white">
+              Close
+            </button>
+          </div>
+        `;
+        
+        modal.showModal();
+      }
+
+      function selectTemplate(id) {
+        localStorage.setItem('selectedTemplate', id);
+        // Update setup state if in flow
+        const setup = localStorage.getItem('setupState');
+        if (setup) {
+          const state = JSON.parse(setup);
+          state.template = true;
+          localStorage.setItem('setupState', JSON.stringify(state));
+        }
+        // Show success
+        alert('Template selected! You can now create quotes with this template.');
+      }
+
+      function filterCategory(cat) {
+        currentFilter = cat;
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+          btn.classList.toggle('bg-white/[0.08]', btn.dataset.cat === cat);
+          btn.classList.toggle('text-white', btn.dataset.cat === cat);
+          btn.classList.toggle('bg-white/[0.04]', btn.dataset.cat !== cat);
+          btn.classList.toggle('text-zinc-400', btn.dataset.cat !== cat);
+        });
+        renderTemplates();
+      }
+
+      function showCreateOption(option) {
+        document.getElementById('blank-form').classList.add('hidden');
+        document.getElementById('ai-form').classList.add('hidden');
+        document.getElementById('example-form').classList.add('hidden');
+        document.getElementById(option + '-form').classList.remove('hidden');
+      }
+
+      function selectColor(color) {
+        selectedColor = color;
+        document.querySelectorAll('.color-btn').forEach(btn => {
+          btn.style.borderColor = btn.dataset.color === color ? 'white' : 'transparent';
+        });
+      }
+
+      function saveTemplate() {
+        const name = document.getElementById('template-name').value;
+        const category = document.getElementById('template-category').value;
+        
+        if (!name) return alert('Please enter a template name');
+        
+        const newTemplate = {
+          id: 'custom-' + Date.now(),
+          name,
+          category,
+          accentColor: selectedColor,
+          description: 'Custom template',
+          icon: '📄',
+          isCustom: true
+        };
+        
+        const saved = localStorage.getItem('quoteTemplates');
+        const userTemplates = saved ? JSON.parse(saved) : [];
+        userTemplates.push(newTemplate);
+        localStorage.setItem('quoteTemplates', JSON.stringify(userTemplates));
+        
+        document.getElementById('create-modal').close();
+        loadTemplates();
+      }
+
+      function useExample(id) {
+        const template = defaultTemplates.find(t => t.id === id);
+        if (!template) return;
+        
+        const newTemplate = {
+          ...template,
+          id: 'custom-' + Date.now(),
+          isCustom: true
+        };
+        
+        const saved = localStorage.getItem('quoteTemplates');
+        const userTemplates = saved ? JSON.parse(saved) : [];
+        userTemplates.push(newTemplate);
+        localStorage.setItem('quoteTemplates', JSON.stringify(userTemplates));
+        
+        document.getElementById('create-modal').close();
+        loadTemplates();
+      }
+
+      async function generateWithAI() {
+        const prompt = document.getElementById('ai-prompt').value;
+        if (!prompt) return alert('Please describe your template');
+        
+        // Simulate AI generation (in real app, call LLM)
+        const newTemplate = {
+          id: 'ai-' + Date.now(),
+          name: 'AI Generated',
+          category: 'business',
+          accentColor: selectedColor,
+          description: prompt.substring(0, 50) + '...',
+          icon: '🤖',
+          isCustom: true
+        };
+        
+        const saved = localStorage.getItem('quoteTemplates');
+        const userTemplates = saved ? JSON.parse(saved) : [];
+        userTemplates.push(newTemplate);
+        localStorage.setItem('quoteTemplates', JSON.stringify(userTemplates));
+        
+        document.getElementById('create-modal').close();
+        loadTemplates();
+      }
+
+      function deleteTemplate(id) {
+        if (!confirm('Delete this template?')) return;
+        
+        const saved = localStorage.getItem('quoteTemplates');
+        let userTemplates = saved ? JSON.parse(saved) : [];
+        userTemplates = userTemplates.filter(t => t.id !== id);
+        localStorage.setItem('quoteTemplates', JSON.stringify(userTemplates));
+        loadTemplates();
+      }
+
+      // Theme Toggle
+      function initTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+          document.documentElement.classList.add('light');
+          document.querySelector('.sun-icon')?.classList.remove('hidden');
+          document.querySelector('.moon-icon')?.classList.add('hidden');
+        }
+      }
+      
+      function toggleTheme() {
+        const isLight = document.documentElement.classList.toggle('light');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        document.querySelector('.sun-icon')?.classList.toggle('hidden', !isLight);
+        document.querySelector('.moon-icon')?.classList.toggle('hidden', isLight);
+      }
+      
+      document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+      initTheme();
+      loadTemplates();
+    </script>
+  </body>
+</html>

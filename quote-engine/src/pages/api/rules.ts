@@ -21,7 +21,13 @@ export const GET: APIRoute = async ({ url }) => {
       success: true, 
       rules,
       count: rules.length 
-    }), { status: 200 });
+    }), { 
+      status: 200,
+      headers: {
+        'Cache-Control': 'public, max-age=30, s-maxage=60',
+        'Vary': 'Authorization'
+      }
+    });
     
   } catch (error) {
     console.error('Get rules error:', error);

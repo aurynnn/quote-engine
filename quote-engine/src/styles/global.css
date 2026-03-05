@@ -20,18 +20,211 @@
   --color-violet-600: #7c3aed;
 }
 
-/* CSS Variables */
+/* CSS Variables - Light Mode */
+:root.light {
+  --bg-primary: #f8f9fc;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-card-hover: rgba(255, 255, 255, 1);
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(239, 68, 68, 0.3);
+  --accent-color: #dc2626;
+  --accent-hover: #ef4444;
+  --accent-glow: rgba(220, 38, 38, 0.15);
+  --input-bg: rgba(0, 0, 0, 0.03);
+  --input-border: rgba(0, 0, 0, 0.08);
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --sidebar-bg: rgba(255, 255, 255, 0.95);
+  --overlay-bg: rgba(0, 0, 0, 0.4);
+}
+
+/* CSS Variables - Dark Mode (default) */
 :root {
   --bg-primary: #0a0a0f;
   --bg-secondary: #12121a;
   --bg-card: rgba(18, 18, 26, 0.8);
+  --bg-card-hover: rgba(22, 22, 30, 0.9);
   --text-primary: #f4f4f5;
   --text-secondary: #a1a1aa;
   --text-muted: #71717a;
+  --border-color: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(16, 185, 129, 0.3);
+  --accent-color: #dc2626;
+  --accent-hover: #ef4444;
+  --accent-glow: rgba(220, 38, 38, 0.2);
+  --input-bg: rgba(255, 255, 255, 0.03);
+  --input-border: rgba(255, 255, 255, 0.08);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --sidebar-bg: rgba(12, 12, 18, 0.95);
+  --overlay-bg: rgba(0, 0, 0, 0.8);
 }
 
-* {
-  box-sizing: border-box;
+/* Light mode specific overrides */
+:root.light body {
+  background: linear-gradient(135deg, #f8f9fc 0%, #ffffff 50%, #f1f3f8 100%) !important;
+}
+
+:root.light .bg-\[\#0a0a0f\] {
+  background: linear-gradient(135deg, #f8f9fc 0%, #ffffff 50%, #f1f3f8 100%) !important;
+}
+
+:root.light .bg-\[\#0c0c12\] {
+  background: #ffffff !important;
+}
+
+/* Light mode specific overrides - use simpler selectors */
+:root.light .fixed.inset-0 {
+  background: linear-gradient(135deg, #f8f9fc 0%, #ffffff 50%, #f1f3f8 100%) !important;
+}
+
+:root.light .border-white\/\[\.06\] {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+:root.light .border-white\/\[\.08\] {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+:root.light .border-white\/\[\.1\] {
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+:root.light .text-zinc-400,
+:root.light .text-zinc-500 {
+  color: #71717a !important;
+}
+
+:root.light .hover\:bg-white\/\[\.04\]:hover {
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+
+:root.light .hover\:text-white:hover {
+  color: #18181b !important;
+}
+
+:root.light .bg-white\/\[0\.03\],
+:root.light .bg-white\/\[0\.02\] {
+  background: rgba(0, 0, 0, 0.03) !important;
+}
+
+:root.light .bg-white\/\[0\.08\] {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+:root.light input,
+:root.light textarea,
+:root.light select {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: #18181b !important;
+}
+
+:root.light input::placeholder,
+:root.light textarea::placeholder {
+  color: #a1a1aa !important;
+}
+
+:root.light .bg-red-500\/10 {
+  background: rgba(220, 38, 38, 0.1) !important;
+}
+
+:root.light .text-red-400 {
+  color: #dc2626 !important;
+}
+
+:root.light .shadow-red-600\/20 {
+  box-shadow: 0 10px 30px -5px rgba(220, 38, 38, 0.15) !important;
+}
+
+/* Light mode file upload area */
+:root.light .border-white\/\[\.1\] {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+:root.light .hover\:border-red-500\/30:hover {
+  border-color: rgba(220, 38, 38, 0.4) !important;
+}
+
+/* Light mode sidebar */
+:root.light aside,
+:root.light .fixed\.left-0 {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+:root.light .sidebar-link:hover {
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+
+:root.light .sidebar-link.active {
+  background: rgba(220, 38, 38, 0.1) !important;
+  color: #dc2626 !important;
+}
+
+/* Light mode modals */
+:root.light dialog,
+:root.light \#generate-modal,
+:root.light \#onboarding-modal {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+:root.light dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Light mode inputs in modals */
+:root.light dialog input,
+:root.light dialog textarea {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: #18181b !important;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+:root.light .theme-toggle {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+:root.light .theme-toggle:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.theme-toggle .sun-icon {
+  display: none;
+}
+
+.theme-toggle .moon-icon {
+  display: block;
+}
+
+:root.light .theme-toggle .sun-icon {
+  display: block;
+}
+
+:root.light .theme-toggle .moon-icon {
+  display: none;
 }
 
 html {

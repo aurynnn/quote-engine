@@ -1,4 +1,13 @@
-import * as XLSX from 'xlsx';
+// Lazy-load xlsx to reduce initial bundle size
+let xlsx: typeof import('xlsx') | null = null;
+
+async function getXLSX() {
+  if (!xlsx) {
+    xlsx = await import('xlsx');
+  }
+  return xlsx;
+}
+
 import type { PriceItem } from './mongodb';
 import { ObjectId } from 'mongodb';
 
@@ -20,10 +29,12 @@ export interface ExcelParseResult {
 /**
  * Parse Excel file buffer to structured JSON
  */
-export function parseExcelFile(buffer: Buffer): ExcelParseResult {
+export async function parseExcelFile(buffer: Buffer): Promise<ExcelParseResult> {
   const errors: string[] = [];
   
   try {
+    const XLSX = await getXLSX();
+    
     // Read workbook
     const workbook = XLSX.read(buffer, { type: 'buffer' });
     
@@ -111,7 +122,9 @@ export function toPriceItems(rows: ParsedRow[], userId: string | ObjectId): Omit
 /**
  * Create sample Excel template
  */
-export function createSampleTemplate(): Buffer {
+export async function createSampleTemplate(): Promise<Buffer> {
+  const XLSX = await getXLSX();
+  
   const data = [
     { category: 'Labor', name: 'Web Development', unit: 'hour', basePrice: 75, minPrice: 60 },
     { category: 'Labor', name: 'UI/UX Design', unit: 'hour', basePrice: 85, minPrice: 70 },

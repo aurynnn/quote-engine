@@ -25,17 +25,17 @@ const userId = '507f1f77bcf86cd799439011';
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
           Dashboard
         </a>
-        <a href="/dashboard/prices" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-          Prices
-        </a>
         <a href="/dashboard/quotes" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
           Quotes
         </a>
-        <a href="/dashboard/clients" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-red-500/10 text-red-400">
+        <a href="/dashboard/clients" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-red-500/10 text-red-400 font-medium">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
           Clients
+        </a>
+        <a href="/dashboard/prices" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          Prices
         </a>
         <a href="/dashboard/rules" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
@@ -45,166 +45,273 @@ const userId = '507f1f77bcf86cd799439011';
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m-6-4a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
           Settings
         </a>
+        <a href="/dashboard/subscription" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+          Subscription
+        </a>
       </nav>
     </aside>
 
     <main class="ml-64 p-8 relative z-10">
       <div class="max-w-6xl">
-        <div class="flex justify-between items-center mb-8">
+        <div class="flex items-center justify-between mb-8">
           <div>
-            <h1 class="text-3xl font-bold">👥 Clients</h1>
-            <p class="text-zinc-500">Manage your clients</p>
+            <h1 class="text-3xl font-bold mb-1">👥 Clients</h1>
+            <p class="text-zinc-500">Manage your client database</p>
           </div>
-          <button onclick="document.getElementById('add-client-modal').showModal()" class="px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-xl font-medium text-sm">
-            + Add Client
+          <button onclick="openModal('add')" class="px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-xl font-semibold transition flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+            Add Client
           </button>
         </div>
 
         <!-- Search -->
         <div class="mb-6">
-          <input type="text" id="search" placeholder="Search clients..." 
-            class="w-full max-w-md px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder-zinc-500"
-            onkeyup="filterClients()" />
+          <input type="text" id="search" placeholder="Search clients..." class="w-full max-w-md px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50" />
         </div>
 
-        <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6">
-          <div id="clients-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <p class="text-zinc-500 text-center py-8 col-span-full">No clients yet. Add your first client!</p>
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden text-center py-16">
+          <div class="w-16 h-16 bg-white/[0.03] rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
           </div>
+          <h3 class="text-lg font-semibold mb-2">No clients yet</h3>
+          <p class="text-zinc-500 mb-4">Add your first client to get started</p>
+          <button onclick="openModal('add')" class="px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-xl font-semibold transition">
+            + Add Client
+          </button>
+        </div>
+
+        <!-- Clients Grid -->
+        <div id="clients-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         </div>
       </div>
     </main>
 
-    <!-- Add Client Modal -->
-    <dialog id="add-client-modal" class="p-8 rounded-2xl bg-[#0c0c12] border border-white/[0.1]">
-      <h3 class="text-xl font-bold mb-4">Add New Client</h3>
+    <!-- Client Modal -->
+    <dialog id="client-modal" class="bg-[#0c0c12] border border-white/[0.1] rounded-2xl p-6 backdrop:bg-black/50 w-full max-w-md">
+      <h2 id="modal-title" class="text-xl font-bold mb-4">Add New Client</h2>
       <form id="client-form" class="space-y-4">
-        <input type="hidden" name="userId" value={userId} />
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-sm text-zinc-400 mb-2">Name</label>
-            <input type="text" name="name" required class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl" />
-          </div>
-          <div>
-            <label class="block text-sm text-zinc-400 mb-2">Company</label>
-            <input type="text" name="company" class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl" />
-          </div>
+        <input type="hidden" id="client-id" />
+        <div>
+          <label class="block text-sm text-zinc-400 mb-2">Company/Name *</label>
+          <input type="text" id="client-name" name="name" required class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50" placeholder="Client name" />
         </div>
         <div>
-          <label class="block text-sm text-zinc-400 mb-2">Email</label>
-          <input type="email" name="email" required class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl" />
+          <label class="block text-sm text-zinc-400 mb-2">Email *</label>
+          <input type="email" id="client-email" name="email" required class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50" placeholder="client@company.com" />
         </div>
         <div>
           <label class="block text-sm text-zinc-400 mb-2">Phone</label>
-          <input type="tel" name="phone" class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl" />
+          <input type="tel" id="client-phone" name="phone" class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50" placeholder="+32 123 45 67 89" />
+        </div>
+        <div>
+          <label class="block text-sm text-zinc-400 mb-2">Company</label>
+          <input type="text" id="client-company" name="company" class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50" placeholder="Company name" />
         </div>
         <div>
           <label class="block text-sm text-zinc-400 mb-2">Address</label>
-          <textarea name="address" rows="2" class="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.1] rounded-xl"></textarea>
+          <textarea id="client-address" name="address" rows="2" class="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50" placeholder="Street, City, Country"></textarea>
         </div>
-        <div class="flex gap-3">
-          <button type="button" onclick="document.getElementById('add-client-modal').close()" class="flex-1 py-3 border border-white/[0.1] rounded-xl text-zinc-400 hover:bg-white/[0.05]">Cancel</button>
-          <button type="submit" class="flex-1 py-3 bg-red-600 rounded-xl font-medium">Add Client</button>
+        <div class="flex gap-3 pt-2">
+          <button type="button" onclick="closeModal()" class="flex-1 px-4 py-3 bg-white/[0.08] hover:bg-white/[0.12] rounded-xl font-medium transition">Cancel</button>
+          <button type="submit" id="submit-btn" class="flex-1 px-4 py-3 bg-red-600 hover:bg-red-500 text-white rounded-xl font-medium transition">Add Client</button>
         </div>
       </form>
     </dialog>
 
-    <!-- Toast -->
-    <div id="toast" class="fixed bottom-4 right-4 px-6 py-3 rounded-xl hidden"></div>
+    <!-- Delete Confirmation Modal -->
+    <dialog id="delete-modal" class="bg-[#0c0c12] border border-white/[0.1] rounded-2xl p-6 backdrop:bg-black/50 w-full max-w-sm">
+      <h2 class="text-xl font-bold mb-2">Delete Client?</h2>
+      <p class="text-zinc-400 mb-6">This action cannot be undone. This will permanently delete the client.</p>
+      <div class="flex gap-3">
+        <button onclick="document.getElementById('delete-modal').close()" class="flex-1 px-4 py-3 bg-white/[0.08] hover:bg-white/[0.12] rounded-xl font-medium transition">Cancel</button>
+        <button id="confirm-delete" class="flex-1 px-4 py-3 bg-red-600 hover:bg-red-500 text-white rounded-xl font-medium transition">Delete</button>
+      </div>
+    </dialog>
 
-    <script define:vars={{ userId }}>
-      let clients = [];
+    <script>
+      const STORAGE_KEY = 'quote_engine_clients';
 
-      function showToast(message, success = true) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.className = `fixed bottom-4 right-4 px-6 py-3 rounded-xl ${success ? 'bg-emerald-600' : 'bg-red-600'} text-white`;
-        toast.classList.remove('hidden');
-        setTimeout(() => toast.classList.add('hidden'), 3000);
+      // Initialize with sample data if empty
+      function initClients() {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) {
+          const sampleClients = [
+            { id: '1', name: 'John Doe', email: 'john@example.com', phone: '+32 123 45 67 89', company: 'Doe Consulting', address: '123 Main St, Brussels', status: 'active', quotes: 12, total: 4500 },
+            { id: '2', name: 'Acme Solutions', email: 'contact@acme.com', phone: '+32 987 65 43 21', company: 'Acme Solutions', address: '456 Business Ave, Antwerp', status: 'active', quotes: 28, total: 12400 },
+            { id: '3', name: 'TechWorks Inc', email: 'info@techworks.io', phone: '', company: 'TechWorks Inc', address: '', status: 'inactive', quotes: 3, total: 890 }
+          ];
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(sampleClients));
+          return sampleClients;
+        }
+        return JSON.parse(stored);
       }
 
-      // Load clients from localStorage (for demo)
-      function loadClients() {
-        const stored = localStorage.getItem('quote_clients_' + userId);
-        clients = stored ? JSON.parse(stored) : [];
-        renderClients(clients);
+      function getClients() {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        return stored ? JSON.parse(stored) : [];
       }
 
-      function renderClients(list) {
-        const container = document.getElementById('clients-list');
-        
-        if (list && list.length > 0) {
-          container.innerHTML = list.map(c => `
-            <div class="p-5 bg-white/[0.02] border border-white/[0.06] rounded-xl hover:border-red-500/30 transition cursor-pointer" onclick="editClient('${c.id}')">
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center text-xl font-bold">
-                  ${c.name.charAt(0).toUpperCase()}
-                </div>
-                <div class="flex-1 min-w-0">
-                  <div class="font-semibold truncate">${c.name}</div>
-                  <div class="text-sm text-zinc-500 truncate">${c.company || c.email}</div>
-                </div>
+      function saveClients(clients) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(clients));
+      }
+
+      function getInitials(name) {
+        return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+      }
+
+      function getGradient(index) {
+        const gradients = [
+          'from-blue-500 to-cyan-500',
+          'from-purple-500 to-pink-500',
+          'from-amber-500 to-orange-500',
+          'from-emerald-500 to-teal-500',
+          'from-rose-500 to-red-500',
+          'from-indigo-500 to-violet-500'
+        ];
+        return gradients[index % gradients.length];
+      }
+
+      function renderClients() {
+        const clients = getClients();
+        const grid = document.getElementById('clients-grid');
+        const emptyState = document.getElementById('empty-state');
+
+        if (clients.length === 0) {
+          grid.innerHTML = '';
+          emptyState.classList.remove('hidden');
+          return;
+        }
+
+        emptyState.classList.add('hidden');
+        grid.innerHTML = clients.map((client, index) => `
+          <div class="client-card bg-white/[0.03] border border-white/[0.06] rounded-xl p-5 hover:bg-white/[0.05] transition cursor-pointer" data-id="${client.id}">
+            <div class="flex items-start justify-between mb-3">
+              <div class="w-10 h-10 bg-gradient-to-br ${getGradient(index)} rounded-full flex items-center justify-center text-white font-bold">
+                ${getInitials(client.name)}
               </div>
-              <div class="mt-4 pt-4 border-t border-white/[0.06] flex justify-between text-sm text-zinc-500">
-                <span>${c._quotes || 0} quotes</span>
-                <button onclick="event.stopPropagation(); deleteClient('${c.id}')" class="text-red-400 hover:text-red-300">Delete</button>
+              <div class="flex gap-1">
+                <button onclick="event.stopPropagation(); editClient('${client.id}')" class="p-1.5 hover:bg-white/[0.08] rounded-lg transition" title="Edit">
+                  <svg class="w-4 h-4 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                </button>
+                <button onclick="event.stopPropagation(); confirmDelete('${client.id}')" class="p-1.5 hover:bg-white/[0.08] rounded-lg transition" title="Delete">
+                  <svg class="w-4 h-4 text-zinc-400 hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                </button>
               </div>
             </div>
-          `).join('');
+            <h3 class="font-semibold mb-1">${client.name}</h3>
+            <p class="text-sm text-zinc-400 mb-1">${client.email}</p>
+            ${client.company ? `<p class="text-xs text-zinc-500 mb-3">🏢 ${client.company}</p>` : '<p class="mb-3"></p>'}
+            <div class="flex items-center gap-4 text-xs text-zinc-500">
+              <span>📄 ${client.quotes || 0} quotes</span>
+              <span>€${(client.total || 0).toLocaleString()} total</span>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function openModal(mode, client = null) {
+        const modal = document.getElementById('client-modal');
+        const title = document.getElementById('modal-title');
+        const submitBtn = document.getElementById('submit-btn');
+        const form = document.getElementById('client-form');
+
+        form.reset();
+        document.getElementById('client-id').value = '';
+
+        if (mode === 'edit' && client) {
+          title.textContent = 'Edit Client';
+          submitBtn.textContent = 'Save Changes';
+          document.getElementById('client-id').value = client.id;
+          document.getElementById('client-name').value = client.name;
+          document.getElementById('client-email').value = client.email;
+          document.getElementById('client-phone').value = client.phone || '';
+          document.getElementById('client-company').value = client.company || '';
+          document.getElementById('client-address').value = client.address || '';
         } else {
-          container.innerHTML = '<p class="text-zinc-500 text-center py-8 col-span-full">No clients yet. Add your first client!</p>';
+          title.textContent = 'Add New Client';
+          submitBtn.textContent = 'Add Client';
+        }
+
+        modal.showModal();
+      }
+
+      function closeModal() {
+        document.getElementById('client-modal').close();
+      }
+
+      function editClient(id) {
+        const clients = getClients();
+        const client = clients.find(c => c.id === id);
+        if (client) {
+          openModal('edit', client);
         }
       }
 
-      function filterClients() {
-        const search = document.getElementById('search').value.toLowerCase();
-        const filtered = clients.filter(c => 
-          c.name.toLowerCase().includes(search) || 
-          (c.company && c.company.toLowerCase().includes(search)) ||
-          c.email.toLowerCase().includes(search)
-        );
-        renderClients(filtered);
-      }
-
-      document.getElementById('client-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
+      function confirmDelete(id) {
+        const modal = document.getElementById('delete-modal');
+        const confirmBtn = document.getElementById('confirm-delete');
         
-        const client = {
-          id: Date.now().toString(),
-          name: formData.get('name'),
-          company: formData.get('company'),
-          email: formData.get('email'),
-          phone: formData.get('phone'),
-          address: formData.get('address'),
-          createdAt: new Date().toISOString(),
-          _quotes: 0
-        };
-        
-        clients.push(client);
-        localStorage.setItem('quote_clients_' + userId, JSON.stringify(clients));
-        
-        document.getElementById('add-client-modal').close();
-        e.target.reset();
-        renderClients(clients);
-        showToast('✅ Client added!');
-      });
-
-      function editClient(id) {
-        // For now, just show a message
-        showToast('Edit client coming soon!');
+        confirmBtn.onclick = () => deleteClient(id);
+        modal.showModal();
       }
 
       function deleteClient(id) {
-        if (confirm('Delete this client?')) {
-          clients = clients.filter(c => c.id !== id);
-          localStorage.setItem('quote_clients_' + userId, JSON.stringify(clients));
-          renderClients(clients);
-          showToast('Client deleted');
-        }
+        let clients = getClients();
+        clients = clients.filter(c => c.id !== id);
+        saveClients(clients);
+        renderClients();
+        document.getElementById('delete-modal').close();
       }
 
-      loadClients();
+      // Search functionality
+      document.getElementById('search').addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        document.querySelectorAll('.client-card').forEach(card => {
+          const text = card.textContent.toLowerCase();
+          card.style.display = text.includes(query) ? 'block' : 'none';
+        });
+      });
+
+      // Form submission
+      document.getElementById('client-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const id = document.getElementById('client-id').value;
+        const clients = getClients();
+
+        const clientData = {
+          id: id || Date.now().toString(),
+          name: form.name.value,
+          email: form.email.value,
+          phone: form.phone.value,
+          company: form.company.value,
+          address: form.address.value,
+          status: 'active',
+          quotes: id ? (clients.find(c => c.id === id)?.quotes || 0) : 0,
+          total: id ? (clients.find(c => c.id === id)?.total || 0) : 0
+        };
+
+        if (id) {
+          // Update existing
+          const index = clients.findIndex(c => c.id === id);
+          if (index !== -1) {
+            clients[index] = clientData;
+          }
+        } else {
+          // Add new
+          clients.push(clientData);
+        }
+
+        saveClients(clients);
+        renderClients();
+        closeModal();
+      });
+
+      // Initialize
+      initClients();
+      renderClients();
     </script>
   </body>
 </html>

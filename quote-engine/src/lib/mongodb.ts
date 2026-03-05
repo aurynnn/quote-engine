@@ -2,17 +2,53 @@ import { MongoClient, Db, Collection, ObjectId } from 'mongodb';
 
 const uri = process.env.MONGODB_URI || 'mongodb+srv://auryn:Z16OQd6HR5CkrfS1@healteascluster.yaunfrm.mongodb.net/quotedb?appName=healteasCluster';
 
+// Connection pool settings for better performance
+const MONGO_OPTIONS = {
+  maxPoolSize: 10,          // Max connections in pool
+  minPoolSize: 2,           // Min connections to maintain
+  maxIdleTimeMS: 30000,     // Close idle connections after 30s
+  connectTimeoutMS: 10000,  // Connection timeout
+  socketTimeoutMS: 45000,   // Socket timeout
+};
+
 let client: MongoClient | null = null;
 let db: Db | null = null;
 
 export async function connectDB(): Promise<Db> {
   if (db) return db;
   
-  client = new MongoClient(uri);
+  client = new MongoClient(uri, MONGO_OPTIONS);
   await client.connect();
   db = client.db();
   console.log('📦 Connected to MongoDB:', db.databaseName);
+  
+  // Create indexes for better query performance
+  await createIndexes(db);
+  
   return db;
+}
+
+// Create indexes for optimal query performance
+async function createIndexes(db: Db) {
+  try {
+    // Price items indexes
+    await db.collection('priceItems').createIndex({ userId: 1, category: 1 });
+    await db.collection('priceItems').createIndex({ userId: 1, name: 1 });
+    
+    // Pricing rules indexes
+    await db.collection('pricingRules').createIndex({ userId: 1, active: 1 });
+    
+    // Quotes indexes
+    await db.collection('quotes').createIndex({ userId: 1, generatedAt: -1 });
+    await db.collection('quotes').createIndex({ userId: 1, status: 1 });
+    
+    // Knowledge base indexes
+    await db.collection('knowledgeBase').createIndex({ userId: 1 });
+    
+    console.log('✅ Database indexes created');
+  } catch (error) {
+    console.warn('⚠️ Index creation warning:', error);
+  }
 }
 
 export function getDB(): Db {

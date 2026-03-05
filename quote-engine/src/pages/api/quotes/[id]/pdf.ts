@@ -1,54 +1,177 @@
 import type { APIRoute } from 'astro';
-import { collections, ObjectId } from '../../lib/mongodb';
-import { generateQuoteHTML } from '../../lib/pdf-generator';
+import PDFDocument from 'pdfkit';
+import { ObjectId } from 'mongodb';
+import { getDB } from '../../../../lib/mongodb';
 
-export const GET: APIRoute = async ({ url }) => {
+const TEMPLATES = {
+  minimal: {
+    accentColor: '#6b7280',
+    showLogo: false,
+    showBorder: false,
+    headerStyle: 'plain'
+  },
+  modern: {
+    accentColor: '#dc2626',
+    showLogo: true,
+    showBorder: true,
+    headerStyle: 'gradient'
+  },
+  professional: {
+    accentColor: '#1e40af',
+    showLogo: true,
+    showBorder: true,
+    headerStyle: 'boxed'
+  },
+  creative: {
+    accentColor: '#8b5cf6',
+    showLogo: true,
+    showBorder: false,
+    headerStyle: 'gradient'
+  }
+};
+
+export const GET: APIRoute = async ({ params, url }) => {
   try {
-    const quoteId = url.searchParams.get('id');
-    const userId = url.searchParams.get('userId');
-    const format = url.searchParams.get('format') || 'html';
-    
-    if (!quoteId || !userId) {
-      return new Response(JSON.stringify({ 
-        success: false, 
-        error: 'Missing quoteId or userId' 
-      }), { status: 400 });
-    }
-    
-    const quotesCollection = collections.quotes();
-    const quote = await quotesCollection.findOne({ 
-      _id: new ObjectId(quoteId),
-      userId: new ObjectId(userId)
-    });
-    
-    if (!quote) {
-      return new Response(JSON.stringify({ 
-        success: false, 
-        error: 'Quote not found' 
-      }), { status: 404 });
-    }
-    
-    if (format === 'html') {
-      const html = generateQuoteHTML(quote);
-      
-      return new Response(html, {
-        headers: {
-          'Content-Type': 'text/html',
-          'Content-Disposition': `attachment; filename="quote-${quote.quoteNumber}.html"`
-        }
+    const { id } = params;
+    const templateId = url.searchParams.get('template') || 'modern';
+    const template = TEMPLATES[templateId as keyof typeof TEMPLATES] || TEMPLATES.modern;
+    if (!id) {
+      return new Response(JSON.stringify({ error: 'Quote ID required' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
       });
     }
-    
-    return new Response(JSON.stringify({ 
-      success: false, 
-      error: 'Unsupported format' 
-    }), { status: 400 });
-    
+
+    const db = await getDB();
+    const quote = await db.collection('quotes').findOne({ _id: new ObjectId(id) });
+
+    if (!quote) {
+      return new Response(JSON.stringify({ error: 'Quote not found' }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    // Create PDF
+    const doc = new PDFDocument({ margin: 50 });
+    const chunks: Buffer[] = [];
+
+    doc.on('data', (chunk) => chunks.push(chunk));
+
+    // Apply template styling
+    const accentColor = template.accentColor;
+    const mutedColor = template.showLogo ? '#6b7280' : '#9ca3af';
+    const textColor = '#1f2937';
+
+    // Header
+    if (template.showLogo) {
+      doc.fontSize(24).fillColor(accentColor).text('Quote Engine', { align: 'left' });
+    } else {
+      doc.fontSize(20).fillColor(textColor).text('Quote', { align: 'left' });
+    }
+    doc.moveDown(0.5);
+    doc.fontSize(10).fillColor(mutedColor).text(`Quote #${quote.quoteNumber}`, { align: 'right' });
+    doc.text(new Date(quote.generatedAt).toLocaleDateString('en-US', { 
+      year: 'numeric', month: 'long', day: 'numeric' 
+    }), { align: 'right' });
+
+    doc.moveDown(2);
+
+    // Client info
+    doc.fontSize(12).fillColor(textColor).text('Bill To:', { continued: false });
+    doc.fontSize(14).text(quote.clientName);
+    if (quote.clientEmail) {
+      doc.fontSize(10).fillColor(mutedColor).text(quote.clientEmail);
+    }
+    if (quote.clientAddress) {
+      doc.text(quote.clientAddress);
+    }
+
+    doc.moveDown(2);
+
+    // Table header
+    const tableTop = doc.y;
+    const col1 = 50;
+    const col2 = 300;
+    const col3 = 400;
+    const col4 = 480;
+
+    // Border for professional template
+    if (template.showBorder) {
+      doc.rect(45, 40, 520, tableTop - 30).fill(accentColor).fillOpacity(0.05);
+    }
+
+    doc.fontSize(10).fillColor(mutedColor);
+    doc.text('Item', col1, tableTop);
+    doc.text('Qty', col2, tableTop, { width: 80, align: 'center' });
+    doc.text('Unit Price', col3, tableTop, { width: 80, align: 'right' });
+    doc.text('Total', col4, tableTop, { width: 80, align: 'right' });
+
+    doc.moveTo(50, tableTop + 15).lineTo(560, tableTop + 15).stroke(mutedColor);
+
+    // Table rows
+    let y = tableTop + 25;
+    doc.fillColor(textColor);
+
+    for (const item of quote.items || []) {
+      doc.fontSize(10).text(item.name, col1, y, { width: 240 });
+      doc.text(String(item.quantity), col2, y, { width: 80, align: 'center' });
+      doc.text(`€${item.unitPrice.toFixed(2)}`, col3, y, { width: 80, align: 'right' });
+      doc.text(`€${item.total.toFixed(2)}`, col4, y, { width: 80, align: 'right' });
+      y += 20;
+    }
+
+    doc.moveTo(50, y).lineTo(560, y).stroke('#e5e7eb');
+    y += 20;
+
+    // Totals
+    const totalsX = 350;
+    doc.fillColor(textColor).text('Subtotal:', totalsX, y);
+    doc.text(`€${quote.subtotal?.toFixed(2) || '0.00'}`, col4, y, { width: 80, align: 'right' });
+    y += 18;
+
+    if (quote.buffer > 0) {
+      doc.fillColor(mutedColor).text('Buffer:', totalsX, y);
+      doc.text(`€${quote.buffer.toFixed(2)}`, col4, y, { width: 80, align: 'right' });
+      y += 18;
+    }
+
+    if (quote.tax > 0) {
+      doc.fillColor(mutedColor).text('Tax:', totalsX, y);
+      doc.text(`€${quote.tax.toFixed(2)}`, col4, y, { width: 80, align: 'right' });
+      y += 18;
+    }
+
+    doc.fontSize(14).fillColor(accentColor).text('Total:', totalsX, y);
+    doc.text(`€${quote.total?.toFixed(2) || '0.00'}`, col4, y, { width: 80, align: 'right' });
+
+    // Footer
+    doc.fontSize(10).fillColor(mutedColor);
+    doc.text('Thank you for your business!', 50, 700, { align: 'center' });
+    doc.text('Generated by Quote Engine', 50, 715, { align: 'center' });
+
+    doc.end();
+
+    return new Promise((resolve) => {
+      doc.on('end', () => {
+        const result = Buffer.concat(chunks);
+        resolve(new Response(result, {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/pdf',
+            'Content-Disposition': `attachment; filename="quote-${quote.quoteNumber}.pdf"`
+          }
+        }));
+      });
+    });
+
   } catch (error) {
     console.error('PDF generation error:', error);
-    return new Response(JSON.stringify({
-      success: false,
-      error: String(error)
-    }), { status: 500 });
+    return new Response(JSON.stringify({ 
+      error: error instanceof Error ? error.message : 'PDF generation failed' 
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 };

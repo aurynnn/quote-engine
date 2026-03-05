@@ -1,0 +1,51 @@
+{
+  "templates": [
+    {
+      "id": "web-development",
+      "name": "Web Development",
+      "description": "Hourly rates for design, frontend, backend, and QA work",
+      "icon": "code",
+      "defaultLineItems": [
+        { "name": "UI/UX Design", "description": "User interface and experience design", "price": 120, "unit": "hour", "quantity": 1 },
+        { "name": "Frontend Development", "description": "React/Vue/Angular implementation", "price": 100, "unit": "hour", "quantity": 1 },
+        { "name": "Backend Development", "description": "API and database development", "price": 110, "unit": "hour", "quantity": 1 },
+        { "name": "QA & Testing", "description": "Manual and automated testing", "price": 80, "unit": "hour", "quantity": 1 }
+      ]
+    },
+    {
+      "id": "marketing-campaign",
+      "name": "Marketing Campaign",
+      "description": "Social media, content, ads, and analytics",
+      "icon": "megaphone",
+      "defaultLineItems": [
+        { "name": "Social Media Management", "description": "Content creation and posting across platforms", "price": 1500, "unit": "month", "quantity": 1 },
+        { "name": "Content Marketing", "description": "Blog posts, articles, and copywriting", "price": 75, "unit": "hour", "quantity": 1 },
+        { "name": "PPC Advertising", "description": "Google Ads and social media campaigns", "price": 500, "unit": "month", "quantity": 1 },
+        { "name": "Analytics & Reporting", "description": "Performance tracking and insights", "price": 300, "unit": "month", "quantity": 1 }
+      ]
+    },
+    {
+      "id": "consulting",
+      "name": "Consulting",
+      "description": "Strategy, implementation, and review services",
+      "icon": "briefcase",
+      "defaultLineItems": [
+        { "name": "Strategy Session", "description": "Initial consultation and strategy development", "price": 250, "unit": "hour", "quantity": 1 },
+        { "name": "Implementation Support", "description": "Hands-on help executing the strategy", "price": 175, "unit": "hour", "quantity": 1 },
+        { "name": "Review & Optimization", "description": "Analysis and recommendations", "price": 200, "unit": "hour", "quantity": 1 }
+      ]
+    },
+    {
+      "id": "product-design",
+      "name": "Product Design",
+      "description": "Research, UX, visual design, and prototyping",
+      "icon": "paint-brush",
+      "defaultLineItems": [
+        { "name": "User Research", "description": "Interviews, surveys, and analysis", "price": 150, "unit": "hour", "quantity": 1 },
+        { "name": "UX Design", "description": "User flows, wireframes, and information architecture", "price": 130, "unit": "hour", "quantity": 1 },
+        { "name": "Visual Design", "description": "High-fidelity mockups and design system", "price": 140, "unit": "hour", "quantity": 1 },
+        { "name": "Prototyping", "description": "Interactive prototypes for testing", "price": 120, "unit": "hour", "quantity": 1 }
+      ]
+    }
+  ]
+}

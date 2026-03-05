@@ -1,0 +1,48 @@
+{
+  "templates": [
+    {
+      "id": "minimal",
+      "name": "Minimal",
+      "description": "Clean and simple layout",
+      "accentColor": "#6b7280",
+      "layout": "simple",
+      "showLogo": false,
+      "showBorder": false,
+      "headerStyle": "plain",
+      "itemsStyle": "plain"
+    },
+    {
+      "id": "modern",
+      "name": "Modern",
+      "description": "Contemporary design with accents",
+      "accentColor": "#dc2626",
+      "layout": "standard",
+      "showLogo": true,
+      "showBorder": true,
+      "headerStyle": "gradient",
+      "itemsStyle": "striped"
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "description": "Classic business layout",
+      "accentColor": "#1e40af",
+      "layout": "detailed",
+      "showLogo": true,
+      "showBorder": true,
+      "headerStyle": "boxed",
+      "itemsStyle": "bordered"
+    },
+    {
+      "id": "creative",
+      "name": "Creative",
+      "description": "Bold and colorful design",
+      "accentColor": "#8b5cf6",
+      "layout": "creative",
+      "showLogo": true,
+      "showBorder": false,
+      "headerStyle": "gradient",
+      "itemsStyle": "gradient-row"
+    }
+  ]
+}

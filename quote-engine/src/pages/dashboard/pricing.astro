@@ -1,0 +1,172 @@
+---
+import '../../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing - Quote Engine</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen bg-[#0a0a0f] text-white font-sans">
+    <div class="fixed inset-0 -z-10 bg-gradient-to-br from-[#0a0a0f] via-[#0f0f14] to-[#0a0a0f]"></div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#0c0c12]/80 backdrop-blur-xl border-b border-white/[0.06]">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/" class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-rose-600 rounded-lg"></div>
+          <span class="text-xl font-semibold">Quote Engine</span>
+        </a>
+        <nav class="flex items-center gap-6">
+          <a href="/dashboard" class="text-zinc-400 hover:text-white transition">Dashboard</a>
+          <a href="/dashboard/pricing" class="text-red-400 font-medium">Pricing</a>
+          <a href="/auth/signin" class="px-4 py-2 bg-white/[0.08] hover:bg-white/[0.12] rounded-xl transition text-sm">Sign In</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="pt-32 pb-20 px-6 relative z-10">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <h1 class="text-5xl font-bold mb-4">Simple, Transparent Pricing</h1>
+          <p class="text-xl text-zinc-400">Start free, upgrade when you need more</p>
+        </div>
+
+        <!-- Plans -->
+        <div class="grid md:grid-cols-3 gap-8 mb-16">
+          <!-- Free -->
+          <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8">
+            <div class="text-lg font-semibold text-zinc-400 mb-2">Starter</div>
+            <div class="mb-6">
+              <span class="text-4xl font-bold">€0</span>
+              <span class="text-zinc-500">/month</span>
+            </div>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-center gap-3 text-zinc-300">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                10 quotes/month
+              </li>
+              <li class="flex items-center gap-3 text-zinc-300">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                50 price items
+              </li>
+              <li class="flex items-center gap-3 text-zinc-300">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Basic rules
+              </li>
+              <li class="flex items-center gap-3 text-zinc-300">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                PDF export
+              </li>
+            </ul>
+            <button class="w-full py-3 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.1] rounded-xl font-medium transition">
+              Get Started
+            </button>
+          </div>
+
+          <!-- Pro (Featured) -->
+          <div class="bg-white/[0.05] border border-red-500/30 rounded-2xl p-8 relative">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-red-600 text-sm font-medium rounded-full">Most Popular</div>
+            <div class="text-lg font-semibold text-red-400 mb-2">Professional</div>
+            <div class="mb-6">
+              <span class="text-4xl font-bold">€29</span>
+              <span class="text-zinc-500">/month</span>
+            </div>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-center gap-3 text-white">
+                <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Unlimited quotes
+              </li>
+              <li class="flex items-center gap-3 text-white">
+                <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Unlimited price items
+              </li>
+              <li class="flex items-center gap-3 text-white">
+                <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Advanced rules engine
+              </li>
+              <li class="flex items-center gap-3 text-white">
+                <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Email to clients
+              </li>
+              <li class="flex items-center gap-3 text-white">
+                <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Client management
+              </li>
+              <li class="flex items-center gap-3 text-white">
+                <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Custom branding
+              </li>
+            </ul>
+            <button class="w-full py-3 bg-red-600 hover:bg-red-500 rounded-xl font-medium transition shadow-lg shadow-red-600/20">
+              Start Free Trial
+            </button>
+          </div>
+
+          <!-- Enterprise -->
+          <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8">
+            <div class="text-lg font-semibold text-zinc-400 mb-2">Business</div>
+            <div class="mb-6">
+              <span class="text-4xl font-bold">€99</span>
+              <span class="text-zinc-500">/month</span>
+            </div>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-center gap-3 text-zinc-300">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Everything in Pro
+              </li>
+              <li class="flex items-center gap-3 text-zinc-300">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Multiple users
+              </li>
+              <li class="flex items-center gap-3 text-zinc-300">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                API access
+              </li>
+              <li class="flex items-center gap-3 text-zinc-300">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Priority support
+              </li>
+              <li class="flex items-center gap-3 text-zinc-300">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Custom integrations
+              </li>
+            </ul>
+            <button class="w-full py-3 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.1] rounded-xl font-medium transition">
+              Contact Sales
+            </button>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="max-w-2xl mx-auto">
+          <h2 class="text-2xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+          <div class="space-y-4">
+            <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-6">
+              <h3 class="font-semibold mb-2">Can I cancel anytime?</h3>
+              <p class="text-zinc-400">Yes! Cancel your subscription anytime from your dashboard. No questions asked.</p>
+            </div>
+            <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-6">
+              <h3 class="font-semibold mb-2">Do you offer refunds?</h3>
+              <p class="text-zinc-400">We offer a 14-day money-back guarantee. If you're not satisfied, contact us for a full refund.</p>
+            </div>
+            <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-6">
+              <h3 class="font-semibold mb-2">What payment methods do you accept?</h3>
+              <p class="text-zinc-400">We accept all major credit cards, PayPal, and bank transfers for annual plans.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/[0.06] py-8 px-6">
+      <div class="max-w-6xl mx-auto text-center text-zinc-500">
+        <p>© 2026 Quote Engine. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
