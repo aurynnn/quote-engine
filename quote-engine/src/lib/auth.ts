@@ -1,6 +1,7 @@
 // Simple auth utilities
 import { connectDB, collections, ObjectId } from './mongodb';
-import { sign, verify } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
+const { sign, verify } = jwt;
 
 const JWT_SECRET = process.env.JWT_SECRET || 'quote-engine-secret-key-change-in-production';
 

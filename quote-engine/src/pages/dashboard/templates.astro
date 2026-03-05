@@ -56,7 +56,7 @@ const userId = '507f1f77bcf86cd799439011';
 
     <!-- Main Content -->
     <main class="ml-56 p-6">
-      <div class="max-w-5xl">
+      <div class="max-w-6xl">
         <!-- Header -->
         <div class="flex items-center justify-between mb-6">
           <div>
@@ -75,140 +75,287 @@ const userId = '507f1f77bcf86cd799439011';
           </div>
         </div>
 
+        <!-- Search Bar -->
+        <div class="relative mb-5">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+          <input 
+            type="text" 
+            id="search-input" 
+            placeholder="Search templates..." 
+            class="w-full pl-10 pr-10 py-2.5 bg-[#0c0c12] border border-white/[0.08] rounded-xl text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50 transition"
+            oninput="searchTemplates(this.value)"
+          />
+          <button id="clear-search" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded hover:bg-white/[0.1] transition">
+            <svg class="w-3 h-3 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+        </div>
+
         <!-- Category Tabs -->
-        <div class="flex gap-2 mb-6">
-          <button onclick="filterCategory('all')" class="cat-btn active px-4 py-2 rounded-lg bg-white/[0.08] text-white text-sm" data-cat="all">All</button>
-          <button onclick="filterCategory('business')" class="cat-btn px-3 py-1.5 rounded-lg bg-white/[0.04] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white" data-cat="business">💼 Business</button>
-          <button onclick="filterCategory('creative')" class="cat-btn px-3 py-1.5 rounded-lg bg-white/[0.04] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white" data-cat="creative">🎨 Creative</button>
-          <button onclick="filterCategory('technical')" class="cat-btn px-3 py-1.5 rounded-lg bg-white/[0.04] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white" data-cat="technical">⚙️ Technical</button>
+        <div class="flex flex-wrap gap-2 mb-6">
+          <button onclick="filterCategory('all')" class="cat-btn active px-4 py-2 rounded-lg bg-white/[0.08] text-white text-sm font-medium" data-cat="all">All</button>
+          <button onclick="filterCategory('business')" class="cat-btn px-3 py-1.5 rounded-lg bg-white/[0.04] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white transition" data-cat="business">
+            <span class="mr-1">💼</span>Business
+          </button>
+          <button onclick="filterCategory('creative')" class="cat-btn px-3 py-1.5 rounded-lg bg-white/[0.04] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white transition" data-cat="creative">
+            <span class="mr-1">🎨</span>Creative
+          </button>
+          <button onclick="filterCategory('technical')" class="cat-btn px-3 py-1.5 rounded-lg bg-white/[0.04] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white transition" data-cat="technical">
+            <span class="mr-1">⚙️</span>Technical
+          </button>
+          <button onclick="filterCategory('custom')" class="cat-btn px-3 py-1.5 rounded-lg bg-white/[0.04] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white transition" data-cat="custom">
+            <span class="mr-1">✨</span>My Templates
+          </button>
+        </div>
+
+        <!-- Results Info -->
+        <div id="results-info" class="text-sm text-zinc-500 mb-4 hidden">
+          Found <span id="results-count" class="text-white font-medium">0</span> templates
         </div>
 
         <!-- Templates Grid -->
-        <div id="templates-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div id="templates-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           <!-- Templates loaded via JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden flex-col items-center justify-center py-16 text-center">
+          <div class="w-20 h-20 rounded-2xl bg-white/[0.04] flex items-center justify-center mb-4">
+            <svg class="w-10 h-10 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">No templates found</h3>
+          <p id="empty-message" class="text-sm text-zinc-500 max-w-sm mb-5">Try adjusting your search or filters, or create a new template to get started.</p>
+          <button onclick="document.getElementById('create-modal').showModal()" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium text-sm transition flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+            Create Template
+          </button>
         </div>
       </div>
     </main>
 
     <!-- Template Preview Modal -->
-    <dialog id="preview-modal" class="p-0 rounded-2xl bg-[#0c0c12] border border-white/[0.1] shadow-2xl max-w-3xl w-full backdrop:bg-black/60">
+    <dialog id="preview-modal" class="p-0 rounded-2xl bg-[#0c0c12] border border-white/[0.1] shadow-2xl max-w-4xl w-full backdrop:bg-black/60">
       <div id="preview-content"></div>
     </dialog>
 
     <!-- Create Template Modal -->
-    <dialog id="create-modal" class="p-6 rounded-2xl bg-[#0c0c12] border border-white/[0.1] shadow-2xl max-w-2xl w-full backdrop:bg-black/60">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-semibold">Create New Template</h3>
-        <button onclick="document.getElementById('create-modal').close()" class="text-zinc-400 hover:text-white">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-        </button>
+    <dialog id="create-modal" class="p-0 rounded-2xl bg-[#0c0c12] border border-white/[0.1] shadow-2xl max-w-2xl w-full backdrop:bg-black/60">
+      <div class="p-5 border-b border-white/[0.06]">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-semibold">Create New Template</h3>
+          <button onclick="document.getElementById('create-modal').close()" class="text-zinc-400 hover:text-white">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+        </div>
       </div>
 
-      <!-- Creation Options -->
-      <div class="grid grid-cols-3 gap-3 mb-6">
-        <button onclick="showCreateOption('blank')" class="option-btn p-4 rounded-xl border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-center transition" data-option="blank">
-          <div class="text-2xl mb-2">📄</div>
-          <div class="text-sm font-medium">Start Fresh</div>
-          <div class="text-xs text-zinc-500">Create from scratch</div>
-        </button>
-        <button onclick="showCreateOption('ai')" class="option-btn p-4 rounded-xl border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-center transition" data-option="ai">
-          <div class="text-2xl mb-2">🤖</div>
-          <div class="text-sm font-medium">Generate with AI</div>
-          <div class="text-xs text-zinc-500">Describe your template</div>
-        </button>
-        <button onclick="showCreateOption('example')" class="option-btn p-4 rounded-xl border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-center transition" data-option="example">
-          <div class="text-2xl mb-2">📋</div>
-          <div class="text-sm font-medium">Use Example</div>
-          <div class="text-xs text-zinc-500">Based on templates</div>
-        </button>
-      </div>
+      <div class="p-5">
+        <!-- Creation Options -->
+        <div class="grid grid-cols-3 gap-3 mb-6">
+          <button onclick="showCreateOption('blank')" class="option-btn p-4 rounded-xl border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-center transition" data-option="blank">
+            <div class="text-2xl mb-2">📄</div>
+            <div class="text-sm font-medium">Start Fresh</div>
+            <div class="text-xs text-zinc-500">Create from scratch</div>
+          </button>
+          <button onclick="showCreateOption('ai')" class="option-btn p-4 rounded-xl border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-center transition" data-option="ai">
+            <div class="text-2xl mb-2">🤖</div>
+            <div class="text-sm font-medium">Generate with AI</div>
+            <div class="text-xs text-zinc-500">Describe your template</div>
+          </button>
+          <button onclick="showCreateOption('example')" class="option-btn p-4 rounded-xl border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-center transition" data-option="example">
+            <div class="text-2xl mb-2">📋</div>
+            <div class="text-sm font-medium">Use Example</div>
+            <div class="text-xs text-zinc-500">Based on templates</div>
+          </button>
+        </div>
 
-      <!-- Blank Form -->
-      <div id="blank-form" class="space-y-4 hidden">
-        <div>
-          <label class="text-sm text-zinc-400 block mb-1">Template Name</label>
-          <input type="text" id="template-name" placeholder="My Template" class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white" />
-        </div>
-        <div>
-          <label class="text-sm text-zinc-400 block mb-1">Category</label>
-          <select id="template-category" class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white">
-            <option value="business">💼 Business</option>
-            <option value="creative">🎨 Creative</option>
-            <option value="technical">⚙️ Technical</option>
-          </select>
-        </div>
-        <div>
-          <label class="text-sm text-zinc-400 block mb-1">Accent Color</label>
-          <div class="flex gap-2">
-            <button type="button" onclick="selectColor('#dc2626')" class="color-btn w-8 h-8 rounded-lg bg-red-600 border-2 border-transparent" data-color="#dc2626"></button>
-            <button type="button" onclick="selectColor('#6b7280')" class="color-btn w-8 h-8 rounded-lg bg-gray-500 border-2 border-transparent" data-color="#6b7280"></button>
-            <button type="button" onclick="selectColor('#1e40af')" class="color-btn w-8 h-8 rounded-lg bg-blue-700 border-2 border-transparent" data-color="#1e40af"></button>
-            <button type="button" onclick="selectColor('#8b5cf6')" class="color-btn w-8 h-8 rounded-lg bg-purple-600 border-2 border-transparent" data-color="#8b5cf6"></button>
-            <button type="button" onclick="selectColor('#059669')" class="color-btn w-8 h-8 rounded-lg bg-emerald-600 border-2 border-transparent" data-color="#059669"></button>
-            <button type="button" onclick="selectColor('#d97706')" class="color-btn w-8 h-8 rounded-lg bg-amber-600 border-2 border-transparent" data-color="#d97706"></button>
+        <!-- Blank Form -->
+        <div id="blank-form" class="space-y-4 hidden">
+          <div>
+            <label class="text-sm text-zinc-400 block mb-1.5">Template Name</label>
+            <input type="text" id="template-name" placeholder="My Template" class="w-full px-3 py-2.5 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-red-500/50" />
           </div>
+          <div>
+            <label class="text-sm text-zinc-400 block mb-1.5">Category</label>
+            <select id="template-category" class="w-full px-3 py-2.5 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white focus:outline-none focus:border-red-500/50">
+              <option value="business">💼 Business</option>
+              <option value="creative">🎨 Creative</option>
+              <option value="technical">⚙️ Technical</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-sm text-zinc-400 block mb-1.5">Accent Color</label>
+            <div class="flex gap-2">
+              <button type="button" onclick="selectColor('#dc2626')" class="color-btn w-8 h-8 rounded-lg bg-red-600 border-2 border-transparent hover:scale-110 transition" data-color="#dc2626"></button>
+              <button type="button" onclick="selectColor('#6b7280')" class="color-btn w-8 h-8 rounded-lg bg-gray-500 border-2 border-transparent hover:scale-110 transition" data-color="#6b7280"></button>
+              <button type="button" onclick="selectColor('#1e40af')" class="color-btn w-8 h-8 rounded-lg bg-blue-700 border-2 border-transparent hover:scale-110 transition" data-color="#1e40af"></button>
+              <button type="button" onclick="selectColor('#8b5cf6')" class="color-btn w-8 h-8 rounded-lg bg-purple-600 border-2 border-transparent hover:scale-110 transition" data-color="#8b5cf6"></button>
+              <button type="button" onclick="selectColor('#059669')" class="color-btn w-8 h-8 rounded-lg bg-emerald-600 border-2 border-transparent hover:scale-110 transition" data-color="#059669"></button>
+              <button type="button" onclick="selectColor('#d97706')" class="color-btn w-8 h-8 rounded-lg bg-amber-600 border-2 border-transparent hover:scale-110 transition" data-color="#d97706"></button>
+              <button type="button" onclick="selectColor('#ec4899')" class="color-btn w-8 h-8 rounded-lg bg-pink-600 border-2 border-transparent hover:scale-110 transition" data-color="#ec4899"></button>
+              <button type="button" onclick="selectColor('#14b8a6')" class="color-btn w-8 h-8 rounded-lg bg-teal-600 border-2 border-transparent hover:scale-110 transition" data-color="#14b8a6"></button>
+            </div>
+          </div>
+          <button onclick="saveTemplate()" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium transition">Save Template</button>
         </div>
-        <button onclick="saveTemplate()" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium">Save Template</button>
-      </div>
 
-      <!-- AI Form -->
-      <div id="ai-form" class="space-y-4 hidden">
-        <div>
-          <label class="text-sm text-zinc-400 block mb-1">Describe your template</label>
-          <textarea id="ai-prompt" rows="4" placeholder="Create a modern, clean template for consulting proposals with a blue accent color..." class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white resize-none"></textarea>
+        <!-- AI Form -->
+        <div id="ai-form" class="space-y-4 hidden">
+          <div>
+            <label class="text-sm text-zinc-400 block mb-1.5">Describe your template</label>
+            <textarea id="ai-prompt" rows="4" placeholder="Create a modern, clean template for consulting proposals with a blue accent color..." class="w-full px-3 py-2.5 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white placeholder-zinc-600 resize-none focus:outline-none focus:border-red-500/50"></textarea>
+          </div>
+          <button onclick="generateWithAI()" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium flex items-center justify-center gap-2 transition">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            Generate Template
+          </button>
         </div>
-        <button onclick="generateWithAI()" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium flex items-center justify-center gap-2">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-          Generate Template
-        </button>
-      </div>
 
-      <!-- Example Templates -->
-      <div id="example-form" class="hidden">
-        <p class="text-sm text-zinc-400 mb-3">Choose an example to start with:</p>
-        <div class="grid grid-cols-2 gap-3">
-          <button onclick="useExample('modern-business')" class="p-3 rounded-lg border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-left transition">
-            <div class="font-medium text-sm">✨ Modern Business</div>
-            <div class="text-xs text-zinc-500">Clean, professional for consulting</div>
-          </button>
-          <button onclick="useExample('minimal')" class="p-3 rounded-lg border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-left transition">
-            <div class="font-medium text-sm">📄 Minimal</div>
-            <div class="text-xs text-zinc-500">Ultra-clean, content-focused</div>
-          </button>
-          <button onclick="useExample('corporate')" class="p-3 rounded-lg border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-left transition">
-            <div class="font-medium text-sm">🏢 Corporate</div>
-            <div class="text-xs text-zinc-500">Formal, enterprise design</div>
-          </button>
-          <button onclick="useExample('creative')" class="p-3 rounded-lg border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-left transition">
-            <div class="font-medium text-sm">🎨 Creative</div>
-            <div class="text-xs text-zinc-500">Bold, colorful for agencies</div>
-          </button>
-          <button onclick="useExample('technical')" class="p-3 rounded-lg border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-left transition">
-            <div class="font-medium text-sm">⚙️ Technical</div>
-            <div class="text-xs text-zinc-500">Detailed specs & timelines</div>
-          </button>
-          <button onclick="useExample('proposal')" class="p-3 rounded-lg border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.02] text-left transition">
-            <div class="font-medium text-sm">📝 Proposal</div>
-            <div class="text-xs text-zinc-500">Standard proposal layout</div>
-          </button>
+        <!-- Example Templates -->
+        <div id="example-form" class="hidden">
+          <p class="text-sm text-zinc-400 mb-3">Choose an example to start with:</p>
+          <div class="grid grid-cols-2 gap-3">
+            <button onclick="useExample('modern-business')" class="p-3 rounded-lg border border-white/[0.1] hover:border-red-500/30 hover:bg-red-600/5 text-left transition group">
+              <div class="font-medium text-sm text-white group-hover:text-red-400">✨ Modern Business</div>
+              <div class="text-xs text-zinc-500">Clean, professional for consulting</div>
+            </button>
+            <button onclick="useExample('minimal')" class="p-3 rounded-lg border border-white/[0.1] hover:border-red-500/30 hover:bg-red-600/5 text-left transition group">
+              <div class="font-medium text-sm text-white group-hover:text-red-400">📄 Minimal</div>
+              <div class="text-xs text-zinc-500">Ultra-clean, content-focused</div>
+            </button>
+            <button onclick="useExample('corporate')" class="p-3 rounded-lg border border-white/[0.1] hover:border-red-500/30 hover:bg-red-600/5 text-left transition group">
+              <div class="font-medium text-sm text-white group-hover:text-red-400">🏢 Corporate</div>
+              <div class="text-xs text-zinc-500">Formal, enterprise design</div>
+            </button>
+            <button onclick="useExample('creative')" class="p-3 rounded-lg border border-white/[0.1] hover:border-red-500/30 hover:bg-red-600/5 text-left transition group">
+              <div class="font-medium text-sm text-white group-hover:text-red-400">🎨 Creative</div>
+              <div class="text-xs text-zinc-500">Bold, colorful for agencies</div>
+            </button>
+            <button onclick="useExample('technical')" class="p-3 rounded-lg border border-white/[0.1] hover:border-red-500/30 hover:bg-red-600/5 text-left transition group">
+              <div class="font-medium text-sm text-white group-hover:text-red-400">⚙️ Technical</div>
+              <div class="text-xs text-zinc-500">Detailed specs & timelines</div>
+            </button>
+            <button onclick="useExample('proposal')" class="p-3 rounded-lg border border-white/[0.1] hover:border-red-500/30 hover:bg-red-600/5 text-left transition group">
+              <div class="font-medium text-sm text-white group-hover:text-red-400">📝 Proposal</div>
+              <div class="text-xs text-zinc-500">Standard proposal layout</div>
+            </button>
+          </div>
         </div>
       </div>
     </dialog>
 
+    <!-- Customize Template Modal -->
+    <dialog id="customize-modal" class="p-0 rounded-2xl bg-[#0c0c12] border border-white/[0.1] shadow-2xl max-w-md w-full backdrop:bg-black/60">
+      <div class="p-5 border-b border-white/[0.06]">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-semibold">Customize Template</h3>
+          <button onclick="document.getElementById('customize-modal').close()" class="text-zinc-400 hover:text-white">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+        </div>
+      </div>
+      <div class="p-5 space-y-4">
+        <div>
+          <label class="text-sm text-zinc-400 block mb-1.5">Template Name</label>
+          <input type="text" id="customize-name" class="w-full px-3 py-2.5 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white focus:outline-none focus:border-red-500/50" />
+        </div>
+        <div>
+          <label class="text-sm text-zinc-400 block mb-1.5">Description</label>
+          <input type="text" id="customize-description" class="w-full px-3 py-2.5 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white focus:outline-none focus:border-red-500/50" />
+        </div>
+        <div>
+          <label class="text-sm text-zinc-400 block mb-1.5">Accent Color</label>
+          <div class="flex gap-2 flex-wrap" id="customize-colors">
+            <button type="button" onclick="selectCustomizeColor('#dc2626')" class="customize-color-btn w-8 h-8 rounded-lg bg-red-600 border-2 border-transparent" data-color="#dc2626"></button>
+            <button type="button" onclick="selectCustomizeColor('#6b7280')" class="customize-color-btn w-8 h-8 rounded-lg bg-gray-500 border-2 border-transparent" data-color="#6b7280"></button>
+            <button type="button" onclick="selectCustomizeColor('#1e40af')" class="customize-color-btn w-8 h-8 rounded-lg bg-blue-700 border-2 border-transparent" data-color="#1e40af"></button>
+            <button type="button" onclick="selectCustomizeColor('#8b5cf6')" class="customize-color-btn w-8 h-8 rounded-lg bg-purple-600 border-2 border-transparent" data-color="#8b5cf6"></button>
+            <button type="button" onclick="selectCustomizeColor('#059669')" class="customize-color-btn w-8 h-8 rounded-lg bg-emerald-600 border-2 border-transparent" data-color="#059669"></button>
+            <button type="button" onclick="selectCustomizeColor('#d97706')" class="customize-color-btn w-8 h-8 rounded-lg bg-amber-600 border-2 border-transparent" data-color="#d97706"></button>
+          </div>
+        </div>
+        <button onclick="saveCustomization()" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium transition">Save Changes</button>
+      </div>
+    </dialog>
+
     <script define:vars={{ userId }}>
-      // Default templates
+      // Default templates with visual configurations
       const defaultTemplates = [
-        { id: 'modern-business', name: 'Modern Business', category: 'business', accentColor: '#dc2626', description: 'Clean, professional design perfect for consulting and services', icon: '💼' },
-        { id: 'minimal', name: 'Minimal', category: 'business', accentColor: '#6b7280', description: 'Ultra-clean, minimal design focusing on content and clarity', icon: '📄' },
-        { id: 'corporate', name: 'Corporate', category: 'business', accentColor: '#1e40af', description: 'Traditional corporate design for enterprise and legal services', icon: '🏢' },
-        { id: 'creative', name: 'Creative Agency', category: 'creative', accentColor: '#8b5cf6', description: 'Bold, colorful design for creative professionals and agencies', icon: '🎨' },
-        { id: 'technical', name: 'Technical', category: 'technical', accentColor: '#059669', description: 'Detailed technical proposal with specifications and timelines', icon: '⚙️' },
-        { id: 'proposal', name: 'Standard Proposal', category: 'business', accentColor: '#d97706', description: 'Standard proposal layout for any business', icon: '📝' }
+        { 
+          id: 'modern-business', 
+          name: 'Modern Business', 
+          category: 'business', 
+          accentColor: '#dc2626', 
+          description: 'Clean, professional design perfect for consulting and services', 
+          icon: '💼',
+          layout: 'modern'
+        },
+        { 
+          id: 'minimal', 
+          name: 'Minimal', 
+          category: 'business', 
+          accentColor: '#6b7280', 
+          description: 'Ultra-clean, minimal design focusing on content and clarity', 
+          icon: '📄',
+          layout: 'minimal'
+        },
+        { 
+          id: 'corporate', 
+          name: 'Corporate', 
+          category: 'business', 
+          accentColor: '#1e40af', 
+          description: 'Traditional corporate design for enterprise and legal services', 
+          icon: '🏢',
+          layout: 'classic'
+        },
+        { 
+          id: 'creative', 
+          name: 'Creative Agency', 
+          category: 'creative', 
+          accentColor: '#8b5cf6', 
+          description: 'Bold, colorful design for creative professionals and agencies', 
+          icon: '🎨',
+          layout: 'bold'
+        },
+        { 
+          id: 'technical', 
+          name: 'Technical', 
+          category: 'technical', 
+          accentColor: '#059669', 
+          description: 'Detailed technical proposal with specifications and timelines', 
+          icon: '⚙️',
+          layout: 'technical'
+        },
+        { 
+          id: 'proposal', 
+          name: 'Standard Proposal', 
+          category: 'business', 
+          accentColor: '#d97706', 
+          description: 'Standard proposal layout for any business', 
+          icon: '📝',
+          layout: 'standard'
+        }
       ];
 
       let templates = [];
       let selectedColor = '#dc2626';
       let currentFilter = 'all';
+      let searchQuery = '';
+      let editingTemplateId = null;
+
+      // Sample content for preview
+      const sampleContent = {
+        quoteNumber: 'QT-001234',
+        clientName: 'Acme Corporation',
+        clientEmail: 'john@acme.com',
+        date: new Date().toLocaleDateString(),
+        items: [
+          { description: 'Web Development', qty: 10, price: 100 },
+          { description: 'UI/UX Design', qty: 5, price: 85 }
+        ],
+        subtotal: 1425,
+        tax: 299.25,
+        total: 1724.25
+      };
 
       // Load templates
       function loadTemplates() {
@@ -220,29 +367,94 @@ const userId = '507f1f77bcf86cd799439011';
 
       function renderTemplates() {
         const grid = document.getElementById('templates-grid');
-        const filtered = currentFilter === 'all' 
-          ? templates 
-          : templates.filter(t => t.category === currentFilter);
+        const emptyState = document.getElementById('empty-state');
+        const resultsInfo = document.getElementById('results-info');
         
-        grid.innerHTML = filtered.map(t => `
-          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl p-4 hover:border-white/[0.12] transition group">
-            <div class="flex items-start justify-between mb-3">
-              <div class="text-2xl">${t.icon || '📄'}</div>
-              <button onclick="deleteTemplate('${t.id}')" class="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-white/[0.1] transition">
-                <svg class="w-4 h-4 text-zinc-500 hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-              </button>
-            </div>
-            <h3 class="font-semibold text-white mb-1">${t.name}</h3>
-            <p class="text-xs text-zinc-500 mb-3">${t.description}</p>
-            <div class="flex items-center justify-between">
-              <span class="text-xs px-2 py-1 rounded bg-white/[0.05] text-zinc-400">${t.category}</span>
+        let filtered = templates;
+        
+        // Apply category filter
+        if (currentFilter === 'custom') {
+          filtered = filtered.filter(t => t.isCustom);
+        } else if (currentFilter !== 'all') {
+          filtered = filtered.filter(t => t.category === currentFilter);
+        }
+        
+        // Apply search
+        if (searchQuery) {
+          const query = searchQuery.toLowerCase();
+          filtered = filtered.filter(t => 
+            t.name.toLowerCase().includes(query) || 
+            t.description.toLowerCase().includes(query) ||
+            t.category.toLowerCase().includes(query)
+          );
+        }
+        
+        // Update results info
+        if (searchQuery || currentFilter !== 'all') {
+          resultsInfo.classList.remove('hidden');
+          document.getElementById('results-count').textContent = filtered.length;
+        } else {
+          resultsInfo.classList.add('hidden');
+        }
+        
+        if (filtered.length === 0) {
+          grid.innerHTML = '';
+          grid.classList.add('hidden');
+          emptyState.classList.remove('hidden');
+          emptyState.classList.add('flex');
+          
+          // Update empty message based on context
+          const emptyMsg = document.getElementById('empty-message');
+          if (searchQuery) {
+            emptyMsg.textContent = `No templates match "${searchQuery}". Try a different search term.`;
+          } else if (currentFilter === 'custom') {
+            emptyMsg.textContent = "You haven't created any custom templates yet. Start fresh or use an example!";
+          } else {
+            emptyMsg.textContent = "No templates found. Try adjusting your filters or create a new template.";
+          }
+          return;
+        }
+        
+        // Hide empty state, show grid
+        emptyState.classList.add('hidden');
+        emptyState.classList.remove('flex');
+        grid.classList.remove('hidden');
+        
+        // Render template cards with mini previews
+        grid.innerHTML = filtered.map(t => {
+          const accent = t.accentColor || '#dc2626';
+          return `
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl overflow-hidden hover:border-white/[0.12] transition group">
+            <!-- Mini Preview Header -->
+            <div class="h-24 px-4 pt-3 flex items-end justify-between" style="background: linear-gradient(135deg, ${accent}20 0%, #0c0c12 100%);">
               <div class="flex items-center gap-2">
-                <button onclick="previewTemplate('${t.id}')" class="text-xs text-red-400 hover:text-red-300">Preview →</button>
-                <div class="w-4 h-4 rounded" style="background-color: ${t.accentColor}"></div>
+                <div class="w-8 h-8 rounded-lg flex items-center justify-center text-lg" style="background: ${accent}">${t.icon || '📄'}</div>
+                ${t.isCustom ? '<span class="text-xs px-1.5 py-0.5 rounded bg-white/[0.08] text-zinc-400">Custom</span>' : ''}
+              </div>
+              <div class="flex gap-1 opacity-0 group-hover:opacity-100 transition">
+                <button onclick="event.stopPropagation(); customizeTemplate('${t.id}')" class="p-1.5 rounded-lg bg-white/[0.1] hover:bg-white/[0.2]" title="Customize">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /></svg>
+                </button>
+                ${t.isCustom ? `<button onclick="event.stopPropagation(); deleteTemplate('${t.id}')" class="p-1.5 rounded-lg bg-white/[0.1] hover:bg-red-600/20" title="Delete">
+                  <svg class="w-3.5 h-3.5 text-zinc-400 hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                </button>` : ''}
+              </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="p-4">
+              <h3 class="font-semibold text-white mb-1">${t.name}</h3>
+              <p class="text-xs text-zinc-500 mb-3 line-clamp-2">${t.description}</p>
+              <div class="flex items-center justify-between">
+                <span class="text-xs px-2 py-1 rounded bg-white/[0.05] text-zinc-400 capitalize">${t.category}</span>
+                <div class="flex items-center gap-2">
+                  <button onclick="previewTemplate('${t.id}')" class="text-xs text-red-400 hover:text-red-300 font-medium">Preview</button>
+                  <div class="w-3 h-3 rounded-full" style="background-color: ${accent}"></div>
+                </div>
               </div>
             </div>
           </div>
-        `).join('');
+        `}).join('');
       }
 
       function previewTemplate(id) {
@@ -264,17 +476,17 @@ const userId = '507f1f77bcf86cd799439011';
             </button>
           </div>
           
-          <!-- Preview Container - Shows what the quote would look like -->
+          <!-- Preview Container -->
           <div class="p-6 bg-white">
-            <div style="border: 2px solid ${accent}; border-radius: 8px; padding: 24px; background: #fff; max-width: 500px; margin: 0 auto;">
+            <div style="border: 2px solid ${accent}; border-radius: 8px; padding: 24px; background: #fff; max-width: 500px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
               <!-- Header -->
               <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #e5e7eb;">
                 <div>
                   <h1 style="font-size: 24px; font-weight: bold; color: ${accent}; margin: 0;">QUOTE</h1>
-                  <p style="color: #6b7280; font-size: 14px; margin: 4px 0 0;">#QT-001234</p>
+                  <p style="color: #6b7280; font-size: 14px; margin: 4px 0 0;">#${sampleContent.quoteNumber}</p>
                 </div>
                 <div style="text-align: right; font-size: 12px; color: #6b7280;">
-                  <p>Date: ${new Date().toLocaleDateString()}</p>
+                  <p>Date: ${sampleContent.date}</p>
                   <p>Valid for 30 days</p>
                 </div>
               </div>
@@ -282,44 +494,40 @@ const userId = '507f1f77bcf86cd799439011';
               <!-- Client Info -->
               <div style="margin-bottom: 20px;">
                 <p style="font-size: 12px; color: #9ca3af; margin: 0 0 4px;">Prepared for:</p>
-                <p style="font-weight: 600; color: #111; margin: 0;">Acme Corporation</p>
-                <p style="font-size: 14px; color: #6b7280; margin: 4px 0 0;">john@acme.com</p>
+                <p style="font-weight: 600; color: #111; margin: 0;">${sampleContent.clientName}</p>
+                <p style="font-size: 14px; color: #6b7280; margin: 4px 0 0;">${sampleContent.clientEmail}</p>
               </div>
               
               <!-- Items Table -->
               <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
                 <thead>
                   <tr style="background: ${accent};">
-                    <th style="padding: 10px; text-align: left; color: white; font-size: 12px;">Description</th>
+                    <th style="padding: 10px; text-align: left; font-size:; color: white 12px;">Description</th>
                     <th style="padding: 10px; text-align: center; color: white; font-size: 12px;">Qty</th>
                     <th style="padding: 10px; text-align: right; color: white; font-size: 12px;">Price</th>
                     <th style="padding: 10px; text-align: right; color: white; font-size: 12px;">Total</th>
                   </tr>
                 </thead>
                 <tbody>
+                  ${sampleContent.items.map(item => `
                   <tr style="border-bottom: 1px solid #e5e7eb;">
-                    <td style="padding: 10px; font-size: 14px; color: #111;">Web Development</td>
-                    <td style="padding: 10px; text-align: center; font-size: 14px; color: #111;">10</td>
-                    <td style="padding: 10px; text-align: right; font-size: 14px; color: #111;">€100</td>
-                    <td style="padding: 10px; text-align: right; font-size: 14px; color: #111;">€1,000</td>
+                    <td style="padding: 10px; font-size: 14px; color: #111;">${item.description}</td>
+                    <td style="padding: 10px; text-align: center; font-size: 14px; color: #111;">${item.qty}</td>
+                    <td style="padding: 10px; text-align: right; font-size: 14px; color: #111;">€${item.price}</td>
+                    <td style="padding: 10px; text-align: right; font-size: 14px; color: #111;">€${item.qty * item.price}</td>
                   </tr>
-                  <tr style="border-bottom: 1px solid #e5e7eb;">
-                    <td style="padding: 10px; font-size: 14px; color: #111;">UI/UX Design</td>
-                    <td style="padding: 10px; text-align: center; font-size: 14px; color: #111;">5</td>
-                    <td style="padding: 10px; text-align: right; font-size: 14px; color: #111;">€85</td>
-                    <td style="padding: 10px; text-align: right; font-size: 14px; color: #111;">€425</td>
-                  </tr>
+                  `).join('')}
                 </tbody>
               </table>
               
               <!-- Totals -->
               <div style="text-align: right; margin-bottom: 20px;">
-                <p style="margin: 4px 0; color: #6b7280; font-size: 14px;">Subtotal: <span style="color: #111;">€1,425</span></p>
-                <p style="margin: 4px 0; color: #6b7280; font-size: 14px;">Tax (21%): <span style="color: #111;">€299.25</span></p>
-                <p style="margin: 8px 0 0; font-size: 18px; font-weight: bold; color: ${accent};">Total: €1,724.25</p>
-              </div>
+                <p style="margin: 4px 0; color: #6b7280; font-size: 14px;">Subtotal: <span style="color: #111;">€${sampleContent.subtotal}</span></p>
+                <p style="margin: 4px 0; color: #6b7280; font-size: 14px;">Tax (21%): <span style="color: #111;">€${sampleContent.tax.toFixed(2)}</span></p>
+                <p style="margin: 8px 0 0; font-size: 18px; font-weight: bold; color: ${accent};">Total: €${sampleContent.total.toFixed(2)}</p>
+               <!-- Footer -->
+             </div>
               
-              <!-- Footer -->
               <div style="padding-top: 16px; border-top: 1px solid #e5e7eb; font-size: 12px; color: #9ca3af;">
                 <p style="margin: 0;">Payment terms: Net 30 days</p>
                 <p style="margin: 4px 0 0;">Thank you for your business!</p>
@@ -329,9 +537,12 @@ const userId = '507f1f77bcf86cd799439011';
           
           <!-- Actions -->
           <div class="p-4 border-t border-white/[0.1] flex gap-3">
-            <button onclick="selectTemplate('${template.id}'); document.getElementById('preview-modal').close()" class="flex-1 py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium">
+            <button onclick="selectTemplate('${template.id}'); document.getElementById('preview-modal').close()" class="flex-1 py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium transition">
               Use This Template
             </button>
+            ${template.isCustom ? `<button onclick="customizeTemplate('${template.id}'); document.getElementById('preview-modal').close()" class="px-4 py-2.5 border border-white/[0.1] rounded-lg text-zinc-400 hover:text-white transition">
+              Edit
+            </button>` : ''}
             <button onclick="document.getElementById('preview-modal').close()" class="px-4 py-2.5 border border-white/[0.1] rounded-lg text-zinc-400 hover:text-white">
               Close
             </button>
@@ -343,29 +554,84 @@ const userId = '507f1f77bcf86cd799439011';
 
       function selectTemplate(id) {
         localStorage.setItem('selectedTemplate', id);
-        // Update setup state if in flow
         const setup = localStorage.getItem('setupState');
         if (setup) {
           const state = JSON.parse(setup);
           state.template = true;
           localStorage.setItem('setupState', JSON.stringify(state));
         }
-        // Mark the setup step as done
         if (typeof markStepDone === 'function') {
           markStepDone('template');
         }
-        // Show success
         alert('Template selected! You can now create quotes with this template.');
+      }
+
+      function customizeTemplate(id) {
+        const template = templates.find(t => t.id === id);
+        if (!template) return;
+        
+        editingTemplateId = id;
+        document.getElementById('customize-name').value = template.name;
+        document.getElementById('customize-description').value = template.description || '';
+        
+        // Set current color
+        document.querySelectorAll('.customize-color-btn').forEach(btn => {
+          btn.style.borderColor = btn.dataset.color === template.accentColor ? 'white' : 'transparent';
+        });
+        
+        document.getElementById('customize-modal').showModal();
+      }
+
+      function selectCustomizeColor(color) {
+        document.querySelectorAll('.customize-color-btn').forEach(btn => {
+          btn.style.borderColor = btn.dataset.color === color ? 'white' : 'transparent';
+        });
+      }
+
+      function saveCustomization() {
+        const name = document.getElementById('customize-name').value;
+        const description = document.getElementById('customize-description').value;
+        const colorBtn = document.querySelector('.customize-color-btn[style*="white"]');
+        const color = colorBtn ? colorBtn.dataset.color : '#dc2626';
+        
+        if (!name) return alert('Please enter a template name');
+        
+        const saved = localStorage.getItem('quoteTemplates');
+        let userTemplates = saved ? JSON.parse(saved) : [];
+        
+        const idx = userTemplates.findIndex(t => t.id === editingTemplateId);
+        if (idx !== -1) {
+          userTemplates[idx] = { ...userTemplates[idx], name, description, accentColor: color };
+          localStorage.setItem('quoteTemplates', JSON.stringify(userTemplates));
+        }
+        
+        document.getElementById('customize-modal').close();
+        loadTemplates();
       }
 
       function filterCategory(cat) {
         currentFilter = cat;
         document.querySelectorAll('.cat-btn').forEach(btn => {
-          btn.classList.toggle('bg-white/[0.08]', btn.dataset.cat === cat);
-          btn.classList.toggle('text-white', btn.dataset.cat === cat);
-          btn.classList.toggle('bg-white/[0.04]', btn.dataset.cat !== cat);
-          btn.classList.toggle('text-zinc-400', btn.dataset.cat !== cat);
+          const isActive = btn.dataset.cat === cat;
+          btn.classList.toggle('bg-white/[0.08]', isActive);
+          btn.classList.toggle('text-white', isActive);
+          btn.classList.toggle('bg-white/[0.04]', !isActive);
+          btn.classList.toggle('text-zinc-400', !isActive);
         });
+        renderTemplates();
+      }
+
+      function searchTemplates(query) {
+        searchQuery = query;
+        const clearBtn = document.getElementById('clear-search');
+        clearBtn.classList.toggle('hidden', !query);
+        renderTemplates();
+      }
+
+      function clearSearch() {
+        document.getElementById('search-input').value = '';
+        searchQuery = '';
+        document.getElementById('clear-search').classList.add('hidden');
         renderTemplates();
       }
 
@@ -405,6 +671,9 @@ const userId = '507f1f77bcf86cd799439011';
         localStorage.setItem('quoteTemplates', JSON.stringify(userTemplates));
         
         document.getElementById('create-modal').close();
+        // Reset form
+        document.getElementById('template-name').value = '';
+        document.getElementById('ai-prompt').value = '';
         loadTemplates();
       }
 
@@ -431,7 +700,6 @@ const userId = '507f1f77bcf86cd799439011';
         const prompt = document.getElementById('ai-prompt').value;
         if (!prompt) return alert('Please describe your template');
         
-        // Simulate AI generation (in real app, call LLM)
         const newTemplate = {
           id: 'ai-' + Date.now(),
           name: 'AI Generated',
@@ -448,6 +716,7 @@ const userId = '507f1f77bcf86cd799439011';
         localStorage.setItem('quoteTemplates', JSON.stringify(userTemplates));
         
         document.getElementById('create-modal').close();
+        document.getElementById('ai-prompt').value = '';
         loadTemplates();
       }
 

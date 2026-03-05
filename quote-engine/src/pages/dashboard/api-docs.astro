@@ -1,0 +1,381 @@
+---
+import '../../styles/global.css';
+
+const userId = '507f1f77bcf86cd799439011';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Docs - Quote Engine</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen bg-[#0a0a0f] text-white font-sans">
+    <div class="fixed inset-0 -z-10 bg-[#0a0a0f]"></div>
+
+    <aside class="fixed left-0 top-0 bottom-0 w-56 bg-[#0c0c12] border-r border-white/[0.06] p-4 z-20 overflow-y-auto">
+      <a href="/" class="flex items-center gap-3 mb-6 px-2">
+        <div class="w-7 h-7 bg-red-600 rounded-lg"></div>
+        <span class="text-lg font-semibold">Quote Engine</span>
+      </a>
+      
+      <nav class="space-y-1">
+        <a href="/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+          Dashboard
+        </a>
+        <a href="/dashboard/quotes" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          Quotes
+        </a>
+        <a href="/dashboard/templates" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" /></svg>
+          Templates
+        </a>
+        <a href="/dashboard/prices" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          Prices
+        </a>
+        <a href="/dashboard/rules" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          Rules
+        </a>
+        <a href="/dashboard/settings" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m-6-4a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
+          Settings
+        </a>
+        
+        <div class="pt-4 pb-2">
+          <div class="px-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">Developer</div>
+        </div>
+        <a href="/dashboard/api-docs" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-red-600/20 text-red-400 font-medium text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+          API Documentation
+        </a>
+      </nav>
+    </aside>
+
+    <main class="ml-56 p-6">
+      <div class="max-w-6xl">
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <h1 class="text-2xl font-bold text-white">API Documentation</h1>
+            <p class="text-sm text-zinc-500">Build custom integrations with Quote Engine</p>
+          </div>
+          <span class="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-xs rounded">v1.0</span>
+        </div>
+
+        <div class="mb-8 p-4 bg-[#0c0c12] border border-white/[0.06] rounded-xl">
+          <h2 class="text-sm font-semibold text-white mb-3">Quick Navigation</h2>
+          <div class="grid grid-cols-3 md:grid-cols-6 gap-2 text-sm">
+            <a href="#authentication" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] text-zinc-400 hover:text-white transition">
+              <span class="w-5 h-5 rounded bg-red-600/20 text-red-400 flex items-center justify-center text-xs">1</span> Auth
+            </a>
+            <a href="#endpoints" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] text-zinc-400 hover:text-white transition">
+              <span class="w-5 h-5 rounded bg-red-600/20 text-red-400 flex items-center justify-center text-xs">2</span> Endpoints
+            </a>
+            <a href="#examples" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] text-zinc-400 hover:text-white transition">
+              <span class="w-5 h-5 rounded bg-red-600/20 text-red-400 flex items-center justify-center text-xs">3</span> Examples
+            </a>
+            <a href="#rate-limits" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] text-zinc-400 hover:text-white transition">
+              <span class="w-5 h-5 rounded bg-red-600/20 text-red-400 flex items-center justify-center text-xs">4</span> Limits
+            </a>
+            <a href="#webhooks" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] text-zinc-400 hover:text-white transition">
+              <span class="w-5 h-5 rounded bg-red-600/20 text-red-400 flex items-center justify-center text-xs">5</span> Webhooks
+            </a>
+            <a href="#try-it" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] hover:bg-white/[0.06] text-zinc-400 hover:text-white transition">
+              <span class="w-5 h-5 rounded bg-red-600/20 text-red-400 flex items-center justify-center text-xs">6</span> Try It
+            </a>
+          </div>
+        </div>
+
+        <!-- Authentication -->
+        <section id="authentication" class="mb-10">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-sm font-bold">1</span>
+            <h2 class="text-xl font-bold text-white">Authentication</h2>
+          </div>
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl p-5">
+            <p class="text-zinc-400 mb-4">Quote Engine uses <strong class="text-white">userId</strong> for authentication. Include your user ID in every API request.</p>
+            <div class="bg-[#0a0a0f] border border-white/[0.08] rounded-lg p-4">
+              <p class="text-sm text-zinc-500 mb-3">Your userId acts as your API key:</p>
+              <code class="text-sm text-emerald-400">userId = "507f1f77bcf86cd799439011"</code>
+            </div>
+          </div>
+        </section>
+
+        <!-- Endpoints -->
+        <section id="endpoints" class="mb-10">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-sm font-bold">2</span>
+            <h2 class="text-xl font-bold text-white">API Endpoints</h2>
+          </div>
+
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl mb-4">
+            <div class="p-4 border-b border-white/[0.06]">
+              <div class="flex items-center gap-3">
+                <span class="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold rounded">POST</span>
+                <code class="text-white">/api/quote</code>
+                <span class="text-xs text-zinc-500">Create a new quote</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <h4 class="text-sm font-medium text-white mb-3">Request Body</h4>
+              <div class="bg-[#0a0a0f] rounded-lg p-3 overflow-x-auto">
+                <pre class="text-sm text-zinc-300"><code>{
+  "userId": "507f1f77bcf86cd799439011",
+  "clientName": "Acme Corp",
+  "prompt": "Website development for 5 pages"
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl mb-4">
+            <div class="p-4 border-b border-white/[0.06]">
+              <div class="flex items-center gap-3">
+                <span class="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs font-bold rounded">GET</span>
+                <code class="text-white">/api/quotes?id=...</code>
+                <span class="text-xs text-zinc-500">Get quotes (list or single)</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="space-y-2 text-sm">
+                <div class="flex gap-4"><code class="text-emerald-400 w-32">userId</code><span class="text-zinc-500">Your user ID (required)</span></div>
+                <div class="flex gap-4"><code class="text-emerald-400 w-32">quoteId</code><span class="text-zinc-500">Specific quote ID (optional)</span></div>
+                <div class="flex gap-4"><code class="text-emerald-400 w-32">page</code><span class="text-zinc-500">Page number (default: 1)</span></div>
+                <div class="flex gap-4"><code class="text-emerald-400 w-32">limit</code><span class="text-zinc-500">Items per page (max: 100)</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl mb-4">
+            <div class="p-4 border-b border-white/[0.06]">
+              <div class="flex items-center gap-3">
+                <span class="px-2 py-1 bg-amber-500/20 text-amber-400 text-xs font-bold rounded">PATCH</span>
+                <code class="text-white">/api/quotes/[id]</code>
+                <span class="text-xs text-zinc-500">Update a quote</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="bg-[#0a0a0f] rounded-lg p-3 overflow-x-auto">
+                <pre class="text-sm text-zinc-300"><code>{"userId": "...", "quoteId": "...", "status": "accepted"}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl mb-4">
+            <div class="p-4 border-b border-white/[0.06]">
+              <div class="flex items-center gap-3">
+                <span class="px-2 py-1 bg-red-500/20 text-red-400 text-xs font-bold rounded">DELETE</span>
+                <code class="text-white">/api/quotes/[id]</code>
+                <span class="text-xs text-zinc-500">Delete a quote</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl">
+            <div class="p-4 border-b border-white/[0.06]">
+              <div class="flex items-center gap-3">
+                <span class="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold rounded">POST</span>
+                <code class="text-white">/api/ingest/pdf</code>
+                <span class="text-xs text-zinc-500">Extract pricing from PDF</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Code Examples -->
+        <section id="examples" class="mb-10">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-sm font-bold">3</span>
+            <h2 class="text-xl font-bold text-white">Code Examples</h2>
+          </div>
+
+          <div class="flex gap-2 mb-4">
+            <button onclick="showCodeTab('curl')" class="code-tab-btn px-4 py-2 bg-white/[0.06] text-white text-sm font-medium rounded-lg transition" data-tab="curl">cURL</button>
+            <button onclick="showCodeTab('javascript')" class="code-tab-btn px-4 py-2 bg-white/[0.03] text-zinc-400 text-sm font-medium rounded-lg hover:bg-white/[0.06] hover:text-white transition" data-tab="javascript">JavaScript</button>
+            <button onclick="showCodeTab('python')" class="code-tab-btn px-4 py-2 bg-white/[0.03] text-zinc-400 text-sm font-medium rounded-lg hover:bg-white/[0.06] hover:text-white transition" data-tab="python">Python</button>
+          </div>
+
+          <div id="curl-example" class="code-example bg-[#0c0c12] border border-white/[0.06] rounded-xl p-4">
+            <div class="bg-[#0a0a0f] rounded-lg p-4 overflow-x-auto">
+              <pre class="text-sm text-zinc-300"><code>curl -X POST https://your-domain.com/api/quote \
+  -H "Content-Type: application/json" \
+  -d '{"userId": "507f1f77bcf86cd799439011", "clientName": "Acme Corp", "prompt": "Website development"}'</code></pre>
+            </div>
+          </div>
+
+          <div id="javascript-example" class="code-example hidden bg-[#0c0c12] border border-white/[0.06] rounded-xl p-4">
+            <div class="bg-[#0a0a0f] rounded-lg p-4 overflow-x-auto">
+              <pre class="text-sm text-zinc-300"><code>const userId = "507f1f77bcf86cd799439011";
+
+async function createQuote(clientName, prompt) {
+  const res = await fetch('/api/quote', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ userId, clientName, prompt })
+  });
+  return res.json();
+}</code></pre>
+            </div>
+          </div>
+
+          <div id="python-example" class="code-example hidden bg-[#0c0c12] border border-white/[0.06] rounded-xl p-4">
+            <div class="bg-[#0a0a0f] rounded-lg p-4 overflow-x-auto">
+              <pre class="text-sm text-zinc-300"><code>import requests
+
+USER_ID = "507f1f77bcf86cd799439011"
+
+def create_quote(client_name, prompt):
+    r = requests.post(f"{BASE_URL}/api/quote", 
+        json={"userId": USER_ID, "clientName": client_name, "prompt": prompt})
+    return r.json()</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Rate Limits -->
+        <section id="rate-limits" class="mb-10">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-sm font-bold">4</span>
+            <h2 class="text-xl font-bold text-white">Rate Limits</h2>
+          </div>
+
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl p-5">
+            <div class="grid md:grid-cols-3 gap-4">
+              <div class="bg-[#0a0a0f] border border-white/[0.08] rounded-lg p-4">
+                <div class="text-2xl font-bold text-white">60</div>
+                <div class="text-sm text-zinc-400">requests/minute</div>
+              </div>
+              <div class="bg-[#0a0a0f] border border-white/[0.08] rounded-lg p-4">
+                <div class="text-2xl font-bold text-white">1,000</div>
+                <div class="text-sm text-zinc-400">requests/day</div>
+              </div>
+              <div class="bg-[#0a0a0f] border border-white/[0.08] rounded-lg p-4">
+                <div class="text-2xl font-bold text-white">10MB</div>
+                <div class="text-sm text-zinc-400">max payload</div>
+              </div>
+            </div>
+            <div class="mt-4 p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg text-sm text-amber-400">
+              Tip: Exceeding limits returns 429. Implement exponential backoff.
+            </div>
+          </div>
+        </section>
+
+        <!-- Webhooks -->
+        <section id="webhooks" class="mb-10">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-sm font-bold">5</span>
+            <h2 class="text-xl font-bold text-white">Webhooks</h2>
+          </div>
+
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl p-5">
+            <p class="text-zinc-400 mb-4">Configure webhooks in <a href="/dashboard/settings" class="text-red-400">settings</a>.</p>
+            
+            <div class="space-y-3 mb-6">
+              <div class="flex items-center gap-3 p-3 bg-[#0a0a0f] rounded-lg">
+                <span class="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs font-bold rounded">quote.created</span>
+                <span class="text-sm text-white">Quote Created</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 bg-[#0a0a0f] rounded-lg">
+                <span class="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold rounded">quote.accepted</span>
+                <span class="text-sm text-white">Quote Accepted</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 bg-[#0a0a0f] rounded-lg">
+                <span class="px-2 py-1 bg-amber-500/20 text-amber-400 text-xs font-bold rounded">quote.expired</span>
+                <span class="text-sm text-white">Quote Expired</span>
+              </div>
+            </div>
+
+            <div class="bg-[#0a0a0f] rounded-lg p-4 overflow-x-auto">
+              <pre class="text-sm text-zinc-300"><code>{"event": "quote.accepted", "data": {"quoteNumber": "QT-XYZ123", "total": 1800}}</code></pre>
+            </div>
+
+            <div class="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-sm text-red-400">
+              Verify X-Webhook-Signature header for security.
+            </div>
+          </div>
+        </section>
+
+        <!-- Try It Out -->
+        <section id="try-it" class="mb-10">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-sm font-bold">6</span>
+            <h2 class="text-xl font-bold text-white">Try It Out</h2>
+          </div>
+
+          <div class="bg-[#0c0c12] border border-white/[0.06] rounded-xl p-5">
+            <p class="text-zinc-400 mb-4">Test the API directly from your browser.</p>
+            
+            <div class="space-y-4">
+              <div>
+                <label class="text-sm text-zinc-400 block mb-2">Your User ID</label>
+                <input type="text" id="try-userId" value="507f1f77bcf86cd799439011" 
+                  class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white" />
+              </div>
+              <div>
+                <label class="text-sm text-zinc-400 block mb-2">Client Name</label>
+                <input type="text" id="try-clientName" placeholder="Acme Corp"
+                  class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white" />
+              </div>
+              <div>
+                <label class="text-sm text-zinc-400 block mb-2">What do you need?</label>
+                <textarea id="try-prompt" rows="3" placeholder="Website development for 5 pages..."
+                  class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-sm text-white"></textarea>
+              </div>
+              <button onclick="testApi()" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg text-sm font-medium">
+                Test API Call
+              </button>
+              <div id="try-result" class="hidden p-4 bg-[#0a0a0f] rounded-lg overflow-x-auto">
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <script>
+      function showCodeTab(tab) {
+        document.querySelectorAll('.code-example').forEach(el => el.classList.add('hidden'));
+        document.getElementById(tab + '-example').classList.remove('hidden');
+        document.querySelectorAll('.code-tab-btn').forEach(btn => {
+          btn.classList.remove('bg-white/[0.06]', 'text-white');
+          btn.classList.add('bg-white/[0.03]', 'text-zinc-400');
+        });
+        event.target.classList.remove('bg-white/[0.03]', 'text-zinc-400');
+        event.target.classList.add('bg-white/[0.06]', 'text-white');
+      }
+
+      async function testApi() {
+        const userId = document.getElementById('try-userId').value;
+        const clientName = document.getElementById('try-clientName').value;
+        const prompt = document.getElementById('try-prompt').value;
+        const result = document.getElementById('try-result');
+        
+        if (!userId || !prompt) {
+          alert('Please fill in required fields');
+          return;
+        }
+        
+        result.classList.remove('hidden');
+        result.innerHTML = '<pre class="text-sm text-zinc-400">Loading...</pre>';
+        
+        try {
+          const res = await fetch('/api/quote', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId, clientName, prompt })
+          });
+          const data = await res.json();
+          result.innerHTML = '<pre class="text-sm text-emerald-400">' + JSON.stringify(data, null, 2) + '</pre>';
+        } catch (err) {
+          result.innerHTML = '<pre class="text-sm text-red-400">Error: ' + err.message + '</pre>';
+        }
+      }
+    </script>
+  </body>
+</html>

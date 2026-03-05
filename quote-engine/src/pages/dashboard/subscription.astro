@@ -1,7 +1,111 @@
 ---
 import '../../styles/global.css';
 
-const userId = '507f1f77bcf86cd799439011';
+const plans = [
+  {
+    id: 'free',
+    name: 'Free',
+    price: 0,
+    description: 'Perfect for trying out the platform',
+    features: [
+      { text: '5 quotes per month', included: true },
+      { text: 'Basic Excel upload', included: true },
+      { text: 'Email support', included: true },
+      { text: 'PDF export', included: false },
+      { text: 'Advanced knowledge base', included: false },
+      { text: 'Custom templates', included: false },
+      { text: 'Client management', included: false },
+      { text: 'API access', included: false },
+    ],
+    cta: 'Current Plan',
+    popular: false,
+    current: true
+  },
+  {
+    id: 'starter',
+    name: 'Starter',
+    price: 29,
+    description: 'For small businesses getting started',
+    features: [
+      { text: '25 quotes per month', included: true },
+      { text: 'Excel upload & parsing', included: true },
+      { text: 'Priority email support', included: true },
+      { text: 'PDF export', included: true },
+      { text: 'Advanced knowledge base', included: false },
+      { text: 'Custom templates', included: false },
+      { text: 'Client management', included: false },
+      { text: 'API access', included: false },
+    ],
+    cta: 'Upgrade',
+    popular: true,
+    current: false
+  },
+  {
+    id: 'pro',
+    name: 'Pro',
+    price: 79,
+    description: 'For growing teams that need more power',
+    features: [
+      { text: '100 quotes per month', included: true },
+      { text: 'Excel upload & parsing', included: true },
+      { text: 'Priority support', included: true },
+      { text: 'PDF export', included: true },
+      { text: 'Advanced knowledge base', included: true },
+      { text: 'Custom templates', included: true },
+      { text: 'Client management', included: true },
+      { text: 'API access', included: true },
+    ],
+    cta: 'Upgrade',
+    popular: false,
+    current: false
+  },
+  {
+    id: 'enterprise',
+    name: 'Enterprise',
+    price: 199,
+    description: 'For large organizations with custom needs',
+    features: [
+      { text: 'Unlimited quotes', included: true },
+      { text: 'Excel upload & parsing', included: true },
+      { text: 'Dedicated support', included: true },
+      { text: 'PDF export', included: true },
+      { text: 'Unlimited knowledge base', included: true },
+      { text: 'Custom templates', included: true },
+      { text: 'Client management', included: true },
+      { text: 'API access', included: true },
+    ],
+    cta: 'Contact Sales',
+    popular: false,
+    current: false
+  }
+];
+
+const faqs = [
+  {
+    question: 'How does the billing work?',
+    answer: 'We bill monthly or annually. You can cancel anytime from your account settings. Your access continues until the end of your billing period.'
+  },
+  {
+    question: 'Can I upgrade or downgrade anytime?',
+    answer: 'Yes! You can change your plan at any time. When upgrading, you\'ll be charged the prorated difference. When downgrading, you\'ll receive credit towards future months.'
+  },
+  {
+    question: 'What happens if I exceed my quote limit?',
+    answer: 'We\'ll notify you when you\'re close to your limit. You can upgrade your plan or wait until your next billing cycle resets.'
+  },
+  {
+    question: 'Do you offer refunds?',
+    answer: 'We offer a 14-day money-back guarantee. If you\'re not satisfied, contact us within 14 days of your first payment for a full refund.'
+  },
+  {
+    question: 'What payment methods do you accept?',
+    answer: 'We accept all major credit cards (Visa, Mastercard, American Express), as well as iDEAL and SEPA debit for European customers.'
+  },
+  {
+    question: 'Is my data secure?',
+    answer: 'Absolutely. We use Stripe for payment processing and never store your payment details. All data is encrypted and we\'re GDPR compliant.'
+  }
+];
 ---
 
 <!DOCTYPE html>
@@ -42,119 +146,231 @@ const userId = '507f1f77bcf86cd799439011';
           Settings
         </a>
       </nav>
+            <a href="/dashboard/subscription" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-red-500/10 text-red-400">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+          Subscription
+        </a>
+        <a href="/dashboard/team" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+          Team
+        </a>
+      </nav>
     </aside>
 
     <main class="ml-64 p-8 relative z-10">
-      <div class="max-w-5xl">
-        <h1 class="text-3xl font-bold mb-2">💳 Subscription</h1>
-        <p class="text-zinc-400 mb-8">Choose the plan that fits your business needs</p>
+      <div class="max-w-6xl">
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <h1 class="text-3xl font-bold mb-2">💳 Subscription</h1>
+            <p class="text-zinc-400">Choose the plan that fits your business needs</p>
+          </div>
+          <div class="flex gap-3">
+            <button id="theme-toggle" class="p-2.5 rounded-xl bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] transition-all" title="Toggle theme">
+              <svg class="w-4 h-4 moon-icon text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+              <svg class="w-4 h-4 sun-icon text-zinc-400 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+            </button>
+            <button id="manage-sub-btn" class="hidden px-4 py-2 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] rounded-lg text-sm font-medium transition">
+              Manage Subscription
+            </button>
+          </div>
+        </div>
 
-        <!-- Current Plan -->
-        <div id="current-plan" class="bg-gradient-to-r from-red-500/10 to-rose-500/10 border border-red-500/20 rounded-2xl p-6 mb-8 hidden">
+        <!-- Current Plan Status -->
+        <div id="current-plan-card" class="hidden bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border border-emerald-500/20 rounded-2xl p-6 mb-8">
           <div class="flex items-center justify-between">
-            <div>
-              <p class="text-sm text-zinc-400">Current Plan</p>
-              <h2 class="text-2xl font-bold text-white">Free</h2>
-              <p class="text-zinc-400 text-sm mt-1">5 quotes this month</p>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </div>
+              <div>
+                <p class="text-sm text-zinc-400">Current Plan</p>
+                <h2 class="text-2xl font-bold text-white" id="current-plan-name">Free</h2>
+                <p class="text-sm text-zinc-400" id="current-plan-quotes">3 of 5 quotes used this month</p>
+              </div>
             </div>
             <div class="text-right">
-              <p class="text-2xl font-bold">€0<span class="text-sm font-normal text-zinc-400">/month</span></p>
-              <button id="manage-btn" class="mt-2 px-4 py-2 bg-red-600 hover:bg-red-500 rounded-lg text-sm font-medium transition">
-                Manage Subscription
-              </button>
+              <p class="text-2xl font-bold" id="current-plan-price">€0<span class="text-sm font-normal text-zinc-400">/month</span></p>
+              <p class="text-xs text-emerald-400 mt-1" id="current-plan-status">Active</p>
+            </div>
+          </div>
+          <!-- Usage Bar -->
+          <div class="mt-4 pt-4 border-t border-white/[0.06]">
+            <div class="flex items-center justify-between text-sm mb-2">
+              <span class="text-zinc-400">Quote Usage</span>
+              <span class="text-zinc-300" id="usage-text">3 / 5</span>
+            </div>
+            <div class="h-2 bg-white/[0.06] rounded-full overflow-hidden">
+              <div id="usage-bar" class="h-full bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full transition-all duration-500" style="width: 60%"></div>
             </div>
           </div>
         </div>
 
-        <!-- Pricing Plans -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <!-- Free -->
-          <div class="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6" data-plan="free">
-            <h3 class="text-xl font-bold mb-2">Free</h3>
-            <p class="text-3xl font-bold mb-4">€0<span class="text-sm font-normal text-zinc-400">/mo</span></p>
-            <ul class="space-y-3 mb-6 text-sm text-zinc-400">
-              <li class="flex items-center gap-2">✓ 5 quotes/month</li>
-              <li class="flex items-center gap-2">✓ Basic Excel upload</li>
-              <li class="flex items-center gap-2">✓ Email support</li>
-            </ul>
-            <button disabled class="w-full py-3 bg-white/[0.08] border border-white/[0.08] rounded-xl font-medium opacity-50 cursor-not-allowed">
-              Current Plan
-            </button>
-          </div>
-
-          <!-- Starter -->
-          <div class="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6" data-plan="starter">
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="text-xl font-bold">Starter</h3>
-              <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full">Popular</span>
+        <!-- Pricing Plans Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {plans.map((plan) => (
+            <div class={`relative bg-white/[0.03] border rounded-2xl p-6 transition-all duration-300 hover:scale-[1.02] ${plan.popular ? 'border-red-500/50 ring-1 ring-red-500/20' : 'border-white/[0.08]'}`} data-plan={plan.id}>
+              {plan.popular && (
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-gradient-to-r from-red-500 to-rose-600 rounded-full text-xs font-medium">
+                  Most Popular
+                </div>
+              )}
+              {plan.current && (
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-xs font-medium border border-emerald-500/30">
+                  Current Plan
+                </div>
+              )}
+              <div class="mb-4">
+                <h3 class="text-xl font-bold">{plan.name}</h3>
+                <p class="text-xs text-zinc-500 mt-1">{plan.description}</p>
+              </div>
+              <div class="mb-6">
+                <span class="text-4xl font-bold">€{plan.price}</span>
+                <span class="text-zinc-400 text-sm">/month</span>
+              </div>
+              <button 
+                data-plan-id={plan.id} 
+                data-plan-price={plan.price}
+                class={`w-full py-3 rounded-xl font-medium transition-all ${
+                  plan.current 
+                    ? 'bg-white/[0.08] border border-white/[0.08] text-zinc-400 cursor-default'
+                    : plan.popular
+                      ? 'bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-400 hover:to-rose-500 text-white'
+                      : 'bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08]'
+                }`}
+              >
+                {plan.cta}
+              </button>
             </div>
-            <p class="text-3xl font-bold mb-4">€29<span class="text-sm font-normal text-zinc-400">/mo</span></p>
-            <ul class="space-y-3 mb-6 text-sm text-zinc-400">
-              <li class="flex items-center gap-2">✓ 25 quotes/month</li>
-              <li class="flex items-center gap-2">✓ Excel upload & parsing</li>
-              <li class="flex items-center gap-2">✓ Priority email</li>
-              <li class="flex items-center gap-2">✓ Export to PDF</li>
-            </ul>
-            <button data-plan-id="starter" class="upgrade-btn w-full py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-medium transition">
-              Upgrade
-            </button>
-          </div>
+          ))}
+        </div>
 
-          <!-- Pro -->
-          <div class="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6" data-plan="pro">
-            <h3 class="text-xl font-bold mb-2">Pro</h3>
-            <p class="text-3xl font-bold mb-4">€79<span class="text-sm font-normal text-zinc-400">/mo</span></p>
-            <ul class="space-y-3 mb-6 text-sm text-zinc-400">
-              <li class="flex items-center gap-2">✓ 100 quotes/month</li>
-              <li class="flex items-center gap-2">✓ Advanced knowledge base</li>
-              <li class="flex items-center gap-2">✓ Custom templates</li>
-              <li class="flex items-center gap-2">✓ Client management</li>
-              <li class="flex items-center gap-2">✓ API access</li>
-            </ul>
-            <button data-plan-id="pro" class="upgrade-btn w-full py-3 bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-400 hover:to-rose-500 text-white rounded-xl font-medium transition">
-              Upgrade
-            </button>
+        <!-- Feature Comparison Table -->
+        <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 mb-12">
+          <h2 class="text-xl font-bold mb-6">📊 Plan Comparison</h2>
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead>
+                <tr class="border-b border-white/[0.06]">
+                  <th class="text-left py-4 pr-4 text-zinc-400 font-medium">Feature</th>
+                  <th class="text-center py-4 px-4 text-zinc-400 font-medium">Free</th>
+                  <th class="text-center py-4 px-4 text-white font-bold">Starter</th>
+                  <th class="text-center py-4 px-4 text-white font-bold">Pro</th>
+                  <th class="text-center py-4 px-4 text-white font-bold">Enterprise</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-white/[0.04]">
+                  <td class="py-4 pr-4 text-zinc-300">Quotes per month</td>
+                  <td class="text-center py-4 px-4 text-zinc-400">5</td>
+                  <td class="text-center py-4 px-4 text-white">25</td>
+                  <td class="text-center py-4 px-4 text-white">100</td>
+                  <td class="text-center py-4 px-4 text-emerald-400">Unlimited</td>
+                </tr>
+                <tr class="border-b border-white/[0.04]">
+                  <td class="py-4 pr-4 text-zinc-300">Knowledge base entries</td>
+                  <td class="text-center py-4 px-4 text-zinc-400">1</td>
+                  <td class="text-center py-4 px-4 text-white">5</td>
+                  <td class="text-center py-4 px-4 text-white">20</td>
+                  <td class="text-center py-4 px-4 text-emerald-400">Unlimited</td>
+                </tr>
+                <tr class="border-b border-white/[0.04]">
+                  <td class="py-4 pr-4 text-zinc-300">Excel upload & parsing</td>
+                  <td class="text-center py-4 px-4 text-zinc-400">Basic</td>
+                  <td class="text-center py-4 px-4 text-emerald-400">✓</td>
+                  <td class="text-center py-4 px-4 text-emerald-400">✓</td>
+                  <td class="text-center py-4 px-4 text-emerald-400">✓</td>
+                </tr>
+                <tr class="border-b border-white/[0.04]">
+                  <td class="py-4 pr-4 text-zinc-300">PDF Export</td>
+                  <td class="text-center py-4 px-4 text-zinc-500">—</td>
+                  <td class="text-center py-4 px-4 text-emerald-400">✓</td>
+                  <td class="text-center py-4 px-4 text-emerald-400">✓</td>
+                  <td class="text-center py-4 px-4 text-emerald-400">✓</td>
+                </tr>
+                <tr class="border-b border-white/[0.04]">
+                  <td class="py-4 pr-4 text-zinc-300">Custom Templates</td>
+                  <td class="text-center py-4 px-4 text-zinc-500">—</td>
+                  <td class="text-center py-4 px-4 text-zinc-500">—</td>
+                  <td class="text-center py-4 px-4 text-emerald-400">✓</td>
+                  <td class="text-center py-4 px-4 text-emerald-400">✓</td>
+                </tr>
+                <tr class="border-b border-white/[0.04]">
+                  <td class="py-4 pr-4 text-zinc-300">Client Management</td>
+                  <td class="text-center py-4 px-4 text-zinc-500">—</td>
+                  <td class="text-center py-4 px-4 text-zinc-500">—</td>
+                  <td class="text-center py-4 px-4 text-emerald-400">✓</td>
+                  <td class="text-center py-4 px-4 text-emerald-400">✓</td>
+                </tr>
+                <tr class="border-b border-white/[0.04]">
+                  <td class="py-4 pr-4 text-zinc-300">API Access</td>
+                  <td class="text-center py-4 px-4 text-zinc-500">—</td>
+                  <td class="text-center py-4 px-4 text-zinc-500">—</td>
+                  <td class="text-center py-4 px-4 text-emerald-400">✓</td>
+                  <td class="text-center py-4 px-4 text-emerald-400">✓</td>
+                </tr>
+                <tr class="border-b border-white/[0.04]">
+                  <td class="py-4 pr-4 text-zinc-300">White-label</td>
+                  <td class="text-center py-4 px-4 text-zinc-500">—</td>
+                  <td class="text-center py-4 px-4 text-zinc-500">—</td>
+                  <td class="text-center py-4 px-4 text-zinc-500">—</td>
+                  <td class="text-center py-4 px-4 text-emerald-400">✓</td>
+                </tr>
+                <tr>
+                  <td class="py-4 pr-4 text-zinc-300">Support</td>
+                  <td class="text-center py-4 px-4 text-zinc-400">Email</td>
+                  <td class="text-center py-4 px-4 text-white">Priority</td>
+                  <td class="text-center py-4 px-4 text-white">Priority</td>
+                  <td class="text-center py-4 px-4 text-emerald-400">Dedicated</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
+        </div>
 
-          <!-- Enterprise -->
-          <div class="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6" data-plan="enterprise">
-            <h3 class="text-xl font-bold mb-2">Enterprise</h3>
-            <p class="text-3xl font-bold mb-4">€199<span class="text-sm font-normal text-zinc-400">/mo</span></p>
-            <ul class="space-y-3 mb-6 text-sm text-zinc-400">
-              <li class="flex items-center gap-2">✓ Unlimited quotes</li>
-              <li class="flex items-center gap-2">✓ Unlimited knowledge base</li>
-              <li class="flex items-center gap-2">✓ White-label</li>
-              <li class="flex items-center gap-2">✓ Dedicated support</li>
-              <li class="flex items-center gap-2">✓ Custom integrations</li>
-            </ul>
-            <button data-plan-id="enterprise" class="upgrade-btn w-full py-3 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] rounded-xl font-medium transition">
-              Contact Us
-            </button>
+        <!-- FAQ Section -->
+        <div class="mb-12">
+          <h2 class="text-xl font-bold mb-6">❓ Frequently Asked Questions</h2>
+          <div class="grid md:grid-cols-2 gap-4">
+            {faqs.map((faq, index) => (
+              <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5">
+                <details class="group">
+                  <summary class="flex items-center justify-between cursor-pointer list-none">
+                    <span class="font-medium text-zinc-200 group-open:text-white transition">{faq.question}</span>
+                    <svg class="w-5 h-5 text-zinc-500 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <p class="mt-3 text-zinc-400 text-sm leading-relaxed">{faq.answer}</p>
+                </details>
+              </div>
+            ))}
           </div>
         </div>
 
         <!-- Payment Methods -->
-        <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6">
-          <h2 class="text-lg font-semibold mb-4">💳 Payment Methods</h2>
-          <div class="flex items-center justify-between py-4 border-b border-white/[0.06]">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-8 bg-zinc-700 rounded flex items-center justify-center">
-                <span class="text-xs font-bold">VISA</span>
-              </div>
-              <div>
-                <p class="font-medium">•••• •••• •••• 4242</p>
-                <p class="text-sm text-zinc-400">Expires 12/26</p>
-              </div>
-            </div>
-            <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded-full">Default</span>
+        <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 mb-6">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-semibold">💳 Payment Methods</h2>
+            <button class="text-sm text-red-400 hover:text-red-300 transition">+ Add New</button>
           </div>
-          <button class="mt-4 px-4 py-2 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] rounded-lg text-sm font-medium transition">
-            + Add Payment Method
-          </button>
+          <div id="payment-methods">
+            <div class="flex items-center justify-between py-4 border-b border-white/[0.06]">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-8 bg-zinc-700 rounded flex items-center justify-center">
+                  <span class="text-xs font-bold text-zinc-300">VISA</span>
+                </div>
+                <div>
+                  <p class="font-medium">•••• •••• •••• 4242</p>
+                  <p class="text-sm text-zinc-400">Expires 12/26</p>
+                </div>
+              </div>
+              <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded-full">Default</span>
+            </div>
+          </div>
         </div>
 
         <!-- Billing History -->
-        <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 mt-6">
+        <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6">
           <h2 class="text-lg font-semibold mb-4">📋 Billing History</h2>
           <table class="w-full">
             <thead>
@@ -166,9 +382,9 @@ const userId = '507f1f77bcf86cd799439011';
                 <th class="pb-3"></th>
               </tr>
             </thead>
-            <tbody class="text-sm">
+            <tbody class="text-sm" id="billing-history">
               <tr class="border-t border-white/[0.06]">
-                <td class="py-3 text-zinc-400">-</td>
+                <td class="py-3 text-zinc-400">—</td>
                 <td class="py-3">Free Plan</td>
                 <td class="py-3">€0.00</td>
                 <td class="py-3"><span class="text-emerald-400">Active</span></td>
@@ -180,16 +396,143 @@ const userId = '507f1f77bcf86cd799439011';
       </div>
     </main>
 
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center">
+      <div class="bg-[#0c0c12] border border-white/[0.08] rounded-2xl p-6 text-center">
+        <div class="w-8 h-8 border-2 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <p class="text-zinc-300">Processing...</p>
+      </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50"></div>
+
     <script>
+      // Plan pricing map
+      const PLAN_PRICES = { free: 0, starter: 29, pro: 79, enterprise: 199 };
+      const PLAN_NAMES = { free: 'Free', starter: 'Starter', pro: 'Pro', enterprise: 'Enterprise' };
+
+      // Fetch user subscription data
+      async function loadUserSubscription() {
+        try {
+          const res = await fetch('/api/user/subscription');
+          const data = await res.json();
+          
+          if (data.subscription) {
+            const sub = data.subscription;
+            const currentPlanName = document.getElementById('current-plan-name');
+            const currentPlanPrice = document.getElementById('current-plan-price');
+            const currentPlanQuotes = document.getElementById('current-plan-quotes');
+            const currentPlanStatus = document.getElementById('current-plan-status');
+            const currentPlanCard = document.getElementById('current-plan-card');
+            const usageText = document.getElementById('usage-text');
+            const usageBar = document.getElementById('usage-bar');
+            const manageBtn = document.getElementById('manage-sub-btn');
+
+            const planName = PLAN_NAMES[sub.plan] || 'Free';
+            const planPrice = PLAN_PRICES[sub.plan] || 0;
+
+            currentPlanName.textContent = planName;
+            currentPlanPrice.innerHTML = `€${planPrice}<span class="text-sm font-normal text-zinc-400">/month</span>`;
+            
+            if (sub.quotesLimit === -1) {
+              currentPlanQuotes.textContent = `${sub.quotesUsed} quotes used this month`;
+              usageText.textContent = `${sub.quotesUsed} / ∞`;
+              usageBar.style.width = '100%';
+            } else {
+              currentPlanQuotes.textContent = `${sub.quotesUsed} of ${sub.quotesLimit} quotes used this month`;
+              usageText.textContent = `${sub.quotesUsed} / ${sub.quotesLimit}`;
+              const percentage = Math.min((sub.quotesUsed / sub.quotesLimit) * 100, 100);
+              usageBar.style.width = `${percentage}%`;
+              
+              if (percentage > 90) {
+                usageBar.className = 'h-full bg-gradient-to-r from-red-500 to-rose-500 rounded-full transition-all duration-500';
+              } else if (percentage > 70) {
+                usageBar.className = 'h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full transition-all duration-500';
+              }
+            }
+
+            currentPlanStatus.textContent = sub.status === 'active' ? 'Active' : sub.status;
+
+            currentPlanCard.classList.remove('hidden');
+            
+            // Show manage button if they have a paid plan
+            if (sub.plan !== 'free') {
+              manageBtn.classList.remove('hidden');
+            }
+
+            // Update plan cards to show current
+            document.querySelectorAll('[data-plan]').forEach(card => {
+              const planId = card.getAttribute('data-plan');
+              const btn = card.querySelector('button');
+              
+              if (planId === sub.plan) {
+                card.classList.add('ring-1', 'ring-emerald-500/30', 'border-emerald-500/30');
+                
+                // Add "Current" badge if not already there
+                if (!card.querySelector('.text-emerald-400')) {
+                  const badge = document.createElement('div');
+                  badge.className = 'absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-xs font-medium border border-emerald-500/30';
+                  badge.textContent = 'Current Plan';
+                  card.appendChild(badge);
+                }
+                
+                if (btn) {
+                  btn.textContent = 'Current Plan';
+                  btn.classList.add('opacity-50', 'cursor-default');
+                  btn.removeAttribute('data-plan-id');
+                }
+              } else {
+                if (btn && !btn.hasAttribute('disabled')) {
+                  btn.textContent = 'Upgrade';
+                }
+              }
+            });
+          }
+        } catch (err) {
+          console.error('Error loading subscription:', err);
+          // Show current plan card with defaults
+          document.getElementById('current-plan-card').classList.remove('hidden');
+        }
+      }
+
+      // Show toast notification
+      function showToast(message, type = 'info') {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        
+        const bgColors = {
+          success: 'bg-emerald-500/20 border-emerald-500/30',
+          error: 'bg-red-500/20 border-red-500/30',
+          info: 'bg-blue-500/20 border-blue-500/30'
+        };
+        
+        toast.className = `${bgColors[type]} border rounded-xl px-4 py-3 mb-2 backdrop-blur-xl animate-[slideIn_0.3s_ease]`;
+        toast.textContent = message;
+        
+        container.appendChild(toast);
+        
+        setTimeout(() => {
+          toast.remove();
+        }, 4000);
+      }
+
       // Upgrade button handler
-      document.querySelectorAll('.upgrade-btn').forEach(btn => {
+      document.querySelectorAll('[data-plan-id]').forEach(btn => {
         btn.addEventListener('click', async () => {
           const planId = btn.getAttribute('data-plan-id');
-          if (!planId) return;
+          const planPrice = parseInt(btn.getAttribute('data-plan-price'));
+          
+          if (!planId || planPrice === 0) return;
 
-          btn.textContent = 'Processing...';
-          btn.setAttribute('disabled', 'true');
+          if (planId === 'enterprise') {
+            showToast('Contact sales@quoteengine.io for Enterprise plans', 'info');
+            return;
+          }
 
+          const overlay = document.getElementById('loading-overlay');
+          overlay.classList.remove('hidden');
+          
           try {
             const res = await fetch('/api/stripe/checkout', {
               method: 'POST',
@@ -198,21 +541,79 @@ const userId = '507f1f77bcf86cd799439011';
             });
 
             const data = await res.json();
+            
             if (data.url) {
               window.location.href = data.url;
-            } else {
+            } else if (data.error) {
+              overlay.classList.add('hidden');
+              showToast(data.error, 'error');
               btn.textContent = 'Error - Try Again';
-              btn.classList.add('bg-red-600');
+            } else {
+              overlay.classList.add('hidden');
+              showToast('Checkout unavailable in demo mode', 'info');
+              btn.textContent = 'Demo Mode';
             }
           } catch (err) {
             console.error(err);
+            overlay.classList.add('hidden');
+            showToast('Failed to start checkout', 'error');
             btn.textContent = 'Error - Try Again';
           }
         });
       });
 
-      // Show current plan (mock for now)
-      document.getElementById('current-plan')?.classList.remove('hidden');
+      // Manage subscription button
+      document.getElementById('manage-sub-btn')?.addEventListener('click', async () => {
+        const overlay = document.getElementById('loading-overlay');
+        overlay.classList.remove('hidden');
+        
+        try {
+          const res = await fetch('/api/stripe/checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'create-portal' })
+          });
+
+          const data = await res.json();
+          
+          if (data.url) {
+            window.location.href = data.url;
+          } else {
+            overlay.classList.add('hidden');
+            showToast('Portal unavailable - no active subscription', 'info');
+          }
+        } catch (err) {
+          overlay.classList.add('hidden');
+          showToast('Failed to open portal', 'error');
+        }
+      });
+
+      // Initialize
+      loadUserSubscription();
+
+      // Theme
+      function initTheme() {
+        const saved = localStorage.getItem('theme') || 'dark';
+        if (saved === 'light') {
+          document.documentElement.classList.add('light');
+          const sunIcon = document.querySelector('.sun-icon');
+          const moonIcon = document.querySelector('.moon-icon');
+          if (sunIcon) sunIcon.classList.remove('hidden');
+          if (moonIcon) moonIcon.classList.add('hidden');
+        }
+      }
+      
+      function toggleTheme() {
+        const isLight = document.documentElement.classList.toggle('light');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        if (sunIcon) sunIcon.classList.toggle('hidden', !isLight);
+        if (moonIcon) moonIcon.classList.toggle('hidden', isLight);
+      }
+      
+      document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+      initTheme();
     </script>
   </body>
 </html>

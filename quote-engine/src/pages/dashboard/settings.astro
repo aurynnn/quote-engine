@@ -46,12 +46,22 @@ const userId = '507f1f77bcf86cd799439011';
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
           Subscription
         </a>
+        <a href="/dashboard/team" class="flex items-center gap-3 px-4 py-3 rounded-xl text-zinc-400 hover:bg-white/[0.04] hover:text-white transition">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+          Team
+        </a>
       </nav>
     </aside>
 
     <main class="ml-64 p-8 relative z-10">
       <div class="max-w-2xl">
-        <h1 class="text-3xl font-bold mb-8">⚙️ Settings</h1>
+        <div class="flex items-center justify-between mb-8">
+          <h1 class="text-3xl font-bold">⚙️ Settings</h1>
+          <button id="theme-toggle" class="p-2.5 rounded-xl bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] transition-all" title="Toggle theme">
+            <svg class="w-4 h-4 moon-icon text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+            <svg class="w-4 h-4 sun-icon text-zinc-400 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+          </button>
+        </div>
 
         <!-- Company Info -->
         <div class="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 mb-6">
@@ -157,6 +167,30 @@ const userId = '507f1f77bcf86cd799439011';
         result.className = 'mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20';
         result.innerHTML = '✅ Settings saved!';
       });
+
+      // Theme
+      function initTheme() {
+        const saved = localStorage.getItem('theme') || 'dark';
+        if (saved === 'light') {
+          document.documentElement.classList.add('light');
+          const sunIcon = document.querySelector('.sun-icon');
+          const moonIcon = document.querySelector('.moon-icon');
+          if (sunIcon) sunIcon.classList.remove('hidden');
+          if (moonIcon) moonIcon.classList.add('hidden');
+        }
+      }
+      
+      function toggleTheme() {
+        const isLight = document.documentElement.classList.toggle('light');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        if (sunIcon) sunIcon.classList.toggle('hidden', !isLight);
+        if (moonIcon) moonIcon.classList.toggle('hidden', isLight);
+      }
+      
+      document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+      initTheme();
     </script>
   </body>
 </html>

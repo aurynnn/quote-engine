@@ -231,6 +231,20 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Theme Transition - Smooth color transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Exclude theme toggle from transition */
+.theme-toggle,
+.theme-toggle *,
+.theme-toggle svg {
+  transition: none !important;
+}
+
 body {
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, #0f0f18 100%);

@@ -13,9 +13,7 @@ import '../styles/global.css';
   <body class="min-h-screen bg-[#0a0a0f] text-white font-sans">
     <!-- Background with gradient mesh -->
     <div class="fixed inset-0 -z-10 overflow-hidden">
-      <!-- Main glow -->
       <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-red-500/10 rounded-full blur-[100px]"></div>
-      <!-- Additional mesh gradients -->
       <div class="absolute top-1/4 right-0 w-[400px] h-[400px] bg-purple-500/8 rounded-full blur-[80px]"></div>
       <div class="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-blue-500/8 rounded-full blur-[80px]"></div>
       <div class="absolute inset-0" id="stars"></div>
@@ -29,6 +27,8 @@ import '../styles/global.css';
         </div>
         <nav class="flex items-center gap-4 text-sm">
           <a href="#features" class="text-zinc-400 hover:text-white transition">Features</a>
+          <a href="#pricing" class="text-zinc-400 hover:text-white transition">Pricing</a>
+          <a href="#testimonials" class="text-zinc-400 hover:text-white transition">Reviews</a>
           <button id="theme-toggle" class="p-2 rounded-lg bg-white/[0.08] hover:bg-white/[0.12] transition">
             <svg class="w-5 h-5 sun-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
             <svg class="w-5 h-5 moon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
@@ -38,87 +38,280 @@ import '../styles/global.css';
       </div>
     </header>
 
-    <main class="relative z-10 pt-24">
-      <section class="max-w-4xl mx-auto px-6 text-center">
-        <!-- Badge from style 2 -->
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-sm mb-8">
-          ✨ AI-Powered
+    <main class="relative z-10 pt-16">
+      <!-- Hero Section -->
+      <section class="max-w-5xl mx-auto px-6 text-center">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-sm mb-8 animate-fade-in">
+          <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+          Trusted by 2,400+ businesses
         </div>
         
-        <!-- Title from user request -->
+        <!-- Title -->
         <h1 class="hero-title text-5xl md:text-7xl font-bold mb-6 leading-tight">
-          Smart Quotes for<br />
+          Generate Quotes<br />
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-rose-400 to-pink-400">
-            Smart Business
+            10x Faster
           </span>
         </h1>
         
-        <p class="hero-subtitle text-xl text-zinc-400 mb-12 max-w-xl mx-auto">
-          Upload your pricing, set your rules, and let AI create accurate quotes instantly. No more manual calculations.
+        <p class="hero-subtitle text-xl text-zinc-400 mb-8 max-w-2xl mx-auto">
+          Stop wasting hours on manual quotes. Upload your pricing once, set your rules, and let AI create professional quotes in seconds. Free to start.
         </p>
         
-        <!-- Red button like version 3 -->
-        <div class="hero-cta flex flex-col items-center gap-6 mb-16">
-          <a href="/dashboard" class="inline-flex items-center justify-center px-10 py-5 text-xl font-bold text-white bg-red-600 rounded-2xl transition-transform hover:bg-red-500 hover:scale-105">
-            <span>Start Generating Free</span>
+        <!-- CTAs -->
+        <div class="hero-cta flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <a href="/dashboard" class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-red-600 rounded-xl hover:bg-red-500 transition-all hover:scale-105 shadow-lg shadow-red-600/25">
+            <span>Start Free</span>
+            <svg class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
           </a>
-          <p class="text-zinc-500 text-sm">No signup required to try</p>
+          <a href="#features" class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-zinc-300 bg-white/[0.08] border border-white/[0.12] rounded-xl hover:bg-white/[0.12] transition-all">
+            See How It Works
+          </a>
         </div>
         
-        <!-- Stats like 5 -->
-        <div class="hero-stats grid grid-cols-3 gap-8 pt-8 border-t border-zinc-800/50">
+        <!-- Social Proof Stats -->
+        <div class="hero-stats grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-zinc-800/50">
           <div class="text-center">
-            <div class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-rose-400">10s</div>
-            <div class="text-zinc-500 text-sm mt-1">Generate time</div>
+            <div class="text-3xl md:text-4xl font-bold text-white">2,400+</div>
+            <div class="text-zinc-500 text-sm mt-1">Active Users</div>
           </div>
           <div class="text-center">
-            <div class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-rose-400">99%</div>
-            <div class="text-zinc-500 text-sm mt-1">Accuracy</div>
+            <div class="text-3xl md:text-4xl font-bold text-white">50k+</div>
+            <div class="text-zinc-500 text-sm mt-1">Quotes Generated</div>
           </div>
           <div class="text-center">
-            <div class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-rose-400">Free</div>
-            <div class="text-zinc-500 text-sm mt-1">To start</div>
+            <div class="text-3xl md:text-4xl font-bold text-white">99.9%</div>
+            <div class="text-zinc-500 text-sm mt-1">Uptime</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl md:text-4xl font-bold text-white">4.9/5</div>
+            <div class="text-zinc-500 text-sm mt-1">User Rating</div>
           </div>
         </div>
       </section>
 
-      <!-- Features -->
-      <section id="features" class="max-w-5xl mx-auto px-6 mt-24 pb-20">
+      <!-- Features Section -->
+      <section id="features" class="max-w-6xl mx-auto px-6 mt-24 pb-20">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Everything You Need to Quote Smart</h2>
+          <p class="text-zinc-400 max-w-xl mx-auto">Powerful features that make quote generation effortless.</p>
+        </div>
+        
         <div class="grid md:grid-cols-3 gap-6">
           <div class="feature-card p-6 bg-white/[0.03] border border-white/[0.08] rounded-2xl">
-            <div class="">
-              <div class="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center mb-4">
-                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold mb-2">Excel Import</h3>
-              <p class="text-zinc-500 text-sm">Upload your pricing file and we parse it automatically.</p>
+            <div class="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
             </div>
+            <h3 class="text-lg font-semibold mb-2">Excel Import</h3>
+            <p class="text-zinc-500 text-sm">Upload your pricing file and we parse it automatically. Supports XLSX, CSV, and more.</p>
           </div>
           
           <div class="feature-card p-6 bg-white/[0.03] border border-white/[0.08] rounded-2xl">
-            <div class="">
-              <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center mb-4">
-                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold mb-2">Instant Generation</h3>
-              <p class="text-zinc-500 text-sm">Describe what you need and get a quote in seconds.</p>
+            <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
             </div>
+            <h3 class="text-lg font-semibold mb-2">Instant Generation</h3>
+            <p class="text-zinc-500 text-sm">Describe what you need in plain English and get a professional quote in seconds.</p>
           </div>
           
           <div class="feature-card p-6 bg-white/[0.03] border border-white/[0.08] rounded-2xl">
-            <div class="">
-              <div class="w-12 h-12 bg-amber-600 rounded-xl flex items-center justify-center mb-4">
-                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold mb-2">Smart Pricing</h3>
-              <p class="text-zinc-500 text-sm">Rules and margins applied automatically.</p>
+            <div class="w-12 h-12 bg-amber-600 rounded-xl flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
             </div>
+            <h3 class="text-lg font-semibold mb-2">Smart Pricing Rules</h3>
+            <p class="text-zinc-500 text-sm">Set margins, discounts, and custom rules. Applied automatically, every time.</p>
+          </div>
+
+          <div class="feature-card p-6 bg-white/[0.03] border border-white/[0.08] rounded-2xl">
+            <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Professional PDFs</h3>
+            <p class="text-zinc-500 text-sm">Export branded, PDF quotes that look great and are ready to send to clients.</p>
+          </div>
+
+          <div class="feature-card p-6 bg-white/[0.03] border border-white/[0.08] rounded-2xl">
+            <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Template System</h3>
+            <p class="text-zinc-500 text-sm">Save your favorite quote formats as reusable templates. One click to generate.</p>
+          </div>
+
+          <div class="feature-card p-6 bg-white/[0.03] border border-white/[0.08] rounded-2xl">
+            <div class="w-12 h-12 bg-cyan-600 rounded-xl flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Client Management</h3>
+            <p class="text-zinc-500 text-sm">Keep track of all your clients and their quote history in one place.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Comparison Section -->
+      <section class="max-w-4xl mx-auto px-6 pb-20">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Why Quote Engine Wins</h2>
+          <p class="text-zinc-400">See how we compare to traditional methods.</p>
+        </div>
+
+        <div class="bg-white/[0.03] border border-white/[0.08] rounded-2xl overflow-hidden">
+          <div class="grid grid-cols-3 gap-4 p-6 border-b border-white/[0.08]">
+            <div class="text-zinc-400 font-medium">Feature</div>
+            <div class="text-center font-bold text-red-400">Quote Engine</div>
+            <div class="text-center text-zinc-500">Spreadsheet</div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 p-4 border-b border-white/[0.06]">
+            <div class="text-zinc-300">Generate quote</div>
+            <div class="text-center text-green-400">⚡ 10 seconds</div>
+            <div class="text-center text-zinc-500">30+ minutes</div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 p-4 border-b border-white/[0.06]">
+            <div class="text-zinc-300">PDF export</div>
+            <div class="text-center text-green-400">✓ Built-in</div>
+            <div class="text-center text-zinc-500">Manual copy</div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 p-4 border-b border-white/[0.06]">
+            <div class="text-zinc-300">Pricing rules</div>
+            <div class="text-center text-green-400">✓ Automatic</div>
+            <div class="text-center text-zinc-500">Easy to miss</div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 p-4 border-b border-white/[0.06]">
+            <div class="text-zinc-300">Version history</div>
+            <div class="text-center text-green-400">✓ Full tracking</div>
+            <div class="text-center text-zinc-500">Chaos 💀</div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 p-4">
+            <div class="text-zinc-300">Team collaboration</div>
+            <div class="text-center text-green-400">✓ Multi-user</div>
+            <div class="text-center text-zinc-500">File conflicts</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section id="testimonials" class="max-w-6xl mx-auto px-6 pb-20">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Loved by 2,400+ Businesses</h2>
+          <p class="text-zinc-400">Here's what our users have to say.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="p-6 bg-white/[0.03] border border-white/[0.08] rounded-2xl">
+            <div class="flex items-center gap-1 mb-4">
+              <span class="text-amber-400">★★★★★</span>
+            </div>
+            <p class="text-zinc-300 mb-4">"We used to spend hours on quotes. Now it takes 10 seconds. Game changer for our sales team."</p>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-gradient-to-br from-red-400 to-pink-500 rounded-full flex items-center justify-center font-bold text-white">SM</div>
+              <div>
+                <div class="font-medium">Sarah M.</div>
+                <div class="text-zinc-500 text-sm">COO, TechFlow</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 bg-white/[0.03] border border-white/[0.08] rounded-2xl">
+            <div class="flex items-center gap-1 mb-4">
+              <span class="text-amber-400">★★★★★</span>
+            </div>
+            <p class="text-zinc-300 mb-4">"The Excel import feature is incredible. Uploaded our 500-item pricing sheet and it just worked."</p>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-blue-500 rounded-full flex items-center justify-center font-bold text-white">JR</div>
+              <div>
+                <div class="font-medium">James R.</div>
+                <div class="text-zinc-500 text-sm">Founder, BuildRight</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 bg-white/[0.03] border border-white/[0.08] rounded-2xl">
+            <div class="flex items-center gap-1 mb-4">
+              <span class="text-amber-400">★★★★★</span>
+            </div>
+            <p class="text-zinc-300 mb-4">"Finally, a tool that understands how small businesses work. Free tier is generous too!"</p>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-cyan-500 rounded-full flex items-center justify-center font-bold text-white">AK</div>
+              <div>
+                <div class="font-medium">Amy K.</div>
+                <div class="text-zinc-500 text-sm">Director, DesignCo</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing Preview -->
+      <section id="pricing" class="max-w-4xl mx-auto px-6 pb-20">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
+          <p class="text-zinc-400">Start free, upgrade when you need to.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Free -->
+          <div class="p-8 bg-white/[0.03] border border-white/[0.08] rounded-2xl">
+            <h3 class="text-xl font-semibold mb-2">Free</h3>
+            <div class="text-4xl font-bold mb-4">$0<span class="text-lg text-zinc-500 font-normal">/mo</span></div>
+            <p class="text-zinc-400 text-sm mb-6">Perfect for getting started.</p>
+            <ul class="space-y-3 mb-8 text-zinc-300">
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 25 quotes/month</li>
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Excel import</li>
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> PDF export</li>
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Basic templates</li>
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Email support</li>
+            </ul>
+            <a href="/dashboard" class="block text-center py-3 rounded-xl border border-zinc-700 hover:bg-white/[0.08] transition font-medium">Get Started</a>
+          </div>
+
+          <!-- Pro -->
+          <div class="p-8 bg-gradient-to-b from-red-600/20 to-red-600/5 border border-red-500/30 rounded-2xl relative">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-red-600 text-white text-sm font-medium rounded-full">Most Popular</div>
+            <h3 class="text-xl font-semibold mb-2">Pro</h3>
+            <div class="text-4xl font-bold mb-4">$19<span class="text-lg text-zinc-500 font-normal">/mo</span></div>
+            <p class="text-zinc-400 text-sm mb-6">For growing businesses.</p>
+            <ul class="space-y-3 mb-8 text-zinc-300">
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Unlimited quotes</li>
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Advanced pricing rules</li>
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Custom branding</li>
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Team collaboration</li>
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Priority support</li>
+              <li class="flex items-center gap-2"><span class="text-green-400">✓</span> API access</li>
+            </ul>
+            <a href="/dashboard" class="block text-center py-3 rounded-xl bg-red-600 hover:bg-red-500 transition font-medium">Start Free Trial</a>
+          </div>
+        </div>
+
+        <p class="text-center text-zinc-500 text-sm mt-6">14-day free trial on Pro. No credit card required.</p>
+      </section>
+
+      <!-- Final CTA -->
+      <section class="max-w-3xl mx-auto px-6 pb-20">
+        <div class="text-center p-12 bg-gradient-to-b from-red-600/10 to-transparent border border-red-500/20 rounded-3xl">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Quote Smarter?</h2>
+          <p class="text-zinc-400 mb-8 max-w-lg mx-auto">Join 2,400+ businesses already saving hours every week. Start generating quotes in seconds.</p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="/dashboard" class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-red-600 rounded-xl hover:bg-red-500 transition-all hover:scale-105 shadow-lg shadow-red-600/25">
+              Start Free Now
+              <svg class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
           </div>
         </div>
       </section>
@@ -126,8 +319,16 @@ import '../styles/global.css';
 
     <!-- Footer -->
     <footer class="relative z-10 border-t border-zinc-800 py-8">
-      <div class="max-w-6xl mx-auto px-6 text-center text-zinc-500 text-sm">
-        © 2026 Quote Engine. All rights reserved.
+      <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-6 h-6 bg-red-600 rounded-md"></div>
+          <span class="text-zinc-500 text-sm">© 2026 Quote Engine. All rights reserved.</span>
+        </div>
+        <div class="flex items-center gap-6 text-sm text-zinc-500">
+          <a href="#" class="hover:text-white transition">Privacy</a>
+          <a href="#" class="hover:text-white transition">Terms</a>
+          <a href="#" class="hover:text-white transition">Contact</a>
+        </div>
       </div>
     </footer>
 
@@ -145,7 +346,6 @@ import '../styles/global.css';
         stars.appendChild(star);
       }
       
-      // Floating shapes
       for (let i = 0; i < 5; i++) {
         const shape = document.createElement('div');
         shape.className = 'absolute rounded-full blur-3xl opacity-20';
@@ -172,47 +372,47 @@ import '../styles/global.css';
         75% { transform: translate(20px, 30px) rotate(3deg); }
       }
       
-      /* Staggered reveal animations */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      .animate-fade-in {
+        animation: fadeIn 0.6s ease-out forwards;
+      }
+      
       .hero-title {
-        animation: slideUp 0.8s ease-out forwards;
+        animation: fadeIn 0.8s ease-out forwards;
         opacity: 0;
         transform: translateY(30px);
       }
       .hero-subtitle {
-        animation: slideUp 0.8s ease-out 0.2s forwards;
+        animation: fadeIn 0.8s ease-out 0.15s forwards;
         opacity: 0;
         transform: translateY(30px);
       }
       .hero-cta {
-        animation: slideUp 0.8s ease-out 0.4s forwards;
+        animation: fadeIn 0.8s ease-out 0.3s forwards;
         opacity: 0;
         transform: translateY(30px);
       }
       .hero-stats {
-        animation: slideUp 0.8s ease-out 0.6s forwards;
+        animation: fadeIn 0.8s ease-out 0.45s forwards;
         opacity: 0;
         transform: translateY(30px);
       }
       .feature-card {
         opacity: 0;
         transform: translateY(20px);
-        animation: slideUp 0.6s ease-out forwards;
+        animation: fadeIn 0.6s ease-out forwards;
       }
       .feature-card:nth-child(1) { animation-delay: 0.1s; }
-      .feature-card:nth-child(2) { animation-delay: 0.2s; }
-      .feature-card:nth-child(3) { animation-delay: 0.3s; }
+      .feature-card:nth-child(2) { animation-delay: 0.15s; }
+      .feature-card:nth-child(3) { animation-delay: 0.2s; }
+      .feature-card:nth-child(4) { animation-delay: 0.25s; }
+      .feature-card:nth-child(5) { animation-delay: 0.3s; }
+      .feature-card:nth-child(6) { animation-delay: 0.35s; }
       
-      @keyframes slideUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      
-      /* Hover effects */
-      .feature-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
       .feature-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
@@ -220,7 +420,6 @@ import '../styles/global.css';
     </style>
     
     <script>
-      // Theme Toggle
       function initTheme() {
         const savedTheme = localStorage.getItem('theme') || 'dark';
         if (savedTheme === 'light') {

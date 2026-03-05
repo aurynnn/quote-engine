@@ -62,6 +62,33 @@ const userId = '507f1f77bcf86cd799439011';
             <p class="text-zinc-500">All your generated quotes</p>
           </div>
           <div class="flex gap-3">
+            <button id="theme-toggle" class="p-2.5 rounded-xl bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] transition-all" title="Toggle theme">
+              <svg class="w-4 h-4 moon-icon text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+              <svg class="w-4 h-4 sun-icon text-zinc-400 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+            </button>
+            <!-- Export Dropdown -->
+            <div class="relative">
+              <button id="export-dropdown-btn" onclick="toggleExportDropdown()" class="px-4 py-2.5 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] text-white rounded-xl font-medium text-sm flex items-center gap-2 transition-all hover:border-white/20">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                Export
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </button>
+              <div id="export-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-[#12121a] border border-white/[0.1] rounded-xl shadow-xl z-50 overflow-hidden">
+                <button onclick="exportQuotesCSV(); closeExportDropdown();" class="w-full px-4 py-3 text-left text-sm text-zinc-300 hover:bg-white/[0.05] flex items-center gap-3 transition">
+                  <svg class="w-4 h-4 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                  Export to CSV
+                </button>
+                <button onclick="exportQuotesExcel(); closeExportDropdown();" class="w-full px-4 py-3 text-left text-sm text-zinc-300 hover:bg-white/[0.05] flex items-center gap-3 transition">
+                  <svg class="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                  Export to Excel
+                </button>
+                <div class="border-t border-white/[0.08] my-1"></div>
+                <button onclick="exportSelectedAsZip(); closeExportDropdown();" id="export-zip-btn" class="hidden w-full px-4 py-3 text-left text-sm text-zinc-300 hover:bg-white/[0.05] flex items-center gap-3 transition">
+                  <svg class="w-4 h-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" /></svg>
+                  Export Selected as ZIP
+                </button>
+              </div>
+            </div>
             <button onclick="openTemplateModal()" class="px-4 py-2.5 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] text-white rounded-xl font-medium text-sm flex items-center gap-2 transition-all hover:border-white/20">
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" /></svg>
               Templates
@@ -611,6 +638,237 @@ const userId = '507f1f77bcf86cd799439011';
       }
 
       loadQuotes();
+
+      // Theme
+      function initTheme() {
+        const saved = localStorage.getItem('theme') || 'dark';
+        if (saved === 'light') {
+          document.documentElement.classList.add('light');
+          const sunIcon = document.querySelector('.sun-icon');
+          const moonIcon = document.querySelector('.moon-icon');
+          if (sunIcon) sunIcon.classList.remove('hidden');
+          if (moonIcon) moonIcon.classList.add('hidden');
+        }
+      }
+      
+      function toggleTheme() {
+        const isLight = document.documentElement.classList.toggle('light');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        if (sunIcon) sunIcon.classList.toggle('hidden', !isLight);
+        if (moonIcon) moonIcon.classList.toggle('hidden', isLight);
+      }
+      
+      document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+      initTheme();
+
+      // Export Functions
+      function toggleExportDropdown() {
+        const dropdown = document.getElementById('export-dropdown');
+        dropdown.classList.toggle('hidden');
+        updateZipButton();
+      }
+
+      function closeExportDropdown() {
+        document.getElementById('export-dropdown').classList.add('hidden');
+      }
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        const btn = document.getElementById('export-dropdown-btn');
+        const dropdown = document.getElementById('export-dropdown');
+        if (btn && !btn.contains(e.target)) {
+          dropdown.classList.add('hidden');
+        }
+      });
+
+      function updateZipButton() {
+        const zipBtn = document.getElementById('export-zip-btn');
+        if (selectedQuotes.size > 0) {
+          zipBtn.classList.remove('hidden');
+        } else {
+          zipBtn.classList.add('hidden');
+        }
+      }
+
+      function exportQuotesCSV() {
+        const quotes = selectedQuotes.size > 0 
+          ? allQuotes.filter(q => selectedQuotes.has(q._id))
+          : getFilteredQuotes();
+        
+        if (quotes.length === 0) {
+          showToast('No quotes to export', 'error');
+          return;
+        }
+
+        // Build CSV content
+        const headers = ['Quote Number', 'Client Name', 'Client Email', 'Status', 'Items', 'Subtotal', 'Tax', 'Total', 'Generated', 'Expires'];
+        const rows = quotes.map(q => [
+          q.quoteNumber,
+          `"${(q.clientName || '').replace(/"/g, '""')}"`,
+          q.clientEmail || '',
+          q.status,
+          q.items?.length || 0,
+          q.subtotal?.toFixed(2) || '0.00',
+          q.tax?.toFixed(2) || '0.00',
+          q.total?.toFixed(2) || '0.00',
+          q.generatedAt ? new Date(q.generatedAt).toLocaleDateString() : '',
+          q.expiresAt ? new Date(q.expiresAt).toLocaleDateString() : ''
+        ]);
+
+        const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+        downloadFile(csv, `quotes_${new Date().toISOString().split('T')[0]}.csv`, 'text/csv');
+        showToast(`Exported ${quotes.length} quote(s) to CSV`);
+      }
+
+      function exportQuotesExcel() {
+        const quotes = selectedQuotes.size > 0 
+          ? allQuotes.filter(q => selectedQuotes.has(q._id))
+          : getFilteredQuotes();
+        
+        if (quotes.length === 0) {
+          showToast('No quotes to export', 'error');
+          return;
+        }
+
+        // Use dynamic import for xlsx
+        import('xlsx').then(XLSX => {
+          const workbook = XLSX.utils.book_new();
+
+          // Summary sheet
+          const summaryData = quotes.map(q => ({
+            'Quote Number': q.quoteNumber,
+            'Client Name': q.clientName,
+            'Client Email': q.clientEmail || '',
+            'Status': q.status,
+            'Items': q.items?.length || 0,
+            'Subtotal (€)': q.subtotal?.toFixed(2) || '0.00',
+            'Tax (€)': q.tax?.toFixed(2) || '0.00',
+            'Total (€)': q.total?.toFixed(2) || '0.00',
+            'Generated': q.generatedAt ? new Date(q.generatedAt).toLocaleDateString() : '',
+            'Expires': q.expiresAt ? new Date(q.expiresAt).toLocaleDateString() : ''
+          }));
+
+          const summarySheet = XLSX.utils.json_to_sheet(summaryData);
+          summarySheet['!cols'] = [
+            { wch: 15 }, { wch: 20 }, { wch: 25 }, { wch: 10 }, { wch: 8 },
+            { wch: 12 }, { wch: 10 }, { wch: 12 }, { wch: 12 }, { wch: 12 }
+          ];
+          XLSX.utils.book_append_sheet(workbook, summarySheet, 'Quotes Summary');
+
+          // Individual quote sheets
+          quotes.forEach((q, idx) => {
+            if (q.items && q.items.length > 0) {
+              const itemsData = q.items.map((item: any) => ({
+                'Item': item.name || '',
+                'Description': item.description || '',
+                'Unit': item.unit || '',
+                'Quantity': item.quantity || 0,
+                'Unit Price (€)': item.unitPrice?.toFixed(2) || '0.00',
+                'Total (€)': item.total?.toFixed(2) || '0.00'
+              }));
+
+              // Add totals
+              itemsData.push({} as any);
+              itemsData.push({ 'Item': 'Subtotal', 'Total (€)': q.subtotal?.toFixed(2) || '0.00' });
+              itemsData.push({ 'Item': 'Tax', 'Total (€)': q.tax?.toFixed(2) || '0.00' });
+              itemsData.push({ 'Item': 'TOTAL', 'Total (€)': q.total?.toFixed(2) || '0.00' });
+
+              const sheet = XLSX.utils.json_to_sheet(itemsData);
+              const sheetName = (q.quoteNumber || `Quote_${idx + 1}`).slice(0, 31);
+              XLSX.utils.book_append_sheet(workbook, sheet, sheetName);
+            }
+          });
+
+          XLSX.writeFile(workbook, `quotes_${new Date().toISOString().split('T')[0]}.xlsx`);
+          showToast(`Exported ${quotes.length} quote(s) to Excel`);
+        });
+      }
+
+      async function exportSelectedAsZip() {
+        const quotes = selectedQuotes.size > 0 
+          ? allQuotes.filter(q => selectedQuotes.has(q._id))
+          : getFilteredQuotes();
+
+        if (quotes.length === 0) {
+          showToast('No quotes to export', 'error');
+          return;
+        }
+
+        showToast('Generating ZIP file...');
+
+        const JSZip = (await import('jszip')).default;
+        const saveAs = (await import('file-saver')).saveAs;
+
+        const zip = new JSZip();
+
+        // Summary CSV
+        const summaryRows = quotes.map(q => [
+          q.quoteNumber,
+          q.clientName,
+          q.total?.toFixed(2) || '0.00'
+        ]);
+        const summaryCsv = ['Quote Number,Client Name,Total', ...summaryRows.map(r => r.join(','))].join('\n');
+        zip.file('quotes_summary.csv', summaryCsv);
+
+        // Individual quote files
+        for (const q of quotes) {
+          const folder = zip.folder(q.quoteNumber || 'quote');
+          if (!folder) continue;
+
+          folder.file('info.json', JSON.stringify({
+            quoteNumber: q.quoteNumber,
+            clientName: q.clientName,
+            clientEmail: q.clientEmail,
+            status: q.status,
+            total: q.total,
+            generatedAt: q.generatedAt
+          }, null, 2));
+
+          if (q.items && q.items.length > 0) {
+            const itemRows = q.items.map((item: any) => [
+              item.name || '',
+              item.description || '',
+              item.unit || '',
+              item.quantity || 0,
+              item.unitPrice?.toFixed(2) || '0.00',
+              item.total?.toFixed(2) || '0.00'
+            ]);
+            const itemsCsv = ['Item,Description,Unit,Quantity,Unit Price,Total', ...itemRows.map(r => r.join(','))].join('\n');
+            folder.file('items.csv', itemsCsv);
+          }
+        }
+
+        const content = await zip.generateAsync({ type: 'blob' });
+        saveAs(content, `quotes_export_${new Date().toISOString().split('T')[0]}.zip`);
+        showToast(`Exported ${quotes.length} quote(s) as ZIP`);
+      }
+
+      function downloadFile(content: string, filename: string, mimeType: string) {
+        const blob = new Blob([content], { type: mimeType });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
+
+      // Update ZIP button when selection changes
+      const originalToggleSelect = toggleSelect;
+      toggleSelect = function(id: string) {
+        originalToggleSelect(id);
+        updateZipButton();
+      }
+
+      const originalClearSelection = clearSelection;
+      clearSelection = function() {
+        originalClearSelection();
+        updateZipButton();
+      }
     </script>
   </body>
 </html>

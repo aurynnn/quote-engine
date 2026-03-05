@@ -59,15 +59,79 @@ const userId = '507f1f77bcf86cd799439011';
             <h1 class="text-3xl font-bold mb-1">👥 Clients</h1>
             <p class="text-zinc-500">Manage your client database</p>
           </div>
-          <button onclick="openModal('add')" class="px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-xl font-semibold transition flex items-center gap-2">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
-            Add Client
-          </button>
+          <div class="flex items-center gap-3">
+            <button onclick="openImportModal()" class="px-4 py-3 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] text-white rounded-xl font-medium text-sm transition flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+              Import
+            </button>
+            <button onclick="exportClients()" class="px-4 py-3 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] text-white rounded-xl font-medium text-sm transition flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+              Export
+            </button>
+            <button onclick="openModal('add')" class="px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-xl font-semibold transition flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4              Add Client
+            </button>
+" /></svg>
+          </div>
         </div>
 
-        <!-- Search -->
-        <div class="mb-6">
-          <input type="text" id="search" placeholder="Search clients..." class="w-full max-w-md px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50" />
+        <!-- Statistics Cards -->
+        <div class="grid grid-cols-4 gap-4 mb-8">
+          <div class="bg-[#12121a] border border-white/[0.08] rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                <svg class="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+              </div>
+              <span class="text-sm text-zinc-400">Total</span>
+            </div>
+            <div class="text-2xl font-bold text-white" id="stat-total">0</div>
+          </div>
+          <div class="bg-[#12121a] border border-white/[0.08] rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </div>
+              <span class="text-sm text-zinc-400">Active</span>
+            </div>
+            <div class="text-2xl font-bold text-emerald-400" id="stat-active">0</div>
+          </div>
+          <div class="bg-[#12121a] border border-white/[0.08] rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                <svg class="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+              </div>
+              <span class="text-sm text-zinc-400">Quotes</span>
+            </div>
+            <div class="text-2xl font-bold text-purple-400" id="stat-quotes">0</div>
+          </div>
+          <div class="bg-[#12121a] border border-white/[0.08] rounded-xl p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center">
+                <svg class="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </div>
+              <span class="text-sm text-zinc-400">Value</span>
+            </div>
+            <div class="text-2xl font-bold text-red-400" id="stat-value">€0</div>
+          </div>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="bg-[#12121a]/80 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 mb-6">
+          <div class="flex flex-wrap items-center gap-4">
+            <div class="flex-1 min-w-[280px]">
+              <div class="relative">
+                <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input type="text" id="search" placeholder="Search clients..." class="w-full pl-12 pr-4 py-3 bg-white/[0.04] border border-white/[0.08] rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50" />
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="filterClients('all')" class="filter-btn active px-4 py-2 rounded-lg bg-white/[0.08] text-white text-sm border border-white/10" data-filter="all">All</button>
+              <button onclick="filterClients('active')" class="filter-btn px-4 py-2 rounded-lg bg-white/[0.03] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white transition-all" data-filter="active">Active</button>
+              <button onclick="filterClients('inactive')" class="filter-btn px-4 py-2 rounded-lg bg-white/[0.03] text-zinc-400 text-sm hover:bg-white/[0.08] hover:text-white transition-all" data-filter="inactive">Inactive</button>
+            </div>
+          </div>
         </div>
 
         <!-- Empty State -->
@@ -308,6 +372,67 @@ const userId = '507f1f77bcf86cd799439011';
         renderClients();
         closeModal();
       });
+
+      // Export Clients to CSV
+      function exportClients() {
+        const clients = getClients();
+        
+        if (clients.length === 0) {
+          showToast('No clients to export', 'error');
+          return;
+        }
+
+        const headers = ['Name', 'Email', 'Phone', 'Company', 'Address', 'Status', 'Created'];
+        const rows = clients.map(c => [
+          `"${(c.name || '').replace(/"/g, '""')}"`,
+          c.email || '',
+          c.phone || '',
+          `"${(c.company || '').replace(/"/g, '""')}"`,
+          `"${(c.address || '').replace(/"/g, '""')}"`,
+          c.status || 'active',
+          c.createdAt || ''
+        ]);
+
+        const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+        downloadFile(csv, `clients_${new Date().toISOString().split('T')[0]}.csv`, 'text/csv');
+        showToast(`Exported ${clients.length} client(s)`);
+      }
+
+      function downloadFile(content, filename, mimeType) {
+        const blob = new Blob([content], { type: mimeType });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
+
+      function showToast(message, type = 'success') {
+        const toast = document.getElementById('toast');
+        const icon = document.getElementById('toast-icon');
+        const msg = document.getElementById('toast-message');
+        
+        msg.textContent = message;
+        
+        if (type === 'error') {
+          icon.classList.remove('text-emerald-400');
+          icon.classList.add('text-red-400');
+          icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+        } else {
+          icon.classList.remove('text-red-400');
+          icon.classList.add('text-emerald-400');
+          icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />';
+        }
+        
+        toast.classList.remove('translate-y-20', 'opacity-0');
+        
+        setTimeout(() => {
+          toast.classList.add('translate-y-20', 'opacity-0');
+        }, 3000);
+      }
 
       // Initialize
       initClients();

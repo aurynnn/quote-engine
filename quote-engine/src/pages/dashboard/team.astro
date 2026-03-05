@@ -1,0 +1,486 @@
+---
+import '../../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team - Quote Engine</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen bg-[#0a0a0f] text-white font-sans">
+    <div class="fixed inset-0 -z-10 bg-[#0a0a0f]"></div>
+
+    <!-- Sidebar -->
+    <aside class="fixed left-0 top-0 bottom-0 w-56 bg-[#0c0c12] border-r border-white/[0.06] p-4 z-20">
+      <a href="/" class="flex items-center gap-3 mb-6 px-2">
+        <div class="w-7 h-7 bg-red-600 rounded-lg"></div>
+        <span class="text-lg font-semibold">Quote Engine</span>
+      </a>
+      
+      <nav class="space-y-1">
+        <a href="/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+          Dashboard
+        </a>
+        <a href="/dashboard/quotes" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          Quotes
+        </a>
+        <a href="/dashboard/templates" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" /></svg>
+          Templates
+        </a>
+        <a href="/dashboard/prices" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          Prices
+        </a>
+        <a href="/dashboard/rules" class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          Rules
+        </a>
+        <a href="/dashboard/settings" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m-6-4a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
+          Settings
+        </a>
+        <a href="/dashboard/subscription" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-zinc-400 hover:bg-white/[0.04] hover:text-white transition text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+          Subscription
+        </a>
+        <a href="/dashboard/team" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/[0.06] text-white font-medium text-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+          Team
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="ml-56 p-6">
+      <div class="max-w-5xl">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h1 class="text-2xl font-bold text-white">Team</h1>
+            <p class="text-sm text-zinc-500">Manage your team members and permissions</p>
+          </div>
+          <div class="flex gap-3">
+            <button id="theme-toggle" class="p-2 rounded-lg bg-white/[0.06] hover:bg-white/[0.1] transition" title="Toggle theme">
+              <svg class="w-4 h-4 moon-icon text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+              <svg class="w-4 h-4 sun-icon text-zinc-400 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+            </button>
+            <button onclick="openInviteModal()" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium text-sm transition flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+              Invite Member
+            </button>
+          </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex gap-1 mb-6 bg-[#0c0c12] p-1 rounded-lg w-fit">
+          <button onclick="switchTab('members')" id="tab-members" class="tab-btn px-4 py-2 rounded-md text-sm font-medium transition bg-red-600 text-white">
+            Members
+          </button>
+          <button onclick="switchTab('activity')" id="tab-activity" class="tab-btn px-4 py-2 rounded-md text-sm font-medium transition text-zinc-400 hover:text-white">
+            Activity Log
+          </button>
+          <button onclick="switchTab('permissions')" id="tab-permissions" class="tab-btn px-4 py-2 rounded-md text-sm font-medium transition text-zinc-400 hover:text-white">
+            Permissions
+          </button>
+        </div>
+
+        <!-- Members Tab -->
+        <div id="panel-members" class="tab-panel">
+          <div class="bg-[#0c0c12] rounded-xl border border-white/[0.06] overflow-hidden">
+            <table class="w-full">
+              <thead class="border-b border-white/[0.06]">
+                <tr class="text-left text-xs text-zinc-500 uppercase">
+                  <th class="px-4 py-3 font-medium">Member</th>
+                  <th class="px-4 py-3 font-medium">Role</th>
+                  <th class="px-4 py-3 font-medium">Status</th>
+                  <th class="px-4 py-3 font-medium">Joined</th>
+                  <th class="px-4 py-3 font-medium text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="members-list" class="divide-y divide-white/[0.06]">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Activity Log Tab -->
+        <div id="panel-activity" class="tab-panel hidden">
+          <div class="bg-[#0c0c12] rounded-xl border border-white/[0.06] overflow-hidden">
+            <div id="activity-list" class="divide-y divide-white/[0.06]">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Permissions Tab -->
+        <div id="panel-permissions" class="tab-panel hidden">
+          <div class="space-y-4">
+            <!-- Role Permissions -->
+            <div class="bg-[#0c0c12] rounded-xl border border-white/[0.06] p-4">
+              <h3 class="text-lg font-semibold text-white mb-4">Role Permissions</h3>
+              <div class="overflow-x-auto">
+                <table class="w-full">
+                  <thead class="border-b border-white/[0.06]">
+                    <tr class="text-left text-xs text-zinc-500 uppercase">
+                      <th class="px-3 py-2 font-medium">Permission</th>
+                      <th class="px-3 py-2 font-medium text-center">Admin</th>
+                      <th class="px-3 py-2 font-medium text-center">Editor</th>
+                      <th class="px-3 py-2 font-medium text-center">Viewer</th>
+                    </tr>
+                  </thead>
+                  <tbody id="permissions-table" class="divide-y divide-white/[0.06] text-sm">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Invite Modal -->
+    <dialog id="invite-modal" class="bg-[#0c0c12] rounded-xl border border-white/[0.06] p-6 w-full max-w-md backdrop:bg-black/50">
+      <h3 class="text-lg font-semibold text-white mb-4">Invite Team Member</h3>
+      <form id="invite-form" onsubmit="handleInvite(event)">
+        <div class="mb-4">
+          <label class="block text-sm text-zinc-400 mb-2">Email Address</label>
+          <input type="email" id="invite-email" required placeholder="colleague@company.com" 
+            class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-red-500" />
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm text-zinc-400 mb-2">Role</label>
+          <select id="invite-role" class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-white focus:outline-none focus:border-red-500">
+            <option value="editor">Editor</option>
+            <option value="viewer">Viewer</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <div class="flex gap-3 justify-end">
+          <button type="button" onclick="closeInviteModal()" class="px-4 py-2 text-zinc-400 hover:text-white transition">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium transition">Send Invite</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Role Modal -->
+    <dialog id="role-modal" class="bg-[#0c0c12] rounded-xl border border-white/[0.06] p-6 w-full max-w-sm backdrop:bg-black/50">
+      <h3 class="text-lg font-semibold text-white mb-4">Change Role</h3>
+      <form id="role-form" onsubmit="handleRoleChange(event)">
+        <input type="hidden" id="role-member-id" />
+        <div class="mb-4">
+          <label class="block text-sm text-zinc-400 mb-2">Select Role</label>
+          <select id="new-role" class="w-full px-3 py-2 bg-[#0a0a0f] border border-white/[0.1] rounded-lg text-white focus:outline-none focus:border-red-500">
+            <option value="admin">Admin</option>
+            <option value="editor">Editor</option>
+            <option value="viewer">Viewer</option>
+          </select>
+        </div>
+        <div class="flex gap-3 justify-end">
+          <button type="button" onclick="closeRoleModal()" class="px-4 py-2 text-zinc-400 hover:text-white transition">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg font-medium transition">Save</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script>
+      // Initialize data
+      const STORAGE_KEY = 'quote_engine_team';
+      
+      function getTeamData() {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) return JSON.parse(stored);
+        
+        // Default demo data
+        const defaultData = {
+          members: [
+            { id: '1', name: 'John Owner', email: 'john@company.com', role: 'admin', status: 'active', joined: '2024-01-15', avatar: 'JO' },
+            { id: '2', name: 'Sarah Editor', email: 'sarah@company.com', role: 'editor', status: 'active', joined: '2024-02-20', avatar: 'SE' },
+            { id: '3', name: 'Mike Viewer', email: 'mike@company.com', role: 'viewer', status: 'active', joined: '2024-03-10', avatar: 'MV' },
+            { id: '4', name: 'Pending User', email: 'pending@company.com', role: 'viewer', status: 'pending', joined: '2024-03-01', avatar: 'PU' }
+          ],
+          activity: [
+            { id: '1', action: 'created quote', target: 'Quote #123', user: 'John Owner', timestamp: '2024-03-05T10:30:00Z' },
+            { id: '2', action: 'updated prices', target: 'Price List', user: 'Sarah Editor', timestamp: '2024-03-05T09:15:00Z' },
+            { id: '3', action: 'invited', target: 'pending@company.com', user: 'John Owner', timestamp: '2024-03-04T14:00:00Z' },
+            { id: '4', action: 'changed role', target: 'Mike Viewer → Editor', user: 'John Owner', timestamp: '2024-03-03T11:20:00Z' },
+            { id: '5', action: 'created template', target: 'Corporate Template', user: 'Sarah Editor', timestamp: '2024-03-02T16:45:00Z' }
+          ]
+        };
+        
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultData));
+        return defaultData;
+      }
+
+      const permissions = [
+        { name: 'Create quotes', admin: true, editor: true, viewer: false },
+        { name: 'Edit quotes', admin: true, editor: true, viewer: false },
+        { name: 'Delete quotes', admin: true, editor: false, viewer: false },
+        { name: 'View quotes', admin: true, editor: true, viewer: true },
+        { name: 'Manage templates', admin: true, editor: true, viewer: false },
+        { name: 'Manage prices', admin: true, editor: true, viewer: false },
+        { name: 'Manage rules', admin: true, editor: true, viewer: false },
+        { name: 'Invite members', admin: true, editor: false, viewer: false },
+        { name: 'Change roles', admin: true, editor: false, viewer: false },
+        { name: 'Billing & subscription', admin: true, editor: false, viewer: false }
+      ];
+
+      function saveTeamData(data) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      }
+
+      function getInitials(name) {
+        return name.split(' ').map(n => n[0]).join('').toUpperCase();
+      }
+
+      function formatDate(dateStr) {
+        return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      }
+
+      function formatTimestamp(ts) {
+        const date = new Date(ts);
+        const now = new Date();
+        const diff = now - date;
+        
+        if (diff < 60000) return 'Just now';
+        if (diff < 3600000) return `${Math.floor(diff / 60000)}m ago`;
+        if (diff < 86400000) return `${Math.floor(diff / 3600000)}h ago`;
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      }
+
+      // Tab switching
+      function switchTab(tab) {
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+          btn.classList.remove('bg-red-600', 'text-white');
+          btn.classList.add('text-zinc-400');
+        });
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+        
+        document.getElementById(`tab-${tab}`).classList.add('bg-red-600', 'text-white');
+        document.getElementById(`tab-${tab}`).classList.remove('text-zinc-400');
+        document.getElementById(`panel-${tab}`).classList.remove('hidden');
+      }
+
+      // Render members
+      function renderMembers() {
+        const data = getTeamData();
+        const tbody = document.getElementById('members-list');
+        
+        tbody.innerHTML = data.members.map(member => `
+          <tr class="hover:bg-white/[0.02] transition">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-xs font-medium text-white">
+                  ${member.avatar}
+                </div>
+                <div>
+                  <div class="text-white font-medium">${member.name}</div>
+                  <div class="text-xs text-zinc-500">${member.email}</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3">
+              <span class="px-2 py-1 rounded text-xs font-medium ${
+                member.role === 'admin' ? 'bg-purple-500/20 text-purple-400' :
+                member.role === 'editor' ? 'bg-blue-500/20 text-blue-400' :
+                'bg-zinc-500/20 text-zinc-400'
+              }">${member.role.charAt(0).toUpperCase() + member.role.slice(1)}</span>
+            </td>
+            <td class="px-4 py-3">
+              <span class="flex items-center gap-2 text-sm ${member.status === 'active' ? 'text-emerald-400' : 'text-amber-400'}">
+                <span class="w-2 h-2 rounded-full ${member.status === 'active' ? 'bg-emerald-400' : 'bg-amber-400'}"></span>
+                ${member.status.charAt(0).toUpperCase() + member.status.slice(1)}
+              </span>
+            </td>
+            <td class="px-4 py-3 text-sm text-zinc-400">${formatDate(member.joined)}</td>
+            <td class="px-4 py-3 text-right">
+              ${member.role !== 'admin' ? `
+                <button onclick="openRoleModal('${member.id}')" class="text-zinc-400 hover:text-white p-1 transition">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m-6-4a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
+                </button>
+                <button onclick="removeMember('${member.id}')" class="text-zinc-400 hover:text-red-400 p-1 transition">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                </button>
+              ` : '<span class="text-xs text-zinc-600">Owner</span>'}
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // Render activity
+      function renderActivity() {
+        const data = getTeamData();
+        const container = document.getElementById('activity-list');
+        
+        container.innerHTML = data.activity.map(item => `
+          <div class="px-4 py-3 flex items-start gap-4 hover:bg-white/[0.02] transition">
+            <div class="w-8 h-8 rounded-full bg-white/[0.06] flex items-center justify-center text-zinc-400">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm text-white">
+                <span class="font-medium">${item.user}</span>
+                <span class="text-zinc-400"> ${item.action}</span>
+                <span class="text-red-400"> ${item.target}</span>
+              </p>
+              <p class="text-xs text-zinc-500 mt-1">${formatTimestamp(item.timestamp)}</p>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Render permissions
+      function renderPermissions() {
+        const tbody = document.getElementById('permissions-table');
+        
+        tbody.innerHTML = permissions.map(perm => `
+          <tr class="hover:bg-white/[0.02]">
+            <td class="px-3 py-2 text-zinc-300">${perm.name}</td>
+            <td class="px-3 py-2 text-center">${perm.admin ? '✓' : '—'}</td>
+            <td class="px-3 py-2 text-center">${perm.editor ? '✓' : '—'}</td>
+            <td class="px-3 py-2 text-center">${perm.viewer ? '✓' : '—'}</td>
+          </tr>
+        `).join('');
+      }
+
+      // Invite modal
+      function openInviteModal() {
+        document.getElementById('invite-modal').showModal();
+      }
+
+      function closeInviteModal() {
+        document.getElementById('invite-modal').close();
+        document.getElementById('invite-form').reset();
+      }
+
+      function handleInvite(e) {
+        e.preventDefault();
+        const email = document.getElementById('invite-email').value;
+        const role = document.getElementById('invite-role').value;
+        
+        const data = getTeamData();
+        const name = email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        
+        const newMember = {
+          id: Date.now().toString(),
+          name: name,
+          email: email,
+          role: role,
+          status: 'pending',
+          joined: new Date().toISOString().split('T')[0],
+          avatar: getInitials(name)
+        };
+        
+        data.members.push(newMember);
+        data.activity.unshift({
+          id: Date.now().toString(),
+          action: 'invited',
+          target: email,
+          user: 'John Owner',
+          timestamp: new Date().toISOString()
+        });
+        
+        saveTeamData(data);
+        renderMembers();
+        renderActivity();
+        closeInviteModal();
+      }
+
+      // Role modal
+      function openRoleModal(memberId) {
+        document.getElementById('role-member-id').value = memberId;
+        document.getElementById('role-modal').showModal();
+      }
+
+      function closeRoleModal() {
+        document.getElementById('role-modal').close();
+        document.getElementById('role-form').reset();
+      }
+
+      function handleRoleChange(e) {
+        e.preventDefault();
+        const memberId = document.getElementById('role-member-id').value;
+        const newRole = document.getElementById('new-role').value;
+        
+        const data = getTeamData();
+        const member = data.members.find(m => m.id === memberId);
+        
+        if (member) {
+          const oldRole = member.role;
+          member.role = newRole;
+          
+          data.activity.unshift({
+            id: Date.now().toString(),
+            action: 'changed role',
+            target: `${member.name}: ${oldRole} → ${newRole}`,
+            user: 'John Owner',
+            timestamp: new Date().toISOString()
+          });
+          
+          saveTeamData(data);
+          renderMembers();
+          renderActivity();
+        }
+        
+        closeRoleModal();
+      }
+
+      function removeMember(memberId) {
+        if (!confirm('Are you sure you want to remove this team member?')) return;
+        
+        const data = getTeamData();
+        const member = data.members.find(m => m.id === memberId);
+        
+        data.members = data.members.filter(m => m.id !== memberId);
+        
+        data.activity.unshift({
+          id: Date.now().toString(),
+          action: 'removed',
+          target: member.email,
+          user: 'John Owner',
+          timestamp: new Date().toISOString()
+        });
+        
+        saveTeamData(data);
+        renderMembers();
+        renderActivity();
+      }
+
+      // Initialize
+      renderMembers();
+      renderActivity();
+      renderPermissions();
+
+      // Theme
+      function initTheme() {
+        const saved = localStorage.getItem('theme') || 'dark';
+        if (saved === 'light') {
+          document.documentElement.classList.add('light');
+          const sunIcon = document.querySelector('.sun-icon');
+          const moonIcon = document.querySelector('.moon-icon');
+          if (sunIcon) sunIcon.classList.remove('hidden');
+          if (moonIcon) moonIcon.classList.add('hidden');
+        }
+      }
+      
+      function toggleTheme() {
+        const isLight = document.documentElement.classList.toggle('light');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        if (sunIcon) sunIcon.classList.toggle('hidden', !isLight);
+        if (moonIcon) moonIcon.classList.toggle('hidden', isLight);
+      }
+      
+      document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+      initTheme();
+    </script>
+  </body>
+</html>

@@ -62,11 +62,19 @@ const userId = '507f1f77bcf86cd799439011';
             <p class="text-zinc-500">Manage your pricing items</p>
           </div>
           <div class="flex gap-3">
+            <button id="theme-toggle" class="p-2.5 rounded-xl bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] transition-all" title="Toggle theme">
+              <svg class="w-4 h-4 moon-icon text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+              <svg class="w-4 h-4 sun-icon text-zinc-400 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+            </button>
             <button id="sample-data-btn" class="group relative px-4 py-2.5 bg-white/[0.05] border border-white/[0.1] hover:border-emerald-500/30 text-zinc-300 hover:text-white rounded-xl font-medium text-sm transition-all">
               <span class="flex items-center gap-2">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
                 Sample Data
               </span>
+            </button>
+            <button onclick="exportPricingCSV()" class="px-4 py-2.5 bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.08] text-white rounded-xl font-medium text-sm flex items-center gap-2 transition-all hover:border-white/20">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+              Export CSV
             </button>
             <button onclick="openAddModal()" class="group relative px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-white rounded-xl font-medium text-sm transition-all shadow-lg shadow-emerald-600/20 hover:shadow-emerald-600/40 hover:scale-105">
               <span class="flex items-center gap-2">
@@ -531,6 +539,89 @@ const userId = '507f1f77bcf86cd799439011';
           }
         }
       });
+
+      // Theme
+      function initTheme() {
+        const saved = localStorage.getItem('theme') || 'dark';
+        if (saved === 'light') {
+          document.documentElement.classList.add('light');
+          const sunIcon = document.querySelector('.sun-icon');
+          const moonIcon = document.querySelector('.moon-icon');
+          if (sunIcon) sunIcon.classList.remove('hidden');
+          if (moonIcon) moonIcon.classList.add('hidden');
+        }
+      }
+      
+      function toggleTheme() {
+        const isLight = document.documentElement.classList.toggle('light');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        if (sunIcon) sunIcon.classList.toggle('hidden', !isLight);
+        if (moonIcon) moonIcon.classList.toggle('hidden', isLight);
+      }
+      
+      document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+      initTheme();
+
+      // Export Pricing to CSV
+      function exportPricingCSV() {
+        const rows = document.querySelectorAll('#prices-table-body tr');
+        
+        if (rows.length === 0) {
+          showStatus('No pricing data to export', 'error');
+          return;
+        }
+
+        // Build data from table
+        const headers = ['Category', 'Name', 'Unit', 'Base Price', 'Min Price'];
+        const data = [headers.join(',')];
+
+        rows.forEach(row => {
+          const cells = row.querySelectorAll('td');
+          if (cells.length >= 5) {
+            const rowData = [
+              `"${cells[0].textContent.trim().replace(/"/g, '""')}"`,
+              `"${cells[1].textContent.trim().replace(/"/g, '""')}"`,
+              cells[2].textContent.trim(),
+              cells[3].textContent.trim().replace('€', '').replace(',', '.'),
+              cells[4].textContent.trim().replace('€', '').replace(',', '.')
+            ];
+            data.push(rowData.join(','));
+          }
+        });
+
+        const csv = data.join('\n');
+        downloadFile(csv, `pricing_${new Date().toISOString().split('T')[0]}.csv`, 'text/csv');
+        showStatus(`Exported ${rows.length} pricing item(s)`);
+      }
+
+      function downloadFile(content, filename, mimeType) {
+        const blob = new Blob([content], { type: mimeType });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
+
+      function showStatus(message, type = 'success') {
+        const statusEl = document.getElementById('upload-status');
+        if (!statusEl) return;
+        
+        statusEl.classList.remove('hidden');
+        const colorClass = type === 'error' ? 'text-red-400' : 'text-emerald-400';
+        statusEl.innerHTML = `<p class="${colorClass} text-sm">${message}</p>`;
+        
+        if (type !== 'error') {
+          setTimeout(() => {
+            statusEl.classList.add('hidden');
+          }, 3000);
+        }
+      }
     </script>
   </body>
 </html>
